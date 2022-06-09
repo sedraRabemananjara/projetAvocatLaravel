@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('idCourse');
+            $table->id();
             $table->unsignedInteger('idEnregistrement');
             $table->foreign('idEnregistrement')->references('id')->on('enregistrements')->onDelete('cascade');
             $table->string('TAF');

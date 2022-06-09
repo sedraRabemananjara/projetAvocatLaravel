@@ -14,15 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enregistrements', function (Blueprint $table) {
-            
             $table->id();
             $table->string('pour');
             $table->string('contre');
+            $table->string('nature');
             $table->string('juridiction');
             $table->string('numerodossier')->unique();
             $table->string('addresse');
             $table->string('contact');
             $table->string('email');
+            $table->unsignedInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('users');
         });
     }
 
@@ -36,5 +38,3 @@ return new class extends Migration
         Schema::dropIfExists('enregistrements');
     }
 };
-
-
