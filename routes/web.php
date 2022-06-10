@@ -92,7 +92,7 @@ Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update
 // avocat
 
 
-Route::get('/voirLesAvocat',[ControllerListerAvocat::class, 'getAllAvocat' ]);
+Route::get('/voirLesAvocat',[ControllerListerAvocat::class, 'getAllAvocats' ]);
 
 Route::post('/insererAvocat',[ControllerInsertAvocat::class, 'insert' ])->name('insertionAvocat');
 
@@ -102,7 +102,7 @@ Route::post('/modifierAvocat/{idAvocat}',[ControllerUpdateAvocat::class, 'update
 
 
 //charge
-Route::get('/voirLesCharge',[ControllerListerCharge::class, 'getAllCharge' ]);
+Route::get('/voirLesCharge',[ControllerListerCharge::class, 'getAllCharges' ]);
 
 Route::post('/insererCharge',[ControllerInsertCharge::class, 'insert' ])->name('insertionCharge');
 
@@ -112,7 +112,7 @@ Route::post('/modifierCharge/{idCharge}',[ControllerUpdateCharge::class, 'update
 
 
 //etat
-Route::get('/voirLesEtat',[ControllerListerEtat::class, 'getAllEtat' ]);
+Route::get('/voirLesEtat',[ControllerListerEtat::class, 'getAllEtats' ]);
 
 Route::post('/insererEtat',[ControllerInsertEtat::class, 'insert' ])->name('insertionEtat');
 
@@ -122,7 +122,7 @@ Route::post('/modifierEtat/{idEtat}',[ControllerUpdateEtat::class, 'update' ])->
 
 
 //frequencePaiement
-Route::get('/voirLesFrequencePaiement',[ControllerListerFrequencePaiement::class, 'getAllFrequencePaiement' ]);
+Route::get('/voirLesFrequencePaiement',[ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements' ]);
 
 Route::post('/insererFrequencePaiement',[ControllerInsertFrequencePaiement::class, 'insert' ])->name('insertionFrequencePaiement');
 
