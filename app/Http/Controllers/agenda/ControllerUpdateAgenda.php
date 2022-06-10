@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateAgenda extends Controller
 {
+  
     public function update($id)
     {
        request()->validate([

@@ -68,4 +68,13 @@ Route::post('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delet
 Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update' ])->name('modifierAgendas');
 
 
+// avocat
 
+
+Route::get('/voirLesAvocat',[ControllerListerAvocat::class, 'getAllAvocat' ]);
+
+Route::post('/insererAvocat',[ControllerInsertAvocat::class, 'insert' ])->name('insertionAvocat');
+
+Route::post('/supprimerAvocat/{idAvocat}',[ControllerDeleteAvocat::class, 'delete' ])->name('supprimerAvocat');
+
+Route::post('/modifierAvocat/{idAvocat}',[ControllerUpdateAvocat::class, 'update' ])->name('modifierAvocat');
