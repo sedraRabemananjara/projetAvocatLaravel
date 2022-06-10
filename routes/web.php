@@ -55,8 +55,23 @@ Route::get('/voirLesCourses',[ControllerListerCourse::class, 'getAllCourses' ]);
 
 Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('insertionCourses');
 
-Route::post('/course/{id}',[ControllerDeleteCourse::class, 'delete' ])->name('delete');
+Route::post('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
 
-Route::get('/course/{id}',[ControllerUpdateCourse::class, 'edit' ])->name('edit');
+Route::get('/findByIdCourse/{idCourse}',[ControllerUpdateCourse::class, 'edit' ])->name('findByIdCourses');
 
-Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->name('update');
+Route::post('/modifierCourse/{idCourse}',[ControllerUpdateCourse::class, 'update' ])->name('modifierCourses');
+
+// agenda
+
+Route::get('/voirLesAgenda',[ControllerListerAgenda::class, 'getAllAgenda' ]);
+
+Route::post('/insererAgenda',[ControllerInsertAgenda::class, 'insert' ])->name('insertionAgendas');
+
+Route::post('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delete' ])->name('supprimerAgendas');
+
+Route::get('/findByIdAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'edit' ])->name('findByIdAgendas');
+
+Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update' ])->name('modifierAgendas');
+
+
+

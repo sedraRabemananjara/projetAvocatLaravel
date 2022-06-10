@@ -9,13 +9,13 @@ use App\models\Course;
 
 class ControllerUpdateCourse extends Controller
 {
-    public function edit($id){
-        $course= course::find($id);  
-        return view('modifier', compact('course'));  
+    public function edit($idCourse){
+        $course= Course::find($idCourse);  
+        return view('modifierCourse', compact('course'));  
     }
     
 
-    public function update(Request $request, $id)  
+    public function update(Request $request, $idCourse)  
     {  
         //    
         $course = Course::find();  
@@ -27,6 +27,6 @@ class ControllerUpdateCourse extends Controller
         $course->responsable=$request->get('responsable');
         
         $course->save();  
-        return view('pageLister',['listecourses'=> course::all()]);
+        //return view('pageLister',['listecourses'=> course::all()]);
     }  
 }
