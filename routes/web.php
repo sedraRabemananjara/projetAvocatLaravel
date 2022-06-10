@@ -12,6 +12,27 @@ use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
+use App\Http\Controllers\agenda\ControllerInsertAgenda;
+use App\Http\Controllers\agenda\ControllerDeleteAgenda;
+use App\Http\Controllers\agenda\ControllerUpdateAgenda;
+use App\Http\Controllers\agenda\ControllerListerAgenda;
+use App\Http\Controllers\avocat\ControllerInsertAvocat;
+use App\Http\Controllers\avocat\ControllerDeleteAvocat;
+use App\Http\Controllers\avocat\ControllerUpdateAvocat;
+use App\Http\Controllers\avocat\ControllerListerAvocat;
+use App\Http\Controllers\charge\ControllerInsertCharge;
+use App\Http\Controllers\charge\ControllerDeleteCharge;
+use App\Http\Controllers\charge\ControllerUpdateCharge;
+use App\Http\Controllers\charge\ControllerListerCharge;
+use App\Http\Controllers\etat\ControllerInsertEtat;
+use App\Http\Controllers\etat\ControllerDeleteEtat;
+use App\Http\Controllers\etat\ControllerUpdateEtat;
+use App\Http\Controllers\etat\ControllerListerEtat;
+use App\Http\Controllers\frequencePaiement\ControllerInsertFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,3 +99,33 @@ Route::post('/insererAvocat',[ControllerInsertAvocat::class, 'insert' ])->name('
 Route::post('/supprimerAvocat/{idAvocat}',[ControllerDeleteAvocat::class, 'delete' ])->name('supprimerAvocat');
 
 Route::post('/modifierAvocat/{idAvocat}',[ControllerUpdateAvocat::class, 'update' ])->name('modifierAvocat');
+
+
+//charge
+Route::get('/voirLesCharge',[ControllerListerCharge::class, 'getAllCharge' ]);
+
+Route::post('/insererCharge',[ControllerInsertCharge::class, 'insert' ])->name('insertionCharge');
+
+Route::post('/supprimerCharge/{idCharge}',[ControllerDeleteCharge::class, 'delete' ])->name('supprimerCharge');
+
+Route::post('/modifierCharge/{idCharge}',[ControllerUpdateCharge::class, 'update' ])->name('modifierCharge');
+
+
+//etat
+Route::get('/voirLesEtat',[ControllerListerEtat::class, 'getAllEtat' ]);
+
+Route::post('/insererEtat',[ControllerInsertEtat::class, 'insert' ])->name('insertionEtat');
+
+Route::post('/supprimerEtat/{idEtat}',[ControllerDeleteEtat::class, 'delete' ])->name('supprimerEtat');
+
+Route::post('/modifierEtat/{idEtat}',[ControllerUpdateEtat::class, 'update' ])->name('modifierEtat');
+
+
+//frequencePaiement
+Route::get('/voirLesFrequencePaiement',[ControllerListerFrequencePaiement::class, 'getAllFrequencePaiement' ]);
+
+Route::post('/insererFrequencePaiement',[ControllerInsertFrequencePaiement::class, 'insert' ])->name('insertionFrequencePaiement');
+
+Route::post('/supprimerFrequencePaiement/{idFrequence}',[ControllerDeleteFrequencePaiement::class, 'delete' ])->name('supprimerFrequencePaiement');
+
+Route::post('/modifierFrequencePaiement/{idFrequence}',[ControllerUpdateFrequencePaiement::class, 'update' ])->name('modifierFrequencePaiement');
