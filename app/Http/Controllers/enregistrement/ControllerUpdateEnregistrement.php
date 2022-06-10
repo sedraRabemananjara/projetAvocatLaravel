@@ -5,29 +5,38 @@ namespace App\Http\Controllers\enregistrement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Enregistrement;
+use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateEnregistrement extends Controller
 {
     
-    public function findById($id){
-        $enregistrement= Enregistrement::find($id);  
-        return view('modifierEnregistrement', compact('enregistrement'));  
+    public function update($id)
+    {
+        request()->validate([
+            'pour' => 'required',
+            'contre' => 'required',
+            'juridiction' => 'required',
+            'numerodossier' => 'required',
+            'addresse' => 'required',
+            'contact' => 'required',
+            'email' => 'required',
+        ]);
+
+        $avocat = DB::table('avocats')
+                        ->where('id', $id)
+                        ->update([
+                            'pour' => request('pour'),
+                            'contre' => request('contre'),
+                            'juridiction' => request('juridiction'),
+                            'numerodossier' => request('numerodossier'),
+                            'addresse' => request('addresse'),
+                            'contact' => request('contact'),
+                            'email' => request('email'),
+                        ]);
+
+        //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');
+
     }
    
-    public function update(Request $request, $id)  
-    {  
-        //    
-        $enregistrement = enregistrement::find();  
-         
-        $enregistrement->pour=$request->get('pour');
-        $enregistrement->contre=$request->get('contre');
-        $enregistrement->juridiction=$request->get('juridiction');
-        $enregistrement->numerodossier=$request->get('numerodossier');
-        $enregistrement->addresse=$request->get('addresse');
-        $enregistrement->contact=$request->get('contact');
-        $enregistrement->email=$request->get('email');
-        
-        $enregistrement->save();  
-        return view('pageLister',['listeEnregistrements'=> Enregistrement::all()]);
-    }  
+   
 }

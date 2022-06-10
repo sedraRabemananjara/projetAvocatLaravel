@@ -44,8 +44,6 @@ Route::post('/insererEnregistrement',[ControllerInsertEnregistrement::class, 'in
 
 Route::post('/supprimerEnregistrement/{id}',[ControllerDeleteEnregistrement::class, 'delete' ])->name('supprimerEnregistrements');
 
-Route::get('/findById/{id}',[ControllerUpdateEnregistrement::class, 'findById' ])->name('findById');
-
 Route::post('/modifierEnregistrement/{id}',[ControllerUpdateEnregistrement::class, 'update' ])->name('modifierEnregistrement');
 
 
@@ -57,8 +55,6 @@ Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('
 
 Route::post('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
 
-Route::get('/findByIdCourse/{idCourse}',[ControllerUpdateCourse::class, 'edit' ])->name('findByIdCourses');
-
 Route::post('/modifierCourse/{idCourse}',[ControllerUpdateCourse::class, 'update' ])->name('modifierCourses');
 
 // agenda
@@ -68,8 +64,6 @@ Route::get('/voirLesAgenda',[ControllerListerAgenda::class, 'getAllAgenda' ]);
 Route::post('/insererAgenda',[ControllerInsertAgenda::class, 'insert' ])->name('insertionAgendas');
 
 Route::post('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delete' ])->name('supprimerAgendas');
-
-Route::get('/findByIdAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'edit' ])->name('findByIdAgendas');
 
 Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update' ])->name('modifierAgendas');
 
