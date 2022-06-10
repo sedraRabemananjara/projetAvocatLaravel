@@ -22,7 +22,7 @@ class ControllerUpdateEnregistrement extends Controller
             'email' => 'required',
         ]);
 
-        $avocat = DB::table('avocats')
+        $avocat = DB::table('enregistrements')
                         ->where('id', $id)
                         ->update([
                             'pour' => request('pour'),

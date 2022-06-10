@@ -19,7 +19,7 @@ class ControllerUpdateCourse extends Controller
             'addresseAvocat' => 'required',
         ]);
 
-        $avocat = DB::table('avocats')
+        $avocat = DB::table('courses')
                         ->where('idCourse', $id)
                         ->update([
                             'idEnregistrement' => request('idEnregistrement'),
