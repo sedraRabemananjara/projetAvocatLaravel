@@ -8,9 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Enregistrement extends Model
 {
     use HasFactory;
-    public $timestamps = false;
-
-            protected $fillable = [
-                'id', 'building_name', 'building_information', 'building_image', 
-            ];
 }

@@ -12,6 +12,7 @@ class ControllerInsertAgenda extends Controller
     
     public function insert(Request $request)
     {
+        
         $agenda = new Agenda();
         $agenda->idEnregistrement=$request->input('idEnregistrement');
         $agenda->renvoi=$request->input('renvoi');
@@ -20,6 +21,10 @@ class ControllerInsertAgenda extends Controller
         $agenda->dateTimeAgenda=$request->input('dateTimeAgenda');
 
         $agenda->save();
+        return redirect()
+            ->route('ajouter-agenda')
+            ->with('succes', 'Enregistrement agenda effectué');
+
         //return view("controlpanel.products");
         //$employe=new Employe;
         //$employe-> nom = $req->input('nom');;

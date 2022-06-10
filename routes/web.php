@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\models\Enregistrement;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\EnregistrementController;
 use App\Http\Controllers\CourseController;
@@ -45,13 +46,16 @@ use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('insertionEnregistrements');
 });
 
 Route::get('/course', function () {
     return view('formulaireInsertionCourse');
 });
 
+Route::get('/liste', function () {
+    return view('pageListerEnregistrement',['listeEnregistrements'=> Enregistrement::all()]);
+});
 
 
 
@@ -61,9 +65,9 @@ Route::get('/course', function () {
 //enregistrements
 Route::get('/voirLesEnregistrement',[ControllerListerEnregistrement::class, 'getAllEnregistrements' ]);
 
-Route::post('/insererEnregistrement',[ControllerInsertEnregistrement::class, 'insert' ])->name('insertionEnregistrements');
+Route::get('/insererEnregistrement',[ControllerInsertEnregistrement::class, 'insert' ])->name('insertionEnregistrements');
 
-Route::post('/supprimerEnregistrement/{id}',[ControllerDeleteEnregistrement::class, 'delete' ])->name('supprimerEnregistrements');
+Route::delete('/supprimerEnregistrement/{id}',[ControllerDeleteEnregistrement::class, 'delete' ])->name('supprimerEnregistrements');
 
 Route::post('/modifierEnregistrement/{id}',[ControllerUpdateEnregistrement::class, 'update' ])->name('modifierEnregistrement');
 
@@ -74,7 +78,7 @@ Route::get('/voirLesCourses',[ControllerListerCourse::class, 'getAllCourses' ]);
 
 Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('insertionCourses');
 
-Route::post('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
+Route::delete('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
 
 Route::post('/modifierCourse/{idCourse}',[ControllerUpdateCourse::class, 'update' ])->name('modifierCourses');
 
@@ -84,7 +88,7 @@ Route::get('/voirLesAgenda',[ControllerListerAgenda::class, 'getAllAgenda' ]);
 
 Route::post('/insererAgenda',[ControllerInsertAgenda::class, 'insert' ])->name('insertionAgendas');
 
-Route::post('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delete' ])->name('supprimerAgendas');
+Route::delete('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delete' ])->name('supprimerAgendas');
 
 Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update' ])->name('modifierAgendas');
 
@@ -96,7 +100,7 @@ Route::get('/voirLesAvocat',[ControllerListerAvocat::class, 'getAllAvocats' ]);
 
 Route::post('/insererAvocat',[ControllerInsertAvocat::class, 'insert' ])->name('insertionAvocat');
 
-Route::post('/supprimerAvocat/{idAvocat}',[ControllerDeleteAvocat::class, 'delete' ])->name('supprimerAvocat');
+Route::delete('/supprimerAvocat/{idAvocat}',[ControllerDeleteAvocat::class, 'delete' ])->name('supprimerAvocat');
 
 Route::post('/modifierAvocat/{idAvocat}',[ControllerUpdateAvocat::class, 'update' ])->name('modifierAvocat');
 
@@ -106,7 +110,7 @@ Route::get('/voirLesCharge',[ControllerListerCharge::class, 'getAllCharges' ]);
 
 Route::post('/insererCharge',[ControllerInsertCharge::class, 'insert' ])->name('insertionCharge');
 
-Route::post('/supprimerCharge/{idCharge}',[ControllerDeleteCharge::class, 'delete' ])->name('supprimerCharge');
+Route::delete('/supprimerCharge/{idCharge}',[ControllerDeleteCharge::class, 'delete' ])->name('supprimerCharge');
 
 Route::post('/modifierCharge/{idCharge}',[ControllerUpdateCharge::class, 'update' ])->name('modifierCharge');
 
@@ -116,7 +120,7 @@ Route::get('/voirLesEtat',[ControllerListerEtat::class, 'getAllEtats' ]);
 
 Route::post('/insererEtat',[ControllerInsertEtat::class, 'insert' ])->name('insertionEtat');
 
-Route::post('/supprimerEtat/{idEtat}',[ControllerDeleteEtat::class, 'delete' ])->name('supprimerEtat');
+Route::delete('/supprimerEtat/{idEtat}',[ControllerDeleteEtat::class, 'delete' ])->name('supprimerEtat');
 
 Route::post('/modifierEtat/{idEtat}',[ControllerUpdateEtat::class, 'update' ])->name('modifierEtat');
 
@@ -126,6 +130,6 @@ Route::get('/voirLesFrequencePaiement',[ControllerListerFrequencePaiement::class
 
 Route::post('/insererFrequencePaiement',[ControllerInsertFrequencePaiement::class, 'insert' ])->name('insertionFrequencePaiement');
 
-Route::post('/supprimerFrequencePaiement/{idFrequence}',[ControllerDeleteFrequencePaiement::class, 'delete' ])->name('supprimerFrequencePaiement');
+Route::delete('/supprimerFrequencePaiement/{idFrequence}',[ControllerDeleteFrequencePaiement::class, 'delete' ])->name('supprimerFrequencePaiement');
 
 Route::post('/modifierFrequencePaiement/{idFrequence}',[ControllerUpdateFrequencePaiement::class, 'update' ])->name('modifierFrequencePaiement');

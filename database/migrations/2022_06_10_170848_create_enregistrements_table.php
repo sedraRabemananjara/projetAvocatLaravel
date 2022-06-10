@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enregistrements', function (Blueprint $table) {
-            
             $table->id();
             $table->string('pour');
             $table->string('contre');
@@ -23,6 +22,7 @@ return new class extends Migration
             $table->string('addresse');
             $table->string('contact');
             $table->string('email');
+            $table->timestamps();
         });
     }
 
@@ -36,5 +36,3 @@ return new class extends Migration
         Schema::dropIfExists('enregistrements');
     }
 };
-
-
