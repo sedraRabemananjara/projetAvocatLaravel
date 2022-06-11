@@ -29,7 +29,6 @@ class ControllerInsertEnregistrement extends Controller
         $enregistrement->email=$request->input('email');
 
         $enregistrement->save();
-        $enregistrement->save();
         return redirect()
             ->route('insertionEnregistrements')
             ->with('succes', 'Enregistrement effectué');

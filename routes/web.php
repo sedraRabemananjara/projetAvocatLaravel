@@ -57,6 +57,10 @@ Route::get('/liste', function () {
     return view('pageListerEnregistrement',['listeEnregistrements'=> Enregistrement::all()]);
 });
 
+Route::get('/agenda', function () {
+    return view('formulaireInsertionAgenda');
+});
+
 
 
 
@@ -81,6 +85,7 @@ Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('
 Route::delete('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
 
 Route::post('/modifierCourse/{idCourse}',[ControllerUpdateCourse::class, 'update' ])->name('modifierCourses');
+
 
 // agenda
 

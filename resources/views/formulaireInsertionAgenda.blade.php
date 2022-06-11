@@ -26,26 +26,29 @@
 		        <div class="container">
 			        <div class="row justify-content-center">
 				        <div class="col-md-6 text-center mb-5">
-					        <h2 class="heading-section">inserer course</h2>
+					        <h2 class="heading-section">inserer agenda</h2>
 				        </div>
 			        </div>
 		            <div class="row justify-content-center">
 				        <div class="col-md-6 col-lg-4">
 					        <div class="login-wrap p-0">
-		      	                <form method="post" action="{{ route('insertionCourses') }}" accept-charset="UTF-8">
+		      	                <form method="post" action="{{ route('insertionAgendas') }}" accept-charset="UTF-8">
                                       {{ csrf_field() }}
 
                                   <label for="pour"> enregistrement: </label>   </br>     
                                   <input type="value" name="idEnregistrement">  </br> 
-                                  <label for="taf">travaux a faire: </label>   </br>     
-                                  <input type="text" name="TAF">  </br> 
-                                  <label for="date"> date et heure: </label>   </br>     
-                                  <input type="datetime-local" class="form-control" id="game-date-time-text" name="dateTimeCourse">
+                                  <label for="renvoi">renvoi: </label>   </br>     
+                                  <input type="text" name="renvoi">  </br> 
+                                  <label for="taf">motif: </label>   </br>     
+                                  <input type="text" name="motif">  </br> 
+                                  <label for="espaceConclusion">espace Conclusion: </label>   </br>     
+                                  <input type="text" name="espaceConclusion">  </br> 
+                                  <label for="pour"> course: </label>   </br>     
+                                  <input type="value" name="idCourse">  </br> 
+
+                                  <label for="date"> dateTimeAgenda: </label>   </br>     
+                                  <input type="datetime-local" class="form-control" id="game-date-time-text" name="dateTimeAgenda">
                                   </br> 
-                                  <label for="resultat">resultat: </label>   </br>     
-                                  <input type="text" name="resultat">  </br> 
-                                  <label for="responsable"> responsable: </label>   </br>     
-                                  <input type="text" name="responsable">  </br>
                                   
                                   <input type="submit">   
                                 </form>

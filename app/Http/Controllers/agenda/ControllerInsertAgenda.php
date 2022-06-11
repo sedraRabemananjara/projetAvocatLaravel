@@ -17,13 +17,16 @@ class ControllerInsertAgenda extends Controller
         $agenda->idEnregistrement=$request->input('idEnregistrement');
         $agenda->renvoi=$request->input('renvoi');
         $agenda->motif=$request->input('motif');
+        $agenda->espaceConclusion=$request->input('espaceConclusion');
         $agenda->idCourse=$request->input('idCourse');
         $agenda->dateTimeAgenda=$request->input('dateTimeAgenda');
 
         $agenda->save();
-        return redirect()
-            ->route('ajouter-agenda')
-            ->with('succes', 'Enregistrement agenda effectué');
+        return view('formulaireInsertionAgenda');
+
+        /*return redirect()
+            ->route('formulaireInsertionAgenda')
+            ->with('succes', 'Enregistrement agenda effectué');*/
 
         //return view("controlpanel.products");
         //$employe=new Employe;

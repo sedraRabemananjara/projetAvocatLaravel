@@ -19,6 +19,13 @@ class ControllerInsertCourse extends Controller
         $course->responsable=$request->input('responsable');
 
         $course->save();
+        /*return redirect()
+        ->route('formulaireInsertionCourse')
+        ->with('succes', 'Enregistrement effectué');
+        */
+        return view('formulaireInsertionCourse')
+        ->with('succes', 'Enregistrement effectué');
+
         //return view("controlpanel.products");
         //$employe=new Employe;
         //$employe-> nom = $req->input('nom');;
