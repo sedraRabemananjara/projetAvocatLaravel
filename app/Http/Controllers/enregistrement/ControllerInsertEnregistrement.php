@@ -5,22 +5,31 @@ namespace App\Http\Controllers\enregistrement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Enregistrement;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerInsertEnregistrement extends Controller
 {
     public function insert(Request $request)
     {
-        $enregistrement = new enregistrement();
-        $enregistrement->pour=$request->input('pour');
-        $enregistrement->contre=$request->input('contre');
-        $enregistrement->juridiction=$request->input('juridiction');
-        $enregistrement->numerodossier=$request->input('numerodossier');
-        $enregistrement->addresse=$request->input('addresse');
-        $enregistrement->contact=$request->input('contact');
-        $enregistrement->email=$request->input('email');
+        request()->validate([
+            "pour" => "required",
+            "contre" => "required",
+            "nature" => "required",
+            "juridiction" => "required",
+            "numerodossier" => "required",
+        ]);
 
-        $enregistrement->save();
-        
-        
+        $enregistrement = new enregistrement();
+        $enregistrement->pour = $request->input('pour');
+        $enregistrement->contre = $request->input('contre');
+        $enregistrement->nature = $request->input('nature');
+        $enregistrement->juridiction = $request->input('juridiction');
+        $enregistrement->numerodossier = $request->input('numerodossier');
+        $enregistrement->adresse = $request->input('adresse');
+        $enregistrement->telephone = $request->input('telephone');
+        $enregistrement->email = $request->input('email');
+        $enregistrement->idUser = Auth::user()->id;
+
+        return $enregistrement->save();
     }
 }

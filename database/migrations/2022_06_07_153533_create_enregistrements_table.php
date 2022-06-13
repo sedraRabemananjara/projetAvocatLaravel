@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('nature');
             $table->string('juridiction');
             $table->string('numerodossier')->unique();
-            $table->string('addresse');
-            $table->string('contact');
-            $table->string('email');
+            $table->string('adresse')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('email')->nullalble();
             $table->unsignedInteger('idUser');
             $table->foreign('idUser')->references('id')->on('users');
         });

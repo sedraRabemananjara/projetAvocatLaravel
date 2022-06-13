@@ -10,7 +10,9 @@ class Enregistrement extends Model
     use HasFactory;
     public $timestamps = false;
 
-            protected $fillable = [
-                'id', 'building_name', 'building_information', 'building_image', 
-            ];
+    protected $fillable = [
+        'id', 'building_name', 'building_information', 'building_image', 'pour', 'contre', 'nature', 'juridiction', 'numerodossier', 'adresse', 'telephone', 'email'
+    ];
+
+    protected $hidden = ['idUser'];
 }
