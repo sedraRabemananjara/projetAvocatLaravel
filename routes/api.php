@@ -7,6 +7,37 @@ use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 use App\Http\Controllers\enregistrement\ControllerInsertEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerListerEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerRechercheEnregistrement;
+
+use App\Http\Controllers\course\ControllerInsertCourse;
+use App\Http\Controllers\course\ControllerDeleteCourse;
+use App\Http\Controllers\course\ControllerUpdateCourse;
+use App\Http\Controllers\course\ControllerListerCourse;
+
+use App\Http\Controllers\agenda\ControllerInsertAgenda;
+use App\Http\Controllers\agenda\ControllerDeleteAgenda;
+use App\Http\Controllers\agenda\ControllerUpdateAgenda;
+use App\Http\Controllers\agenda\ControllerListerAgenda;
+
+use App\Http\Controllers\avocat\ControllerInsertAvocat;
+use App\Http\Controllers\avocat\ControllerDeleteAvocat;
+use App\Http\Controllers\avocat\ControllerUpdateAvocat;
+use App\Http\Controllers\avocat\ControllerListerAvocat;
+
+use App\Http\Controllers\charge\ControllerInsertCharge;
+use App\Http\Controllers\charge\ControllerDeleteCharge;
+use App\Http\Controllers\charge\ControllerUpdateCharge;
+use App\Http\Controllers\charge\ControllerListerCharge;
+
+use App\Http\Controllers\etat\ControllerInsertEtat;
+use App\Http\Controllers\etat\ControllerDeleteEtat;
+use App\Http\Controllers\etat\ControllerUpdateEtat;
+use App\Http\Controllers\etat\ControllerListerEtat;
+
+use App\Http\Controllers\frequencePaiement\ControllerInsertFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
+use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -30,8 +61,46 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     });
 
     // enregistrement
-    Route::post('/enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-    Route::get('/enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
+    Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
+
+    // courses
+    Route::get('/course', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::post('course', [ControllerInsertCourse::class, 'insert']);
+    Route::delete('/supprimerCourse/{idCourse}', [ControllerDeleteCourse::class, 'delete']);
+    Route::post('/modifierCourse/{idCourse}', [ControllerUpdateCourse::class, 'update']);
+
+    // agenda
+    Route::get('/agenda', [ControllerListerAgenda::class, 'getAllAgenda']);
+    Route::post('/agenda', [ControllerInsertAgenda::class, 'insert']);
+    Route::delete('/supprimerAgenda/{idAgenda}', [ControllerDeleteAgenda::class, 'delete']);
+    Route::post('/modifierAgenda/{idAgenda}', [ControllerUpdateAgenda::class, 'update']);
+
+    // avocat
+    Route::get('/voirLesAvocat', [ControllerListerAvocat::class, 'getAllAvocats']);
+    Route::post('/insererAvocat', [ControllerInsertAvocat::class, 'insert'])->name('insertionAvocat');
+    Route::delete('/supprimerAvocat/{idAvocat}', [ControllerDeleteAvocat::class, 'delete'])->name('supprimerAvocat');
+    Route::post('/modifierAvocat/{idAvocat}', [ControllerUpdateAvocat::class, 'update'])->name('modifierAvocat');
+
+    //charge
+    Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
+    Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+    Route::delete('/supprimerCharge/{idCharge}', [ControllerDeleteCharge::class, 'delete'])->name('supprimerCharge');
+    Route::post('/modifierCharge/{idCharge}', [ControllerUpdateCharge::class, 'update'])->name('modifierCharge');
+
+    //etat
+    Route::get('/voirLesEtat', [ControllerListerEtat::class, 'getAllEtats']);
+    Route::post('/insererEtat', [ControllerInsertEtat::class, 'insert'])->name('insertionEtat');
+    Route::delete('/supprimerEtat/{idEtat}', [ControllerDeleteEtat::class, 'delete'])->name('supprimerEtat');
+    Route::post('/modifierEtat/{idEtat}', [ControllerUpdateEtat::class, 'update'])->name('modifierEtat');
+
+
+    //frequencePaiement
+    Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
+    Route::post('/insererFrequencePaiement', [ControllerInsertFrequencePaiement::class, 'insert'])->name('insertionFrequencePaiement');
+    Route::delete('/supprimerFrequencePaiement/{idFrequence}', [ControllerDeleteFrequencePaiement::class, 'delete'])->name('supprimerFrequencePaiement');
+    Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
 });
 
 // Route::post('/login', [UserLoginController::class, 'login']);

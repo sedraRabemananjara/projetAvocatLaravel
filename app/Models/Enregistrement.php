@@ -10,6 +10,17 @@ class Enregistrement extends Model
     use HasFactory;
     public $timestamps = false;
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+
     protected $fillable = [
         'id', 'building_name', 'building_information', 'building_image', 'pour', 'contre', 'nature', 'juridiction', 'numerodossier', 'adresse', 'telephone', 'email'
     ];
