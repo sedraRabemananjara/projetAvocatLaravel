@@ -10,7 +10,20 @@ class Course extends Model
     use HasFactory;
     public $timestamps = false;
 
+    public function enregistrement()
+    {
+        return $this->hasOne(Enregistrement::class);
+    }
+
+
     protected $fillable = [
-        'id', 'building_name', 'building_information', 'building_image', 
+        'id',
+        'enregistrement_id',
+        'agenda_id',
+        'TAF',
+        'resultat',
+        'responsable',
+        'date_necessite',
+        'fini',
     ];
 }

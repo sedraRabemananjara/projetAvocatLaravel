@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('idEnregistrement');
-            $table->foreign('idEnregistrement')->references('id')->on('enregistrements')->onDelete('cascade');
-            $table->string('TAF');
-            $table->timestamp('dateTimeCourse')->useCurrent();
-            $table->text('resultat');
-            $table->string('responsable');
+            $table->foreignId('enregistrement_id');
+            $table->datetime('date');
+            $table->string('renvoi');
+            $table->string('motif');
+            $table->string('espace_conclusion')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('table_agendas');
     }
 };

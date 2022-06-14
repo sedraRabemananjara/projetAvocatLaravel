@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\course;
+namespace App\Http\Controllers\agenda;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Course;
+use App\models\Agenda;
 
-class ControllerDeleteCourse extends Controller
+class ControllerDeleteAgenda extends Controller
 {
-    public function delete($idCourse){
-        $course=Course::find($idCourse);  
+    public function delete($id){
+        $course=Course::find($id);  
         $course->delete();  
         //return redirect('/')->with('deleted','Kamar Theresia deleted successfully');
     }
