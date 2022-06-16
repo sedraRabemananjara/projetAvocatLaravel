@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('nature_id')->constrained()->onUpdate('cascade');
             $table->foreignId('juridiction_id')->constrained()->onUpdate('cascade');
             $table->foreignId('section_juridiction_id')->nullable();
-            $table->string('procedure');
+            $table->string('procedure')->unique();
             $table->string('lieu');
             $table->string('adresse_client')->nullable();
             $table->string('telephone_client')->nullable();

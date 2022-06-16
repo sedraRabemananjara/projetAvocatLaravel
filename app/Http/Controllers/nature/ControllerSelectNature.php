@@ -10,6 +10,6 @@ class ControllerSelectNature extends Controller
 {
     public function selectAll()
     {
-        return Nature::all();
+        return Nature::orderBy('nom', 'asc')->get();
     }
 }

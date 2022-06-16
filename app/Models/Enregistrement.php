@@ -26,7 +26,20 @@ class Enregistrement extends Model
 
 
     protected $fillable = [
-        'id', 'building_name', 'building_information', 'building_image', 'pour', 'contre', 'nature', 'juridiction', 'numerodossier', 'adresse', 'telephone', 'email'
+        'id',
+        'pour',
+        'contre',
+        'nature_id',
+        'juridiction_id',
+        'procedure',
+        'adresse_client',
+        'telephone_client',
+        'email_client',
+        'telephone_interlocuteur',
+        'email_interlocuteur',
+        'user_id',
+        'lieu',
+        'section_juridiction_id',
     ];
 
     protected $hidden = ['user_id'];

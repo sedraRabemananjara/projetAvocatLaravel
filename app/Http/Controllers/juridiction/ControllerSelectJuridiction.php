@@ -11,6 +11,6 @@ class ControllerSelectJuridiction extends Controller
 
     public function selectAll()
     {
-        return Juridiction::all();
+        return Juridiction::orderBy('nom', 'asc')->get();
     }
 }
