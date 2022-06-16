@@ -11,6 +11,6 @@ class ControllerDeleteEnregistrement extends Controller
     public function delete($id){
         $enregistrement=Enregistrement::find($id);  
         $enregistrement->delete();  
-        return redirect('/')->with('deleted','Kamar Theresia deleted successfully');
+        //return redirect()->route('enregistrements.index');
     }
 }

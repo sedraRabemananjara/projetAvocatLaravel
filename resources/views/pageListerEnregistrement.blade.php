@@ -49,19 +49,13 @@
             <td>{{$liste->email}}</td>  
             <td>{{$liste->contact}}</td> 
             <td >  
-                <form action="{{ route('supprimerEnregistrements', $liste->id)}}" method="post" enctype="multipart/form-data">  
+                <form action="{{ route('supprimerEnregistrements', $liste->id)}}" method="post" enctype="multipart/form-data"  >  
                 @csrf
                 {{method_field('delete')}}
                     <button class="btn btn-danger" type="submit">Delete</button>  
                 </form>  
             </td>  
-            <td >  
-                <form action="{{ route('findById', $liste->id)}}" method="GET" enctype="multipart/form-data">  
-                    @csrf  
-
-                    <button class="btn btn-danger" type="submit">Edit</button>  
-                </form>  
-            </td>  
+           
 
    
   
