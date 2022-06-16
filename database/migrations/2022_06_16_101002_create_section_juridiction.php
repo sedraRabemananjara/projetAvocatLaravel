@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('section_juridictions', function (Blueprint $table) {
             $table->id();
-            $table->string('section');
+            $table->string('section')->unique();
             $table->timestamps();
         });
     }
