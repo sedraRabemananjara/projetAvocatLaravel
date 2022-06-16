@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('resultat');
             $table->string('responsable');
             $table->string('date_ordre')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->boolean('fini')->default(false);
             $table->timestamps();
         });
     }
