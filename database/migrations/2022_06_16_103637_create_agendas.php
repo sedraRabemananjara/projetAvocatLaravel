@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('enregistrement_id');
-            $table->datetime('date');
-            $table->string('renvoi');
+            $table->foreignId('enregistrement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('type_renvoi_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('motif');
-            $table->string('espace_conclusion')->nullable();
+            $table->string('espace_conclusion');
+            $table->datetime('date_agenda');
+            $table->string('salle');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_agendas');
+        Schema::dropIfExists('agendas');
     }
 };

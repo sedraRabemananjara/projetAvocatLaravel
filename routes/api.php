@@ -39,12 +39,15 @@ use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 
+use App\Http\Controllers\calendrier\ControllerSelectSemaineCalendrier;
+
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 
 
 Route::post('login', [AccessTokenController::class, 'issueToken'])
@@ -59,6 +62,8 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::get('/valider-token', function () {
         return ['data' => true];
     });
+
+    // calendrier
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);

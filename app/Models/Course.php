@@ -12,7 +12,7 @@ class Course extends Model
 
     public function enregistrement()
     {
-        return $this->hasOne(Enregistrement::class);
+        return $this->belongsTo(Enregistrement::class);
     }
 
 

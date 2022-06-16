@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,15 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('comptabilite_honoraire', function (Blueprint $table) {
             $table->id();
             $table->foreignId('enregistrement_id');
-            $table->foreignId('agenda_id')->nullable();
-            $table->string('TAF');
-            $table->string('resultat');
-            $table->string('responsable');
-            $table->datetime('date_necessite');
-            $table->boolean('fini')->default(false);
+            $table->string('motif');
+            $table->double('montant');
+            $table->datetime('date_paiement')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('paye_par');
+            $table->string('recu_par');
+            $table->string('remarque')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_course');
+        Schema::dropIfExists('comptabilite_honoraire');
     }
 };

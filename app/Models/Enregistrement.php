@@ -15,9 +15,14 @@ class Enregistrement extends Model
         return $this->hasMany(Course::class);
     }
 
+    public function agendas()
+    {
+        return $this->hasMany(Agenda::class);
+    }
+
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
 

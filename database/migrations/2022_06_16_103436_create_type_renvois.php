@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('enregistrements', function (Blueprint $table) {
-            $table->datetime('date_enregistrement')->default(DB::raw('CURRENT_TIMESTAMP'));
+        Schema::create('type_renvois', function (Blueprint $table) {
+            $table->id();
+            $table->string('type');
+            $table->integer('degre');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('enregistrements', function (Blueprint $table) {
-            $table->removeColumn("date_enregistrement");
-        });
+        Schema::dropIfExists('type_renvois');
     }
 };
