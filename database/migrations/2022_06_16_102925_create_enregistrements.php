@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('enregistrements', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('pour');
             $table->string('contre');
-            $table->foreignId('nature_id')->constrained()->onUpdate('update');
-            $table->foreignId('juridiction_id')->constrained()->onUpdate('update');
+            $table->foreignId('nature_id')->constrained()->onUpdate('cascade');
+            $table->foreignId('juridiction_id')->constrained()->onUpdate('cascade');
             $table->foreignId('section_juridiction_id')->nullable();
             $table->string('procedure');
             $table->string('lieu');

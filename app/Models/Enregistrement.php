@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Enregistrement extends Model
 {
     use HasFactory;
-    public $timestamps = false;
 
     public function courses()
     {
@@ -30,5 +29,5 @@ class Enregistrement extends Model
         'id', 'building_name', 'building_information', 'building_image', 'pour', 'contre', 'nature', 'juridiction', 'numerodossier', 'adresse', 'telephone', 'email'
     ];
 
-    protected $hidden = ['idUser'];
+    protected $hidden = ['user_id'];
 }

@@ -9,8 +9,6 @@ class Juridiction extends Model
 {
     use HasFactory;
 
-
-
     protected $fillable = [
         'id', 'juridiction'
     ];
