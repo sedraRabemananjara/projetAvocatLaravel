@@ -10,6 +10,14 @@ class ControllerInsertAvocat extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'mdp' => 'required',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'mailAvocat' => 'required',
+            'addresseAvocat' => 'required',
+            'contactAvocat' => 'required',
+        ]);
         $Avocat = new Avocat();
         $Avocat->mdp=$request->input('mdp');
         $Avocat->nom=$request->input('nom');

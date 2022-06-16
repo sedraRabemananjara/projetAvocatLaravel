@@ -4,7 +4,7 @@ namespace App\Http\Controllers\comptabiliteGenerale;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\ComptabiliteFrais;
+use App\models\ComptabiliteGenerale;
 use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateComptabiliteGenereles extends Controller
@@ -12,22 +12,17 @@ class ControllerUpdateComptabiliteGenereles extends Controller
     public function update($id)
     {
        request()->validate([
-            'idEnregistrement' => 'required',
-            'coutActes' => 'required',
-            'fraisProcedure' => 'required',
-            'date' => 'required',
-            'entite' => 'required',
+            'id_comptabilite_honoraires' => 'required',
+            'id_comptabilite_frais' => 'required',
             'especeRecu' => 'required',
-            'motif' => 'required',
-            'remarque' => 'required',
         ]);
 
-        $ComptabiliteFrais = DB::table('comptabilite_frais')
-                        ->where('id_comptabilite_frais', $id)
+        $ComptabiliteGenerale = DB::table('comptabilite_generales')
+                        ->where('id_comptabilite_generales', $id)
                         ->update([
-                            'idEnregistrement' => request('idEnregistrement'),
-                            'coutActes' => request('coutActes'),
-                            'fraisProcedure' => request('fraisProcedure'),
+                            'id_comptabilite_honoraires' => request('id_comptabilite_honoraires'),
+                            'id_comptabilite_frais' => request('id_comptabilite_frais'),
+                            'especeRecu' => request('especeRecu'),
                         ]);
 
         //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');

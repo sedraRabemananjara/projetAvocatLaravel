@@ -10,9 +10,12 @@ class ControllerInsertFrequencePaiement extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'nomFrequence' => 'required',
+        ]);
         $FrequencePaiement = new FrequencePaiement();
         $FrequencePaiement->nomFrequence=$request->input('nomFrequence');
         
         $FrequencePaiement->save();
-        }
+    }
 }

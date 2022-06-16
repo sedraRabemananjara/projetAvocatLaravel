@@ -10,6 +10,16 @@ class ControllerInsertComptabiliteFrais extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'idEnregistrement' => 'required',
+            'coutActes' => 'required',
+            'fraisProcedure' => 'required',
+            'date' => 'required',
+            'entite' => 'required',
+            'especeRecu' => 'required',
+            'motif' => 'required',
+            'remarque' => 'required',
+        ]);
         
         $ComptabiliteFrais = new ComptabiliteFrais();
         $ComptabiliteFrais->idEnregistrement=$request->input('idEnregistrement');

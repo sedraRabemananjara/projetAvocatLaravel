@@ -11,6 +11,13 @@ class ControllerInsertCourse extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'idEnregistrement' => 'required',
+            'TAF' => 'required',
+            'dateTimeCourse' => 'required',
+            'resultat' => 'required',
+            'addresseAvocat' => 'required',
+        ]);
         $course = new Course();
         $course->idEnregistrement=$request->input('idEnregistrement');
         $course->TAF=$request->input('TAF');
@@ -23,8 +30,8 @@ class ControllerInsertCourse extends Controller
         ->route('formulaireInsertionCourse')
         ->with('succes', 'Enregistrement effectué');
         */
-        return view('formulaireInsertionCourse')
-        ->with('succes', 'Enregistrement effectué');
+        //return view('formulaireInsertionCourse')
+        //->with('succes', 'Enregistrement effectué');
 
         //return view("controlpanel.products");
         //$employe=new Employe;

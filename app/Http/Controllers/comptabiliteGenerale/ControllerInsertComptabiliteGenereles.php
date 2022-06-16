@@ -11,13 +11,19 @@ class ControllerInsertComptabiliteGenereles extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'id_comptabilite_honoraires' => 'required',
+            'id_comptabilite_frais' => 'required',
+            'especeRecu' => 'required',
+        ]);
+
         $ComptabiliteGenerale = new ComptabiliteGenerale();
         $ComptabiliteGenerale->id_comptabilite_honoraires=$request->input('id_comptabilite_honoraires');
         $ComptabiliteGenerale->id_comptabilite_frais=$request->input('id_comptabilite_frais');
         $ComptabiliteGenerale->especeRecu=$request->input('especeRecu');
 
         $ComptabiliteGenerale->save();
-        return view('formulaireInsertionComptabiliteGenerale');
+        //return view('formulaireInsertionComptabiliteGenerale');
 
 
         /*return redirect()

@@ -10,6 +10,12 @@ class ControllerInsertCharge extends Controller
 {
     public function insert(Request $request)
     {
+        request()->validate([
+            'typeCharge' => 'required',
+            'montant' => 'required',
+            'idFrequence' => 'required',
+        ]);
+        
         $Charge = new Charge();
         $Charge->typeCharge=$request->input('typeCharge');
         $Charge->montant=$request->input('montant');

@@ -12,6 +12,14 @@ class ControllerInsertAgenda extends Controller
     
     public function insert(Request $request)
     {
+        request()->validate([
+            'idEnregistrement' => 'required',
+            'renvoi' => 'required',
+            'motif' => 'required',
+            'espaceConclusion' => 'required',
+            'idCourse' => 'required',
+            'dateTimeAgenda' => 'required',
+        ]);
         
         $agenda = new Agenda();
         $agenda->idEnregistrement=$request->input('idEnregistrement');
