@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreignId('enregistrement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('TAF');
             $table->string('date_necessite');
-            $table->string('resultat');
+            $table->string('resultat')->nullable();
             $table->string('responsable');
             $table->string('date_ordre')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->boolean('fini')->default(false);
+            $table->boolean('fini')->nullable()->default(false);
             $table->timestamps();
         });
     }
