@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('charges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_charge_id');
-            $table->foreignId('type_frequence_paiement_charge_id');
+            $table->foreignId('type_charge_id')->constrained();
+            $table->foreignId('type_frequence_paiement_charge_id')->constrained();
             $table->integer('frequence_paiement');
             $table->double('montant');
             $table->string('motif')->nullable();

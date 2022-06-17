@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('contre');
             $table->foreignId('nature_id')->constrained()->onUpdate('cascade');
             $table->foreignId('juridiction_id')->constrained()->onUpdate('cascade');
-            $table->foreignId('section_juridiction_id')->nullable();
+            $table->foreignId('section_juridiction_id')->constrained()->nullable();
             $table->string('procedure')->unique();
             $table->string('lieu');
             $table->string('adresse_client')->nullable();
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('email_interlocuteur')->nullable();
             $table->string('telephone_interlocuteur')->nullable();
             $table->date('date_delais_paiement')->nullable();
+            $table->double('montant_honoraire')->nullable();
             $table->timestamps();
         });
     }

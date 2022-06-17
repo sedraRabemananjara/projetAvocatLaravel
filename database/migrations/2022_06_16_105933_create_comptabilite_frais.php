@@ -26,7 +26,7 @@ return new class extends Migration
     {
         Schema::create('comptabilite_frais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('enregistrement_id');
+            $table->foreignId('enregistrement_id')->constrained();
             $table->string('motif');
             $table->double('montant');
             $table->datetime('date_paiement')->default(DB::raw('CURRENT_TIMESTAMP'));
