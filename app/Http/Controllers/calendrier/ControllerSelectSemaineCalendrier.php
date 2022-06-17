@@ -23,8 +23,22 @@ class ControllerSelectSemaineCalendrier extends Controller
         /*  $agendas = Agenda::all();
         foreach ($agendas as $agenda) {
             $agenda->enregistrement = $agenda->enregistrement();
-        }
+        }*/
 
-        return $agendas; */
+        return $agendas; 
+    } 
+    
+    public function getEnregistrementsAndCoursesAndAgendaByAvocat($id){
+      
+        $enregistrement = Enregistrement::where('enregistrements.user_id', $id)
+            ->join('agendas', 'agendas.enregistrement_id', 'enregistrements.id')
+            ->join('courses', 'courses.enregistrement_id', 'enregistrements.id')
+            ->select('enregistrements.*', 'courses.*', 'agendas.*')
+            ->get();
+        $enregistrement = $enregistrement[0];
+        var_dump($enregistrement);
+       
+        //return view('calendrierAvocat');
+    
     }
 }
