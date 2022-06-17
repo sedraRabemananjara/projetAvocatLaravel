@@ -9,7 +9,6 @@ class SectionJuridiction extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
 
     protected $fillable = [
         'id', 'section'

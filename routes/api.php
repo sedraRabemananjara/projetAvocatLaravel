@@ -41,6 +41,12 @@ use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 
 use App\Http\Controllers\calendrier\ControllerSelectSemaineCalendrier;
 
+use App\Http\Controllers\juridiction\ControllerSelectJuridiction;
+use App\Http\Controllers\nature\ControllerSelectNature;
+use App\Http\Controllers\sectionJuridiction\ControllerSelectSectionJuridiction;
+use App\Http\Controllers\typeCharge\ControllerSelectTypeCharge;
+use App\Http\Controllers\typeFrequencePaiementCharge\ControllerSelectTypeFrequencePaiementCharge;
+use App\Http\Controllers\typeRenvoi\ControllerSelectTypeRenvoi;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -49,10 +55,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 
-
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
-
 
 Route::middleware(['web', 'auth:api'])->group(function () {
     Route::get('/users', [UserSelectController::class, 'selectAll']);
@@ -108,4 +112,22 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
 });
 
-// Route::post('/login', [UserLoginController::class, 'login']);
+
+
+// Juridiction
+Route::get('juridiction', [ControllerSelectJuridiction::class, 'selectAll']);
+
+// Nature
+Route::get('nature', [ControllerSelectNature::class, 'selectAll']);
+
+// Selection juridiction
+Route::get('section-juridiction', [ControllerSelectSectionJuridiction::class, 'selectAll']);
+
+// Type charge
+Route::get('type-charge', [ControllerSelectTypeCharge::class, 'selectAll']);
+
+// Type frequence paiement charge
+Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiementCharge::class, 'selectAll']);
+
+// Type frequence paiement charge
+Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);

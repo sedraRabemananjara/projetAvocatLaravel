@@ -10,16 +10,16 @@ class ControllerInsertComptabiliteFrais extends Controller
 {
     public function insert(Request $request)
     {
-        
+
         $ComptabiliteFrais = new ComptabiliteFrais();
-        $ComptabiliteFrais->idEnregistrement=$request->input('idEnregistrement');
-        $ComptabiliteFrais->coutActes=$request->input('coutActes');
-        $ComptabiliteFrais->fraisProcedure=$request->input('fraisProcedure');
-        $ComptabiliteFrais->date=$request->input('date');
-        $ComptabiliteFrais->entite=$request->input('entite');
-        $ComptabiliteFrais->especeRecu=$request->input('especeRecu');
-        $ComptabiliteFrais->motif=$request->input('motif');
-        $ComptabiliteFrais->remarque=$request->input('remarque');
+        $ComptabiliteFrais->idEnregistrement = $request->input('idEnregistrement');
+        $ComptabiliteFrais->coutActes = $request->input('coutActes');
+        $ComptabiliteFrais->fraisProcedure = $request->input('fraisProcedure');
+        $ComptabiliteFrais->date = $request->input('date');
+        $ComptabiliteFrais->entite = $request->input('entite');
+        $ComptabiliteFrais->especeRecu = $request->input('especeRecu');
+        $ComptabiliteFrais->motif = $request->input('motif');
+        $ComptabiliteFrais->remarque = $request->input('remarque');
 
         $ComptabiliteFrais->save();
         return view('formulaireInsertionComptabiliteFrais');
