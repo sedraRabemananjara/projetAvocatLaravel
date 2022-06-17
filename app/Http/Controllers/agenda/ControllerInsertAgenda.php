@@ -14,18 +14,28 @@ class ControllerInsertAgenda extends Controller
     {
         request()->validate([
             "idEnregistrement" => "required",
-            "renvoi" => "required",
+            "typeRenvoi" => "required",
             "motif" => "required",
-            "date" => "required",
+            "dateAgenda" => "required",
+            "salle" => "required",
         ]);
 
-        $agenda = new Agenda();
+        return Agenda::create([
+            "enregistrement_id" => request('idEnregistrement'),
+            "type_renvoi_id" => request('typeRenvoi'),
+            "motif" => request("motif"),
+            "date_agenda" => request("dateAgenda"),
+            "salle" => request("salle"),
+            "espace_conclusion" => request("espaceConclusion"),
+        ]);
+
+        /*$agenda = new Agenda();
         $agenda->enregistrement_id = $request->input('idEnregistrement');
-        $agenda->renvoi = $request->input('renvoi');
+        $agenda->type_renvoi_id = $request->input('typeRenvoi');
         $agenda->motif = $request->input('motif');
         $agenda->espace_conclusion = $request->input('espaceConclusion');
         $agenda->date = $request->input('date');
 
-        return $agenda->save();
+        return $agenda->save();*/
     }
 }
