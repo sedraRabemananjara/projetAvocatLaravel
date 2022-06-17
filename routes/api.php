@@ -104,6 +104,9 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::delete('/supprimerEtat/{idEtat}', [ControllerDeleteEtat::class, 'delete'])->name('supprimerEtat');
     Route::post('/modifierEtat/{idEtat}', [ControllerUpdateEtat::class, 'update'])->name('modifierEtat');
 
+    //calendrier
+    Route::get('/calendrier/{id}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ]);
+
 
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
