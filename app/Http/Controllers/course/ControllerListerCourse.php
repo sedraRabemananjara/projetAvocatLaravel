@@ -12,8 +12,8 @@ class ControllerListerCourse extends Controller
     public function getAllCourses(Request $req)
     {
         $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
-            ->where('enregistrements.idUser', '=', Auth::user()->id)
-            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'TAF', 'resultat', 'responsable', 'enregistrements.id as dossier', 'created_at'])
+            ->where('enregistrements.user_id', '=', Auth::user()->id)
+            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'TAF', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
             ->get();
         return $courses;
     }

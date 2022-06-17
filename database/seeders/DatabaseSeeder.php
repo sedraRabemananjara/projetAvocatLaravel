@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            SectionJuridictionSeeder::class,
-            JuridictionSeeder::class,
+            // SectionJuridictionSeeder::class,
+            // JuridictionSeeder::class,
             NatureSeeder::class,
             TypeRenvoiSeeder::class,
             TypeChargeSeeder::class,

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('enregistrement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('type_renvoi_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('motif');
-            $table->string('espace_conclusion');
+            $table->string('espace_conclusion')->nullable();
             $table->datetime('date_agenda');
             $table->string('salle');
             $table->timestamps();
