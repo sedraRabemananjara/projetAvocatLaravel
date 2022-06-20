@@ -12,7 +12,7 @@ use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
-use App\Http\Controllers\calendrier\ControllerSelectSemaineCalendrier;
+use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,5 +65,5 @@ Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->n
 
 
 //calendrier
-Route::get('/calendrier/{id}',[ControllerSelectSemaineCalendrier::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ])->name('edit');
+Route::get('/calendrier/{id}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ])->name('edit');
 
