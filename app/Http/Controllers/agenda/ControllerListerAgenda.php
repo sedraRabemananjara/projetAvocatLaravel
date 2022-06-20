@@ -19,7 +19,7 @@ class ControllerListerAgenda extends Controller
                 'agendas.enregistrement_id', 'agendas.created_at',
                 'motif', 'espace_conclusion',
                 'enregistrements.id as dossier', 'salle',
-                'date_agenda', 'type_renvois.type', 'type_renvois.degre'
+                'date_agenda', 'type_renvois.type', 'type_renvois.degre', 'type_renvois.id as type_renvois_id'
             ])
             ->get();
         return $agendas;
