@@ -8,16 +8,20 @@ use Laravel\Passport\Http\Controllers\AccessTokenController;
 use App\Http\Controllers\enregistrement\ControllerInsertEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerListerEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerRechercheEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerSelectEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerUpdateEnregistrement;
 
 use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
+use App\Http\Controllers\course\ControllerSelectCourse;
 
 use App\Http\Controllers\agenda\ControllerInsertAgenda;
 use App\Http\Controllers\agenda\ControllerDeleteAgenda;
 use App\Http\Controllers\agenda\ControllerUpdateAgenda;
 use App\Http\Controllers\agenda\ControllerListerAgenda;
+use App\Http\Controllers\agenda\ControllerSelectAgenda;
 
 use App\Http\Controllers\avocat\ControllerInsertAvocat;
 use App\Http\Controllers\avocat\ControllerDeleteAvocat;
@@ -72,19 +76,23 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
     Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
+    Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
 
     // courses
-    Route::get('/course', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+    Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
-    Route::delete('/supprimerCourse/{idCourse}', [ControllerDeleteCourse::class, 'delete']);
-    Route::post('/modifierCourse/{idCourse}', [ControllerUpdateCourse::class, 'update']);
+    Route::delete('supprimerCourse/{idCourse}', [ControllerDeleteCourse::class, 'delete']);
 
     // agenda
-    Route::get('/agenda', [ControllerListerAgenda::class, 'getAllAgenda']);
-    Route::post('/agenda', [ControllerInsertAgenda::class, 'insert']);
-    Route::delete('/supprimerAgenda/{idAgenda}', [ControllerDeleteAgenda::class, 'delete']);
-    Route::post('/modifierAgenda/{idAgenda}', [ControllerUpdateAgenda::class, 'update']);
+    Route::get('agenda', [ControllerListerAgenda::class, 'getAllAgenda']);
+    Route::get('agenda/{id}', [ControllerSelectAgenda::class, 'getAgenda']);
+    Route::put('agenda', [ControllerUpdateAgenda::class, 'update']);
+    Route::post('agenda', [ControllerInsertAgenda::class, 'insert']);
+    Route::delete('supprimerAgenda/{idAgenda}', [ControllerDeleteAgenda::class, 'delete']);
 
     // avocat
     Route::get('/voirLesAvocat', [ControllerListerAvocat::class, 'getAllAvocats']);
