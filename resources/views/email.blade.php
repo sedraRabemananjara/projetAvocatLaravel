@@ -1,7 +1,4 @@
-
-  
-	     
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -23,9 +20,9 @@
             }
         </style>
     </head>
-      <x-mailing.headline tag="h4" text="Headline Example #4"> Cabinet Razafimahefa </x-mailing.headline>
+      <x-mailing.headline tag="h1" text="Headline Example #4"> Cabinet Razafimahefa </x-mailing.headline>
       </br>
-      <x-mailing.headline tag="h4" text="Headline Example #5">  Village des jeux </x-mailing.headline> 
+      <x-mailing.headline tag="h1" text="Headline Example #5">  Village des jeux </x-mailing.headline> 
       </br>
       <x-mailing.headline tag="h1" text="Headline Example #6"> Emmeuble Regus </x-mailing.headline> 
       </br>
@@ -35,7 +32,7 @@
 	           
     <body class="antialiased">
       <h1 style="text-align: center" class="heading-section">Andrianarison Michael</h1>
-      <h4 style="" class="heading-section">Procedure: 120/12</h4>  
+      <h2 style="" class="heading-section">Procedure: 120/12</h2>  
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
           <section class="ftco-section">
             <h2 style="text-decoration: underline" class="heading-section">Dérnière convocation:</h2> 
