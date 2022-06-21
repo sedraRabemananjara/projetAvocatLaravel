@@ -19,4 +19,10 @@ class UserSelectController extends Controller
     {
         return User::all();
     }
+
+    public function selectAllExceptUser()
+    {
+        $users = User::where('id', "!=", Auth::user()->id)->get();
+        return $users;
+    }
 }
