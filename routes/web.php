@@ -25,8 +25,13 @@ use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgend
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/email', function () {
+    return view('email');
 });
 
 Route::get('/course', function () {
@@ -66,4 +71,9 @@ Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->n
 
 //calendrier
 Route::get('/calendrier/{id}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ])->name('edit');
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
