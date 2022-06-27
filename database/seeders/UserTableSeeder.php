@@ -21,8 +21,8 @@ class UserTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        // Let's make sure everyone has the same password and 
-        // let's hash it before the loop, or else our seeder 
+        // Let's make sure everyone has the same password and
+        // let's hash it before the loop, or else our seeder
         // will be too slow.
         $password = Hash::make('toptal');
 
@@ -40,5 +40,6 @@ class UserTableSeeder extends Seeder
                 'password' => $password,
             ]);
         }*/
+        User::factory()->count(1)->create();
     }
 }
