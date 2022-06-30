@@ -37,6 +37,8 @@ class DatabaseSeeder extends Seeder
             SectionJuridictionSeeder::class,
             TypeFrequencePaiementChargeSeeder::class,
             EnregistrementSeeder::class,
+            AgendaSeeder::class,
+            CourseSeeder::class,
         ]);
     }
 }
