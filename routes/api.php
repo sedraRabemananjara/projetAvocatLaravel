@@ -72,6 +72,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::put('user/refuser', [UserRefusController::class, 'refuser']);
     Route::put('user/valider', [UserValiderController::class, 'valider']);
     Route::get('user-except', [UserSelectController::class, 'selectAllExceptUser']);
+    Route::get('user/date-verification-email/{id}', [UserSelectController::class, 'getDateVerificationEmail']);
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
