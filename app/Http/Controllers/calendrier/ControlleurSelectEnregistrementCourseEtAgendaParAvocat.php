@@ -19,4 +19,15 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
         return $enregistrement;
     
     }
+
+    public function getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements($id,$idE){
+      
+        $enregistrement = ViewSelectEnregistrementCourseEtAgendaParAvocat::select("*")
+                        ->where('user_id', $id)
+                        ->where('id_enregistrement', $idE)
+                        ->get();
+                        
+        return view('email',compact('enregistrement'));
+    
+    }
 }

@@ -30,6 +30,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 Route::get('/email', function () {
     return view('email');
 });
@@ -72,8 +76,13 @@ Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->n
 //calendrier
 Route::get('/calendrier/{id}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ])->name('edit');
 
+Route::get('/calendrierParEnregistrements/{id}/{idE}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements' ]);
+
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 
