@@ -41,12 +41,17 @@ use App\Http\Controllers\etat\ControllerDeleteEtat;
 use App\Http\Controllers\etat\ControllerUpdateEtat;
 use App\Http\Controllers\etat\ControllerListerEtat;
 
+use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
+
 use App\Http\Controllers\frequencePaiement\ControllerInsertFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 
 use App\Http\Controllers\calendrier\ControllerSelectSemaineCalendrier;
+
+use App\Http\Controllers\client\ControllerListerDossierClient;
+use App\Http\Controllers\client\ControllerDetailDossierClient;
 
 use App\Http\Controllers\juridiction\ControllerSelectJuridiction;
 use App\Http\Controllers\nature\ControllerSelectNature;
@@ -122,6 +127,10 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::post('/insererFrequencePaiement', [ControllerInsertFrequencePaiement::class, 'insert'])->name('insertionFrequencePaiement');
     Route::delete('/supprimerFrequencePaiement/{idFrequence}', [ControllerDeleteFrequencePaiement::class, 'delete'])->name('supprimerFrequencePaiement');
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
+
+    //client
+    Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
+    Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 });
 
 

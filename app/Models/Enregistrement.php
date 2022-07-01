@@ -24,6 +24,21 @@ class Enregistrement extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function nature()
+    {
+        return $this->belongsTo(Nature::class);
+    }
+
+    public function juridiction()
+    {
+        return $this->belongsTo(Juridiction::class);
+    }
+
+    public function sectionJuridiction()
+    {
+        return $this->belongsTo(SectionJuridiction::class);
+    }
+
 
     protected $fillable = [
         'id',
