@@ -6,6 +6,7 @@ use App\Http\Controllers\user\UserSelectController;
 use App\Http\Controllers\user\UserInscriptionController;
 use App\Http\Controllers\user\UserRefusController;
 use App\Http\Controllers\user\UserValiderController;
+use App\Http\Controllers\user\UserInfoController;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 use App\Http\Controllers\enregistrement\ControllerInsertEnregistrement;
@@ -41,12 +42,17 @@ use App\Http\Controllers\etat\ControllerDeleteEtat;
 use App\Http\Controllers\etat\ControllerUpdateEtat;
 use App\Http\Controllers\etat\ControllerListerEtat;
 
+use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
+
 use App\Http\Controllers\frequencePaiement\ControllerInsertFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
 use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 
 use App\Http\Controllers\calendrier\ControllerSelectSemaineCalendrier;
+
+use App\Http\Controllers\client\ControllerListerDossierClient;
+use App\Http\Controllers\client\ControllerDetailDossierClient;
 
 use App\Http\Controllers\juridiction\ControllerSelectJuridiction;
 use App\Http\Controllers\nature\ControllerSelectNature;
@@ -73,6 +79,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::put('user/valider', [UserValiderController::class, 'valider']);
     Route::get('user-except', [UserSelectController::class, 'selectAllExceptUser']);
     Route::get('user/date-verification-email/{id}', [UserSelectController::class, 'getDateVerificationEmail']);
+    Route::get('user/info', [UserInfoController::class, 'getInfo']);
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
@@ -122,6 +129,10 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::post('/insererFrequencePaiement', [ControllerInsertFrequencePaiement::class, 'insert'])->name('insertionFrequencePaiement');
     Route::delete('/supprimerFrequencePaiement/{idFrequence}', [ControllerDeleteFrequencePaiement::class, 'delete'])->name('supprimerFrequencePaiement');
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
+
+    //client
+    Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
+    Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 });
 
 

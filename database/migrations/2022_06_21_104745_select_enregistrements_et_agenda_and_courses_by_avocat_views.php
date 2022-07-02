@@ -28,7 +28,6 @@ return new class extends Migration
 
         DB::statement($this->createView());
     }
-    
     /**
      * Reverse the migrations.
      *
@@ -36,7 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
     }
 
     private function createView(): string
