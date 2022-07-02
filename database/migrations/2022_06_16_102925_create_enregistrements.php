@@ -22,7 +22,7 @@ return new class extends Migration
             $table->foreignId('juridiction_id')->constrained()->onUpdate('cascade');
             $table->foreignId('section_juridiction_id')->constrained()->nullable();
             $table->string('procedure')->unique();
-            $table->string('lieu');
+            $table->string('lieu')->nullable();
             $table->string('adresse_client')->nullable();
             $table->string('telephone_client')->nullable();
             $table->string('email_client')->nullable();
