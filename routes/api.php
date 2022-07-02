@@ -6,6 +6,7 @@ use App\Http\Controllers\user\UserSelectController;
 use App\Http\Controllers\user\UserInscriptionController;
 use App\Http\Controllers\user\UserRefusController;
 use App\Http\Controllers\user\UserValiderController;
+use App\Http\Controllers\user\UserInfoController;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 
 use App\Http\Controllers\enregistrement\ControllerInsertEnregistrement;
@@ -78,6 +79,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::put('user/valider', [UserValiderController::class, 'valider']);
     Route::get('user-except', [UserSelectController::class, 'selectAllExceptUser']);
     Route::get('user/date-verification-email/{id}', [UserSelectController::class, 'getDateVerificationEmail']);
+    Route::get('user/info', [UserInfoController::class, 'getInfo']);
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
