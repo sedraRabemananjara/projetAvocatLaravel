@@ -44,6 +44,9 @@ use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
+
+
+use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -59,11 +62,20 @@ Route::get('selectComptaHonoraire',[ControllerListerComptabiliteHonoraires::clas
 
 // courses
     Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
-//
+//type frequence de paiement
+Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
+//type charge
+Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
+//calendrier
 Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 //enregistrement
 Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
 Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+ //charge
+ Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
+ Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+
+
 
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle']);
@@ -105,8 +117,8 @@ Route::post('login', [AccessTokenController::class, 'issueToken'])
     Route::post('/modifierAvocat/{idAvocat}', [ControllerUpdateAvocat::class, 'update'])->name('modifierAvocat');
 
     //charge
-    Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
-    Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+    //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
+    //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
     Route::delete('/supprimerCharge/{idCharge}', [ControllerDeleteCharge::class, 'delete'])->name('supprimerCharge');
     Route::post('/modifierCharge/{idCharge}', [ControllerUpdateCharge::class, 'update'])->name('modifierCharge');
 

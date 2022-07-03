@@ -60,3 +60,4 @@ Route::post('/course/{id}',[ControllerDeleteCourse::class, 'delete' ])->name('de
 Route::get('/course/{id}',[ControllerUpdateCourse::class, 'edit' ])->name('edit');
 
 Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->name('update');
+
