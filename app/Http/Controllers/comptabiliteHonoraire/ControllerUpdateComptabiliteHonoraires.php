@@ -18,7 +18,7 @@ class ControllerUpdateComptabiliteHonoraires extends Controller
             'dateReception' => 'required',
         ]);
 
-        $ComptabiliteFrais = DB::table('comptabilite_honoraire')
+        $ComptabiliteFrais = DB::table('comptabilite_honoraires')
                         ->where('id_comptabilite_honoraires', $id)
                         ->update([
                             'idEnregistrement' => request('idEnregistrement'),

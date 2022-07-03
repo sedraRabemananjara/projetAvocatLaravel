@@ -4,7 +4,7 @@ namespace App\Http\Controllers\frequencePaiement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\TypeFrequencePaiementCharge;
+use App\models\FrequencePaiement;
 use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateFrequencePaiement extends Controller
@@ -15,7 +15,7 @@ class ControllerUpdateFrequencePaiement extends Controller
             'nomFrequence' => 'required',
         ]);
 
-        $FrequencePaiement = DB::table('type_frequence_paiement_charges')
+        $FrequencePaiement = DB::table('frequence_paiements')
                         ->where('idFrequence', $id)
                         ->update([
                             'nomFrequence' => request('nomFrequence'),

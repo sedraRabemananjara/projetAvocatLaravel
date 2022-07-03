@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    public $timestamps = false;
 
     public function enregistrement()
     {
@@ -20,7 +19,7 @@ class Course extends Model
         'id',
         'enregistrement_id',
         'agenda_id',
-        'travaux_a_faire',
+        'TAF',
         'resultat',
         'responsable',
         'date_necessite',

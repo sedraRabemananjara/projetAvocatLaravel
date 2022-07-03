@@ -10,7 +10,6 @@ class ControllerListerComptabiliteHonoraires extends Controller
 {
     public function getAllComptabiliteHonoraire(Request $req){
         ComptabiliteHonoraire::all();
-        return ComptabiliteHonoraire::all();
-        //return view('pageListerComptabiliteHonoraire',['listeComptabiliteHonoraires'=> ComptabiliteHonoraire::all()]);
+        return view('pageListerComptabiliteHonoraire',['listeComptabiliteHonoraires'=> ComptabiliteHonoraire::all()]);
     }
 }

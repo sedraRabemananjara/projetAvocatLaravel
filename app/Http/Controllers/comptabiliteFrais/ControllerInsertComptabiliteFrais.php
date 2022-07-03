@@ -5,29 +5,24 @@ namespace App\Http\Controllers\comptabiliteFrais;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\ComptabiliteFrais;
-use Illuminate\Support\Facades\DB;
 
 class ControllerInsertComptabiliteFrais extends Controller
 {
     public function insert(Request $request)
     {
-        request()->validate([
-            "enregistrement_id" => "required",
-            "motif" => "required",
-            "montant" => "required",
-            "paye_par" => "required",
-            "recu_par" => "required",
-        ]);
+
         $ComptabiliteFrais = new ComptabiliteFrais();
-        $ComptabiliteFrais->enregistrement_id=$request->input('enregistrement_id');
-        $ComptabiliteFrais->motif=$request->input('motif');
-        $ComptabiliteFrais->montant=$request->input('montant');
-        $ComptabiliteFrais->paye_par=$request->input('paye_par');
-        $ComptabiliteFrais->recu_par=$request->input('recu_par');
-        $ComptabiliteFrais->remarque=$request->input('remarque');
+        $ComptabiliteFrais->idEnregistrement = $request->input('idEnregistrement');
+        $ComptabiliteFrais->coutActes = $request->input('coutActes');
+        $ComptabiliteFrais->fraisProcedure = $request->input('fraisProcedure');
+        $ComptabiliteFrais->date = $request->input('date');
+        $ComptabiliteFrais->entite = $request->input('entite');
+        $ComptabiliteFrais->especeRecu = $request->input('especeRecu');
+        $ComptabiliteFrais->motif = $request->input('motif');
+        $ComptabiliteFrais->remarque = $request->input('remarque');
 
-
-        return $ComptabiliteFrais->save();
+        $ComptabiliteFrais->save();
+        return view('formulaireInsertionComptabiliteFrais');
 
 
         /*return redirect()
