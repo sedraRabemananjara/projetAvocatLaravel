@@ -21,7 +21,7 @@ class ControllerUpdateComptabiliteHonoraires extends Controller
         $ComptabiliteFrais = DB::table('comptabilite_honoraire')
                         ->where('id_comptabilite_honoraires', $id)
                         ->update([
-                            'idEnregistrement' => request('idEnregistrement'),
+                            'idEnregistrement' => request('Enregistrement_id'),
                             'idAvocat' => request('idAvocat'),
                             'especeRecu' => request('especeRecu'),
                             'dateReception' => request('dateReception'),
