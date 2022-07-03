@@ -60,6 +60,16 @@ use App\Http\Controllers\sectionJuridiction\ControllerSelectSectionJuridiction;
 use App\Http\Controllers\typeCharge\ControllerSelectTypeCharge;
 use App\Http\Controllers\typeFrequencePaiementCharge\ControllerSelectTypeFrequencePaiementCharge;
 use App\Http\Controllers\typeRenvoi\ControllerSelectTypeRenvoi;
+
+
+use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
+use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
+use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
+use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
+
+
+use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -154,3 +164,29 @@ Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiem
 
 // Type frequence paiement charge
 Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
+
+
+
+
+//comptabiliteFrais
+Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
+Route::get('selectComptaFrais',[ControllerListerComptabiliteFrais::class,'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
+
+//comptabiiteHonoraire
+Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
+Route::get('selectComptaHonoraire',[ControllerListerComptabiliteHonoraires::class,'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
+
+// courses
+    Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+//type frequence de paiement
+Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
+//type charge
+Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
+//calendrier
+Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
+//enregistrement
+Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
+Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+ //charge
+ Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
+ Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
