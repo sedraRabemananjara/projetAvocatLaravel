@@ -83,7 +83,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-    Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('enregistrement/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
     Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);

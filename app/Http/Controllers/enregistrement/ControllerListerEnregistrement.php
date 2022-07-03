@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ControllerListerEnregistrement extends Controller
 {
-    public function getAllEnregistrements()
+    public function getAllEnregistrements($page = 0)
     {
-        $enregistrements = Enregistrement::where('user_id', Auth::user()->id)->get();
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
+        $enregistrements = Enregistrement::where('user_id', Auth::user()->id)->offset($offset)->limit($limit)->get();
         return $enregistrements;
     }
 }
