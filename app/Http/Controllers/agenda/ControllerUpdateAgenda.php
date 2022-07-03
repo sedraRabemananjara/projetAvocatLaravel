@@ -9,27 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateAgenda extends Controller
 {
-
-    public function update()
+  
+    public function update($id)
     {
-        /*request()->validate([
+       request()->validate([
             'idEnregistrement' => 'required',
             'renvoi' => 'required',
             'motif' => 'required',
             'espaceConclusion' => 'required',
             'idCourse' => 'required',
             'dateTimeAgenda' => 'required',
-        ]);*/
+        ]);
 
-        return DB::table('agendas')
-            ->where('id', request('id'))
-            ->update([
-                'enregistrement_id' => request('idEnregistrement'),
-                'type_renvoi_id' => request('typeRenvoi'),
-                'motif' => request('motif'),
-                'espace_conclusion' => request('espaceConclusion'),
-                'date_agenda' => request('dateAgenda'),
-                'salle' => request('salle'),
-            ]);
+        $agenda = DB::table('agendas')
+                        ->where('idAgenda', $id)
+                        ->update([
+                            'idEnregistrement' => request('idEnregistrement'),
+                            'renvoi' => request('renvoi'),
+                            'motif' => request('motif'),
+                            'espaceConclusion' => request('espaceConclusion'),
+                            'idCourse' => request('idCourse'),
+                            'dateTimeAgenda' => request('dateTimeAgenda'),
+                        ]);
+
+        //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');
+
     }
+    
+
+  
 }

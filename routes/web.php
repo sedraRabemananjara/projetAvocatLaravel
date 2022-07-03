@@ -12,8 +12,6 @@ use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
-use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,17 +23,8 @@ use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgend
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/test', function () {
-    return view('test');
-});
-
-Route::get('/email', function () {
-    return view('email');
 });
 
 Route::get('/course', function () {
@@ -71,18 +60,4 @@ Route::post('/course/{id}',[ControllerDeleteCourse::class, 'delete' ])->name('de
 Route::get('/course/{id}',[ControllerUpdateCourse::class, 'edit' ])->name('edit');
 
 Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->name('update');
-
-
-//calendrier
-Route::get('/calendrier/{id}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat' ])->name('edit');
-
-Route::get('/calendrierParEnregistrements/{id}/{idE}',[ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements' ]);
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
 

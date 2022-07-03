@@ -9,10 +9,7 @@ class SectionJuridiction extends Model
 {
     use HasFactory;
 
-    public function enregistrements()
-    {
-        $this->hasMany(Enregistrement::class);
-    }
+    public $timestamps = false;
 
     protected $fillable = [
         'id', 'section'

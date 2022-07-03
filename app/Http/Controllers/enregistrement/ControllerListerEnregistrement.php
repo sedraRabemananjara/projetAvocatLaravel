@@ -11,7 +11,7 @@ class ControllerListerEnregistrement extends Controller
 {
     public function getAllEnregistrements()
     {
-        $enregistrements = Enregistrement::where('user_id', Auth::user()->id)->get();
+        $enregistrements = Enregistrement::where('idUser', Auth::user()->id)->get();
         return $enregistrements;
     }
 }

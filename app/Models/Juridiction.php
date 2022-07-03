@@ -9,10 +9,7 @@ class Juridiction extends Model
 {
     use HasFactory;
 
-    public function enregistrements()
-    {
-        $this->hasMany(Enregistrement::class);
-    }
+
 
     protected $fillable = [
         'id', 'juridiction'

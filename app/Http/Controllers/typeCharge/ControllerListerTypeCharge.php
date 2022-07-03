@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\typeCharge;
 
 use App\Http\Controllers\Controller;
-use App\Models\TypeCharge;
 use Illuminate\Http\Request;
+use App\Models\TypeCharge;
 
-class ControllerSelectTypeCharge extends Controller
+class ControllerListerTypeCharge extends Controller
 {
-    public function selectAll()
+    public function getAllTypeCharge()
     {
         return TypeCharge::all();
     }

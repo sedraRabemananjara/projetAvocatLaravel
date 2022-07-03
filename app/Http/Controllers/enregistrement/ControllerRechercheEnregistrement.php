@@ -10,8 +10,8 @@ class ControllerRechercheEnregistrement extends Controller
 {
     public function rechercher($information)
     {
-        return $enregistrement = Enregistrement::where('id', 'LIKE', '%' . $information . '%')
-            ->orWhere('procedure', 'LIKE', '%' . $information . '%')
+        $enregistrement = Enregistrement::where('id', 'LIKE', '%' . $information . '%')
+            ->orWhere('numerodossier', 'LIKE', '%' . $information . '%')
             ->orWhere('pour', 'LIKE', '%' . $information . '%')
             ->get();
         return $enregistrement;

@@ -9,28 +9,29 @@ use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateCourse extends Controller
 {
-    public function update()
+    public function update($id)
     {
-        /*request()->validate([
+        request()->validate([
             'idEnregistrement' => 'required',
             'TAF' => 'required',
             'dateTimeCourse' => 'required',
             'resultat' => 'required',
             'addresseAvocat' => 'required',
-        ]);*/
+        ]);
 
-        return DB::table('courses')
-            ->where('id', request('id'))
-            ->update([
-                'enregistrement_id' => request('enregistrement'),
-                'TAF' => request('TAF'),
-                'date_necessite' => request('dateNecessite'),
-                'resultat' => request('resultat'),
-                'responsable' => request('responsable'),
-                'fini' => request('fini'),
-            ]);
+        $avocat = DB::table('courses')
+                        ->where('idCourse', $id)
+                        ->update([
+                            'idEnregistrement' => request('idEnregistrement'),
+                            'TAF' => request('TAF'),
+                            'dateTimeCourse' => request('dateTimeCourse'),
+                            'resultat' => request('resultat'),
+                            'responsable' => request('responsable'),
+                        ]);
 
         //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');
 
     }
+
+  
 }

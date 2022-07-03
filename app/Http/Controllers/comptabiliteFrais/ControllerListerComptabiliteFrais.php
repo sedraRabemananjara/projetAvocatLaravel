@@ -10,6 +10,7 @@ class ControllerListerComptabiliteFrais extends Controller
 {
     public function getAllComptabiliteFrais(Request $req){
         ComptabiliteFrais::all();
-        return view('pageListerComptabiliteFrais',['listeComptabiliteFraiss'=> ComptabiliteFrais::all()]);
+        return  ComptabiliteFrais::all();
+        //return view('pageListerComptabiliteFrais',['listeComptabiliteFraiss'=> ComptabiliteFrais::all()]);
     }
 }
