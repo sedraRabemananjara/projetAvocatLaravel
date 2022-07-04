@@ -89,7 +89,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
 
     // courses
-    Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
     Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
