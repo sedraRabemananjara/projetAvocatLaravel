@@ -75,10 +75,10 @@ use Illuminate\Support\Facades\Auth;
 
 // authentification
 Route::post('login', [AccessTokenController::class, 'issueToken'])
-    ->middleware(['api-login', 'throttle']);
+    ->middleware(['api-login', 'throttle', 'verified']);
 Route::post('inscription', [UserInscriptionController::class, 'inscription']);
 
-Route::middleware(['web', 'auth:api'])->group(function () {
+Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     Route::get('/valider-token', function () {
         return ['data' => true];
@@ -144,6 +144,21 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     //client
     Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
+
+
+    Route::middleware(['isAdmin'])->group(function () {
+        //comptabiliteFrais
+        Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
+        Route::get('selectComptaFrais', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
+
+        //comptabiiteHonoraire
+        Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
+        Route::get('selectComptaHonoraire', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
+
+        //charge
+        Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
+        Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+    });
 });
 
 
@@ -166,28 +181,9 @@ Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiem
 // Type frequence paiement charge
 Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
-
-
-
-//comptabiliteFrais
-Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
-Route::get('selectComptaFrais', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
-
-//comptabiiteHonoraire
-Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
-Route::get('selectComptaHonoraire', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
-
-// courses
-Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
 //type frequence de paiement
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
 //type charge
 Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
 //calendrier
 Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
-//enregistrement
-Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
-//charge
-Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
-Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
