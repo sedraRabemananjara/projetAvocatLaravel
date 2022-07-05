@@ -55,6 +55,8 @@ class Enregistrement extends Model
         'user_id',
         'lieu',
         'section_juridiction_id',
+        'montant_honoraire',
+        'date_delais_paiement',
     ];
 
     protected $hidden = ['user_id'];

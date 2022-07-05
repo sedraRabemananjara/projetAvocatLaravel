@@ -97,7 +97,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
-    Route::delete('enregistrement', [ControllerDeleteEnregistrement::class, 'delete']);
+    Route::delete('enregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete']);
 
     // courses
     Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
