@@ -21,7 +21,7 @@ class ControllerInsertCourse extends Controller
 
         return Course::create([
             "enregistrement_id" => request("idEnregistrement"),
-            "TAF" => request("TAF"),
+            "travaux_a_faire" => request("TAF"),
             "date_necessite" => request("dateNecessite"),
             "resultat" => request("resultat"),
             "responsable" => request("responsable"),
@@ -31,7 +31,7 @@ class ControllerInsertCourse extends Controller
         /*$course = new Course();
         $course->enregistrement_id = $request->input('idEnregistrement');
         $course->agenda_id = $request->input('idAgenda');
-        $course->TAF = $request->input('TAF');
+        $course-> = $request->input('TAF');
         $course->date_necessite = $request->input('dateNecessite');
         $course->resultat = $request->input('resultat');
         $course->responsable = $request->input('responsable');

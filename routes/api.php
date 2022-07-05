@@ -100,8 +100,10 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::delete('enregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete']);
 
     // courses
-    Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
-    Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+
+    //Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
+    //Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
     Route::delete('course', [ControllerDeleteCourse::class, 'delete']);
@@ -133,7 +135,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     //calendrier
     Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
-
+    Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
@@ -145,6 +147,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 
+=
 
     Route::middleware(['isAdmin'])->group(function () {
         //comptabiliteFrais
@@ -159,6 +162,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
         Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
         Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
     });
+
 });
 
 
@@ -181,9 +185,15 @@ Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiem
 // Type frequence paiement charge
 Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
+
+// courses
+    Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+
 //type frequence de paiement
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
 //type charge
 Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
-//calendrier
-Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
+
+ Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
+ Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+

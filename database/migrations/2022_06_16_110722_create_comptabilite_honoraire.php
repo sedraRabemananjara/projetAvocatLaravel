@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comptabilite_honoraire', function (Blueprint $table) {
+        Schema::create('comptabilite_honoraires', function (Blueprint $table) {
             $table->id();
             $table->foreignId('enregistrement_id')->constrained();
             $table->string('motif');
