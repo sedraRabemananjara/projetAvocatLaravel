@@ -147,7 +147,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 
-=
+
 
     Route::middleware(['isAdmin'])->group(function () {
         //comptabiliteFrais
