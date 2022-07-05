@@ -31,9 +31,8 @@ class ControllerInsertEnregistrement extends Controller
             throw $error;
         }
 
-        return Auth::user();
 
-        /*  return Enregistrement::create([
+        return Enregistrement::create([
             "user_id" => Auth::user()->id,
             "lieu" => request("lieu"),
             "pour" => request("pour"),
@@ -48,7 +47,7 @@ class ControllerInsertEnregistrement extends Controller
             "email_interlocuteur" => request("emailInterloc"),
             "telephone_interlocuteur" => request("telephoneInterloc"),
             "date_delais_paiement" => request("dateDelaisPaiement"),
-        ]); */
+        ]);
 
         /*$enregistrement = new enregistrement();
         $enregistrement->pour = $request->input('pour');

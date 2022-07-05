@@ -22,10 +22,12 @@ class AssurerVerificationUser
 
         $email_verified_at = null;
         if (request('username') != null) {
-            $email_verified_at = User::where('email', request('username'))
+            $user = User::where('email', request('username'))
                 ->select('email_verified_at')
-                ->get()[0]
-                ->email_verified_at;
+                ->get();
+            if (count($user) != 0) {
+                $email_verified_at = $user[0]->email_verified_at;
+            }
         } else {
             $email_verified_at = Auth::user()->email_verified_at;
         }
