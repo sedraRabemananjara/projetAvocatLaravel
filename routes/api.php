@@ -66,8 +66,8 @@ use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
-
-
+use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerSupprimerEnregistrement;
 use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
 
 use Illuminate\Support\Facades\Auth;
@@ -93,24 +93,25 @@ Route::middleware(['web', 'auth:api'])->group(function () {
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-    Route::get('enregistrement/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('enregistrement/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
     Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
+    Route::delete('enregistrement', [ControllerDeleteEnregistrement::class, 'delete']);
 
     // courses
-    Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
     Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
-    Route::delete('supprimerCourse/{idCourse}', [ControllerDeleteCourse::class, 'delete']);
+    Route::delete('course', [ControllerDeleteCourse::class, 'delete']);
 
     // agenda
-    Route::get('agenda/{page}', [ControllerListerAgenda::class, 'getAllAgenda']);
+    Route::get('agenda/page/{page}', [ControllerListerAgenda::class, 'getAllAgenda']);
     Route::get('agenda/{id}', [ControllerSelectAgenda::class, 'getAgenda']);
     Route::put('agenda', [ControllerUpdateAgenda::class, 'update']);
     Route::post('agenda', [ControllerInsertAgenda::class, 'insert']);
-    Route::delete('supprimerAgenda/{idAgenda}', [ControllerDeleteAgenda::class, 'delete']);
+    Route::delete('agenda', [ControllerDeleteAgenda::class, 'delete']);
 
     // avocat
     Route::get('/voirLesAvocat', [ControllerListerAvocat::class, 'getAllAvocats']);

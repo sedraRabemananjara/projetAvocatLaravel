@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\enregistrement;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\models\Enregistrement;
 
 class ControllerDeleteEnregistrement extends Controller
 {
-    public function delete($id){
-        $enregistrement=Enregistrement::find($id);  
-        $enregistrement->delete();  
-        return redirect('/')->with('deleted','Kamar Theresia deleted successfully');
+    public function delete()
+    {
+        request()->validate([
+            'id' => 'required',
+        ]);
+
+        return Enregistrement::where('id', request('id'))
+            ->delete();
     }
 }
