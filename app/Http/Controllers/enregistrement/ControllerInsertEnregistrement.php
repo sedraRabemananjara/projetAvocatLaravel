@@ -31,6 +31,7 @@ class ControllerInsertEnregistrement extends Controller
             throw $error;
         }
 
+
         return Enregistrement::create([
             "user_id" => Auth::user()->id,
             "lieu" => request("lieu"),

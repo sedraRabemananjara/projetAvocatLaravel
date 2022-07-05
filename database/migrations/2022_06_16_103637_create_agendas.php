@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('enregistrement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('type_renvoi_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('type_renvoi_id')->constrained()->onUpdate('cascade');
             $table->string('motif');
             $table->string('espace_conclusion')->nullable();
             $table->datetime('date_agenda');
