@@ -7,13 +7,9 @@ use App\models\Enregistrement;
 
 class ControllerDeleteEnregistrement extends Controller
 {
-    public function delete()
+    public function delete($id)
     {
-        request()->validate([
-            'id' => 'required',
-        ]);
-
-        return Enregistrement::where('id', request('id'))
+        return Enregistrement::where('id', $id)
             ->delete();
     }
 }

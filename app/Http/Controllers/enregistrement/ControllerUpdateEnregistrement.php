@@ -35,6 +35,10 @@ class ControllerUpdateEnregistrement extends Controller
         $enregistrement->telephone_interlocuteur = request('telephoneInterloc');
         $enregistrement->email_interlocuteur = request('emailInterloc');
 
+        if (Auth::user()->est_admin) {
+            $enregistrement->montant_honoraire = request('montantHonoraire');
+        }
+
         return $enregistrement->save();
     }
 }
