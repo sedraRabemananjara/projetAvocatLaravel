@@ -23,7 +23,7 @@ class ControllerUpdateCourse extends Controller
             ->where('id', request('id'))
             ->update([
                 'enregistrement_id' => request('enregistrement'),
-                'TAF' => request('TAF'),
+                'travaux_a_faire' => request('TAF'),
                 'date_necessite' => request('dateNecessite'),
                 'resultat' => request('resultat'),
                 'responsable' => request('responsable'),

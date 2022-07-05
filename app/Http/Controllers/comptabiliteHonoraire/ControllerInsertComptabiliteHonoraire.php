@@ -17,9 +17,10 @@ class ControllerInsertComptabiliteHonoraire extends Controller
             "montant" => "required",
             "paye_par" => "required",
             "recu_par" => "required",
+            "recu_par" => "required",
         ]);
 
-        $ComptabiliteHonoraire = new ComptabiliteHonoraire();
+       $ComptabiliteHonoraire = new ComptabiliteHonoraire();
         $ComptabiliteHonoraire->enregistrement_id=$request->input('enregistrement_id');
         $ComptabiliteHonoraire->motif=$request->input('motif');
         $ComptabiliteHonoraire->montant=$request->input('montant');
@@ -28,6 +29,17 @@ class ControllerInsertComptabiliteHonoraire extends Controller
         $ComptabiliteHonoraire->remarque=$request->input('remarque');
 
         return  $ComptabiliteHonoraire->save();
+
+       /* return ComptabiliteHonoraire::create([
+            "enregistrement_id"=>request('enregistrement_id'),
+            "motif"=>request('motif'),
+            "montant"=>request('montant'),
+            "paye_par"=>request('paye_par'),
+            "recu_par"=>request('recu_par'),
+            "remarque"=>request('remarque'),
+
+        ]);*/
+
 
     }
 }

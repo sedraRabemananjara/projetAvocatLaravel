@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ControllerListerCourse extends Controller
 {
-    public function getAllCourses($page = 0)
+    /*public function getAllCourses($page = 0)
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
@@ -20,5 +20,10 @@ class ControllerListerCourse extends Controller
             ->limit($limit)
             ->get();
         return $courses;
+    }*/
+
+    public function getAllCourses()
+    {
+        return Course::all();
     }
 }

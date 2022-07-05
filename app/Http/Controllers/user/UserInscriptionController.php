@@ -42,6 +42,7 @@ class UserInscriptionController extends Controller
             "nom" => request("nom"),
             "prenom" => request("prenom"),
             "password" => Hash::make(request("password")),
+            //"password" =>request("password"),
             "est_admin" => false,
             'remember_token' => Str::random(10),
         ]);

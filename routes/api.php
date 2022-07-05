@@ -99,8 +99,8 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
 
     // courses
-    Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
-    Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+    //Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
+    //Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
     Route::delete('supprimerCourse/{idCourse}', [ControllerDeleteCourse::class, 'delete']);
@@ -132,7 +132,7 @@ Route::middleware(['web', 'auth:api'])->group(function () {
 
     //calendrier
     Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
-
+    Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
@@ -143,6 +143,15 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     //client
     Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
+
+    //comptabiliteFrais
+Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
+Route::get('selectComptaFrais',[ControllerListerComptabiliteFrais::class,'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
+
+//comptabiiteHonoraire
+Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
+Route::get('selectComptaHonoraire',[ControllerListerComptabiliteHonoraires::class,'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
+
 });
 
 
@@ -168,13 +177,7 @@ Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
 
-//comptabiliteFrais
-Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
-Route::get('selectComptaFrais',[ControllerListerComptabiliteFrais::class,'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
 
-//comptabiiteHonoraire
-Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
-Route::get('selectComptaHonoraire',[ControllerListerComptabiliteHonoraires::class,'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
 
 // courses
     Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
@@ -182,11 +185,6 @@ Route::get('selectComptaHonoraire',[ControllerListerComptabiliteHonoraires::clas
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
 //type charge
 Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
-//calendrier
-Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
-//enregistrement
-Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-Route::get('enregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
- //charge
+
  Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
