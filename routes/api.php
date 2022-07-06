@@ -67,6 +67,7 @@ use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonor
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
 use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerSupprimerEnregistrement;
 use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
 
@@ -77,6 +78,7 @@ use Illuminate\Support\Facades\Auth;
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle', 'verified']);
 Route::post('inscription', [UserInscriptionController::class, 'inscription']);
+
 
 Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
@@ -93,11 +95,11 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     // enregistrement
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
-    Route::get('enregistrement/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
-    Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
     Route::delete('enregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete']);
+    Route::post('enregistrement/import', [ControllerImportEnregistrement::class, 'import']);
+    Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
 
     // courses
     Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
