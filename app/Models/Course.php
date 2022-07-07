@@ -19,7 +19,7 @@ class Course extends Model
         'id',
         'enregistrement_id',
         'agenda_id',
-        'TAF',
+        'travaux_a_faire',
         'resultat',
         'responsable',
         'date_necessite',

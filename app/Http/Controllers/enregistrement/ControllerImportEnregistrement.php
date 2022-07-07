@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\enregistrement;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\models\Enregistrement;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Enregistrement;
 
-class ControllerInsertEnregistrement extends Controller
+class ControllerImportEnregistrement extends Controller
 {
-    public function insert(Request $request)
+    public function import()
     {
         request()->validate([
+            "id" => "required",
+            "userId" => "required",
             "pour" => "required",
             "contre" => "required",
             "nature" => "required",
@@ -33,7 +33,8 @@ class ControllerInsertEnregistrement extends Controller
 
 
         return Enregistrement::create([
-            "user_id" => Auth::user()->id,
+            "id" => request("id"),
+            "user_id" => request("userId"),
             "lieu" => request("lieu"),
             "pour" => request("pour"),
             "contre" => request("contre"),
@@ -48,22 +49,5 @@ class ControllerInsertEnregistrement extends Controller
             "telephone_interlocuteur" => request("telephoneInterloc"),
             "date_delais_paiement" => request("dateDelaisPaiement"),
         ]);
-
-        /*$enregistrement = new enregistrement();
-        $enregistrement->pour = $request->input('pour');
-        $enregistrement->contre = $request->input('contre');
-        $enregistrement->nature_id = $request->input('nature');
-        $enregistrement->juridiction_id = $request->input('juridiction');
-        $enregistrement->section_juridiction_id = $request->input('sectionJuridiction');
-        $enregistrement->procedure = $request->input('procedure');
-        $enregistrement->adresse_client = $request->input('adresseClient');
-        $enregistrement->telephone_client = $request->input('telephoneClient');
-        $enregistrement->email_client = $request->input('emailClient');
-        $enregistrement->adresse_interloc = $request->input('adresseInterloc');
-        $enregistrement->telephone_interloc = $request->input('telephoneInterloc');
-        $enregistrement->email_interloc = $request->input('emailInterloc');
-        $enregistrement->user_id = Auth::user()->id;
-
-        return $enregistrement->save();*/
     }
 }

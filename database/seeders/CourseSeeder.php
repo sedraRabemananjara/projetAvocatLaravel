@@ -23,19 +23,19 @@ class CourseSeeder extends Seeder
         $faker = \Faker\Factory::create();
         for ($i = 1; $i < 251; $i++) {
             DB::table("courses")->insert([
-                'enregistrement_id'=> $i, 
-                'TAF' => 'mila maka cetificat de residence',
+                'enregistrement_id'=> $i,
+                'travaux_a_faire' => 'mila maka cetificat de residence',
                 'date_necessite'=>"20/06/2022",
                 'resultat'=> 'resoudre le probleme entre client et entite',
                 'responsable'=> $faker->name(),
                 'date_ordre'=>"29/06/2022",
                 'fini'=> $faker->randomElement(["true", "false"]),
             ]);
-            }  
-        
+            }
+
             for ($i = 1; $i < 251; $i++) {
                 DB::table("courses")->insert([
-                    'enregistrement_id'=> $i, 
+                    'enregistrement_id'=> $i,
                     'TAF' => 'mila certification legales ana tany',
                     'date_necessite'=>"10/07/2022",
                     'resultat'=> 'ahafahana mahazo aingana ny droit',
@@ -43,11 +43,11 @@ class CourseSeeder extends Seeder
                     'date_ordre'=>"20/07/2022",
                     'fini'=> $faker->randomElement(["true", "false"]),
                 ]);
-                } 
-                
+                }
+
                 for ($i = 1; $i < 251; $i++) {
                     DB::table("courses")->insert([
-                        'enregistrement_id'=> $i, 
+                        'enregistrement_id'=> $i,
                         'TAF' => 'mila maka passeport',
                         'date_necessite'=>"22/06/2022",
                         'resultat'=> 'ahafahana mahazo famelana',
@@ -55,10 +55,10 @@ class CourseSeeder extends Seeder
                         'date_ordre'=>"30/06/2022",
                         'fini'=> $faker->randomElement(["true", "false"]),
                     ]);
-                    } 
+                    }
                     for ($i = 1; $i < 251; $i++) {
                         DB::table("courses")->insert([
-                            'enregistrement_id'=> $i, 
+                            'enregistrement_id'=> $i,
                             'TAF' => 'mila mifandamina aigana miaraka aminy avocat',
                             'date_necessite'=>"20/06/2022",
                             'resultat'=> 'resoudre le probleme rapide',
@@ -66,7 +66,7 @@ class CourseSeeder extends Seeder
                             'date_ordre'=>"29/06/2022",
                             'fini'=> $faker->randomElement(["true", "false"]),
                         ]);
-                        } 
+                        }
 
     }
 }

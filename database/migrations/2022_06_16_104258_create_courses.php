@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('enregistrement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('TAF');
+            $table->string('travaux_a_faire');
             $table->string('date_necessite');
             $table->string('resultat')->nullable();
             $table->string('responsable');

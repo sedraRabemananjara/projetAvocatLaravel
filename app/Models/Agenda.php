@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     use HasFactory;
-
     public function enregistrement()
     {
         $this->belongsTo(Enregistrement::class);
