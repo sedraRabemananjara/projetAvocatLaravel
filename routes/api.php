@@ -116,7 +116,11 @@ Route::middleware(['web', 'auth:api'])->group(function () {
     //calendrier
     Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
 
-
+    //chiffreAffaire
+    Route::get('/chiffreAffaire', [ControlleurVoirChiffreAffaire::class, 'getChiffreAffaire']);
+    Route::get('/chiffreAffaireParAnne/{annee}', [ControlleurVoirChiffreAffaireParAnne::class, 'getChiffreAffaireParAnne']);
+    Route::get('/Totalchargefixe', [ControlleurVoirTotalChargeFixe::class, 'getChargeFixe']);
+    
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
     Route::post('/insererFrequencePaiement', [ControllerInsertFrequencePaiement::class, 'insert'])->name('insertionFrequencePaiement');
