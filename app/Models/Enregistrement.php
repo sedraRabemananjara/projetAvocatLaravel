@@ -57,6 +57,7 @@ class Enregistrement extends Model
         'section_juridiction_id',
         'montant_honoraire',
         'date_delais_paiement',
+        'envoi_mail_automatique',
     ];
 
     protected $hidden = ['user_id'];

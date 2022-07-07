@@ -11,7 +11,7 @@ class ControllerListerDossierClient extends Controller
 
     public function getAll()
     {
-        $dossiers = Enregistrement::orderBy("created_at")
+        $dossiers = Enregistrement::orderBy("created_at", "DESC")
             ->select(['id', 'procedure', 'pour'])
             ->get();
         return $dossiers;

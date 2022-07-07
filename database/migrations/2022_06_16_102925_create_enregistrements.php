@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('telephone_interlocuteur')->nullable();
             $table->date('date_delais_paiement')->nullable();
             $table->double('montant_honoraire')->nullable();
+            $table->boolean('envoi_mail_automatique')->nullable()->default(false);
             $table->timestamps();
         });
     }

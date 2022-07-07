@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\agenda;
 
+use App\Events\AgendaCreatedEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\enregistrement\ControllerEnvoiMailEnregistrement;
+use App\Listeners\AgendaCreatedListener;
 use Illuminate\Http\Request;
 use App\models\Agenda;
+use App\Models\Enregistrement;
 
 class ControllerInsertAgenda extends Controller
 {
 
 
-    public function insert(Request $request)
+    public function insert()
     {
         request()->validate([
             "idEnregistrement" => "required",
@@ -20,7 +24,8 @@ class ControllerInsertAgenda extends Controller
             "salle" => "required",
         ]);
 
-        return Agenda::create([
+        // insertion de l'agenda
+        $agenda =  Agenda::create([
             "enregistrement_id" => request('idEnregistrement'),
             "type_renvoi_id" => request('typeRenvoi'),
             "motif" => request("motif"),
@@ -29,13 +34,6 @@ class ControllerInsertAgenda extends Controller
             "espace_conclusion" => request("espaceConclusion"),
         ]);
 
-        /*$agenda = new Agenda();
-        $agenda->enregistrement_id = $request->input('idEnregistrement');
-        $agenda->type_renvoi_id = $request->input('typeRenvoi');
-        $agenda->motif = $request->input('motif');
-        $agenda->espace_conclusion = $request->input('espaceConclusion');
-        $agenda->date = $request->input('date');
-
-        return $agenda->save();*/
+        return $agenda;
     }
 }
