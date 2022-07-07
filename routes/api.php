@@ -149,6 +149,10 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 
+    //chiffre Affaire
+    Route::get('/chiffreAffaire', [ControlleurVoirChiffreAffaire::class, 'getChiffreAffaire']);
+    Route::get('/chiffreAffaire/{annee}', [ControlleurVoirChiffreAffaireParAnne::class, 'getChiffreAffaireParAnne']);
+    Route::get('/chargeFixe', [ControlleurVoirTotalChargeFixe::class, 'getChargeFixe']);
 
 
     Route::middleware(['isAdmin'])->group(function () {
