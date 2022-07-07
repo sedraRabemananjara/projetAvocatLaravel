@@ -13,7 +13,10 @@ class ControllerListerEnregistrement extends Controller
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
-        $enregistrements = Enregistrement::offset($offset)->limit($limit)->get();
+        $enregistrements = Enregistrement::offset($offset)
+            ->limit($limit)
+            ->orderBy('created_at', "DESC")
+            ->get();
         return $enregistrements;
     }
 

@@ -68,6 +68,7 @@ use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonor
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
 use App\Http\Controllers\enregistrement\ControllerAutomatisationEnvoiEmailEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerSupprimerEnregistrement;
 use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
 
@@ -97,6 +98,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('enregistrement/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
     Route::get('enregistrement/recherche/page/{page}/{information}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsRecherche']);
     Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
+    Route::post('enregistrement/import', [ControllerImportEnregistrement::class, 'import']);
     Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
@@ -140,7 +142,6 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierEtat/{idEtat}', [ControllerUpdateEtat::class, 'update'])->name('modifierEtat');
 
     //calendrier
-    Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
 
     //frequencePaiement
@@ -150,7 +151,9 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
 
     //client
-    Route::get('client/dossier', [ControllerListerDossierClient::class, 'getAll']);
+    Route::get('client/dossier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
+    Route::get('client/dossier/{page}', [ControllerListerDossierClient::class, 'getAll']);
+    Route::get('client/dossier/recherche/{page}/{information}', [ControllerListerDossierClient::class, 'rechercher']);
     Route::get('client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 
 
