@@ -4,6 +4,7 @@ namespace App\Http\Controllers\enregistrement;
 
 use App\Http\Controllers\Controller;
 use App\Models\Enregistrement;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerImportEnregistrement extends Controller
 {
@@ -11,7 +12,6 @@ class ControllerImportEnregistrement extends Controller
     {
         request()->validate([
             "id" => "required",
-            "userId" => "required",
             "pour" => "required",
             "contre" => "required",
             "nature" => "required",
@@ -23,18 +23,18 @@ class ControllerImportEnregistrement extends Controller
 
 
         // controle du regex du procedure
-        $pregProcedure = preg_match("/[0-9]{0,} *\/ *[0-9]{2,2}/", request("procedure"));
+        /* $pregProcedure = preg_match("/[0-9]{0,} *\/ *[0-9]{2,2}/", request("procedure"));
         if ($pregProcedure === 0) {
             $error = \Illuminate\Validation\ValidationException::withMessages([
                 'procedure' => ['validation.regex'],
             ]);
             throw $error;
-        }
+        } */
 
 
         return Enregistrement::create([
             "id" => request("id"),
-            "user_id" => request("userId"),
+            "user_id" => Auth::user()->id,
             "lieu" => request("lieu"),
             "pour" => request("pour"),
             "contre" => request("contre"),

@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             // SectionJuridictionSeeder::class,
-            // JuridictionSeeder::class,
+            // JuridictionSeeder::class,php
             NatureSeeder::class,
             TypeRenvoiSeeder::class,
             TypeChargeSeeder::class,

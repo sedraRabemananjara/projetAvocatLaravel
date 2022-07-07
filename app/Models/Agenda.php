@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Events\AgendaCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Agenda extends Model
 {
     use HasFactory;
+
     public function enregistrement()
     {
         $this->belongsTo(Enregistrement::class);

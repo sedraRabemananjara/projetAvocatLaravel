@@ -27,13 +27,15 @@ class AssurerVerificationUser
                 ->get();
             if (count($user) != 0) {
                 $email_verified_at = $user[0]->email_verified_at;
+            } else {
+                return abort(403, "Email ou mot de passe éronné");
             }
         } else {
             $email_verified_at = Auth::user()->email_verified_at;
         }
 
         if ($email_verified_at === null) {
-            return abort(403, "Vous n'êtes pas authorisé");
+            return abort(403, "Vous n'êtes pas authentifié(e). Veuillez vous reconnecter.");
         }
 
         return $response;

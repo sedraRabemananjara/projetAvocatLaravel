@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\enregistrement;
 
+use App\Events\AgendaCreatedEvent;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\models\Enregistrement;
+use App\Models\Agenda;
 use Illuminate\Support\Facades\Auth;
 
 class ControllerInsertEnregistrement extends Controller
 {
-    public function insert(Request $request)
+    public function insert()
     {
+        // validation champs enregistrements
         request()->validate([
             "pour" => "required",
             "contre" => "required",
@@ -21,18 +23,31 @@ class ControllerInsertEnregistrement extends Controller
             "lieu" => "required",
         ]);
 
+        // validation champs agenda
+        if (
+            request("typeRenvoi") != null ||
+            request("motif") != null ||
+            request("salle") != null
+        ) {
+            request()->validate([
+                "typeRenvoi" => "required",
+                "motif" => "required",
+                "salle" => "required",
+            ]);
+        }
+
 
         // controle du regex du procedure
-        $pregProcedure = preg_match("/[0-9]{0,} *\/ *[0-9]{2,2}/", request("procedure"));
+        /* $pregProcedure = preg_match("/[0-9]{0,} *\/ *[0-9]{2,2}/", request("procedure"));
         if ($pregProcedure === 0) {
             $error = \Illuminate\Validation\ValidationException::withMessages([
                 'procedure' => ['validation.regex'],
             ]);
             throw $error;
-        }
+        } */
 
 
-        return Enregistrement::create([
+        $enregistrement =  Enregistrement::create([
             "user_id" => Auth::user()->id,
             "lieu" => request("lieu"),
             "pour" => request("pour"),
@@ -47,23 +62,28 @@ class ControllerInsertEnregistrement extends Controller
             "email_interlocuteur" => request("emailInterloc"),
             "telephone_interlocuteur" => request("telephoneInterloc"),
             "date_delais_paiement" => request("dateDelaisPaiement"),
+            "montant_honoraire" => request("montantHonoraire"),
         ]);
 
-        /*$enregistrement = new enregistrement();
-        $enregistrement->pour = $request->input('pour');
-        $enregistrement->contre = $request->input('contre');
-        $enregistrement->nature_id = $request->input('nature');
-        $enregistrement->juridiction_id = $request->input('juridiction');
-        $enregistrement->section_juridiction_id = $request->input('sectionJuridiction');
-        $enregistrement->procedure = $request->input('procedure');
-        $enregistrement->adresse_client = $request->input('adresseClient');
-        $enregistrement->telephone_client = $request->input('telephoneClient');
-        $enregistrement->email_client = $request->input('emailClient');
-        $enregistrement->adresse_interloc = $request->input('adresseInterloc');
-        $enregistrement->telephone_interloc = $request->input('telephoneInterloc');
-        $enregistrement->email_interloc = $request->input('emailInterloc');
-        $enregistrement->user_id = Auth::user()->id;
+        $agenda = null;
 
-        return $enregistrement->save();*/
+        if (
+            request("typeRenvoi") != null &&
+            request("motif") != null &&
+            request("salle") != null
+        ) {
+            $agenda = Agenda::create([
+                "enregistrement_id" => $enregistrement->id,
+                "type_renvoi_id" => request('typeRenvoi'),
+                "motif" => request("motif"),
+                "date_agenda" => request("dateAgenda"),
+                "salle" => request("salle"),
+                "espace_conclusion" => request("espaceConclusion"),
+            ]);
+
+            event(new AgendaCreatedEvent($agenda, $enregistrement));
+        }
+
+        return [$enregistrement, $agenda];
     }
 }
