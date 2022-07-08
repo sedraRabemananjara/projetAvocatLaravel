@@ -11,4 +11,5 @@ class ControllerSelectCourse extends Controller
     {
         return Course::where('id', $id)->get();
     }
+
 }

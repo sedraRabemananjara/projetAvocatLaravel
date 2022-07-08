@@ -101,8 +101,8 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     // courses
 
-    //Route::get('course/{page}', [ControllerListerCourse::class, 'getAllCourses']);
-    //Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+    Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
 
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
@@ -136,6 +136,10 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     //calendrier
     Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
+    Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsByName']);
+    Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
+
 
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
@@ -187,7 +191,7 @@ Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
 // courses
-    Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+    //Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
 
 //type frequence de paiement
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
@@ -196,4 +200,6 @@ Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge'
 
  Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+
+ 
 
