@@ -22,7 +22,7 @@ class EnregistrementSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             DB::table("enregistrements")->insert([
                 'user_id' => 1,
                 'pour' => $faker->name(),
@@ -42,7 +42,7 @@ class EnregistrementSeeder extends Seeder
             ]);
         }
 
-        for ($i = 51; $i < 101; $i++) {
+        for ($i = 51; $i < 10; $i++) {
             DB::table("enregistrements")->insert([
                 'user_id' => 2,
                 'pour' => $faker->name(),
@@ -62,7 +62,7 @@ class EnregistrementSeeder extends Seeder
             ]);
         }
 
-        for ($i = 102; $i < 152; $i++) {
+        for ($i = 102; $i < 10; $i++) {
             DB::table("enregistrements")->insert([
                 'user_id' => 3,
                 'pour' => $faker->name(),
@@ -81,7 +81,7 @@ class EnregistrementSeeder extends Seeder
                 'montant_honoraire' => 11300,
             ]);
         }
-        for ($i = 153; $i < 203; $i++) {
+        for ($i = 153; $i < 10; $i++) {
             DB::table("enregistrements")->insert([
                 'user_id' => 4,
                 'pour' => $faker->name(),
@@ -100,7 +100,7 @@ class EnregistrementSeeder extends Seeder
                 'montant_honoraire' => 11000,
             ]);
         }
-        for ($i = 204; $i < 254; $i++) {
+        for ($i = 204; $i < 10; $i++) {
             DB::table("enregistrements")->insert([
                 'user_id' => 5,
                 'pour' => $faker->name(),

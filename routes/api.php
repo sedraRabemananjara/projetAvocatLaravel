@@ -27,10 +27,10 @@ use App\Http\Controllers\agenda\ControllerUpdateAgenda;
 use App\Http\Controllers\agenda\ControllerListerAgenda;
 use App\Http\Controllers\agenda\ControllerSelectAgenda;
 
-use App\Http\Controllers\avocat\ControllerInsertAvocat;
-use App\Http\Controllers\avocat\ControllerDeleteAvocat;
-use App\Http\Controllers\avocat\ControllerUpdateAvocat;
-use App\Http\Controllers\avocat\ControllerListerAvocat;
+// use App\Http\Controllers\avocat\ControllerInsertAvocat;
+// use App\Http\Controllers\avocat\ControllerDeleteAvocat;
+// use App\Http\Controllers\avocat\ControllerUpdateAvocat;
+// use App\Http\Controllers\avocat\ControllerListerAvocat;
 
 use App\Http\Controllers\charge\ControllerInsertCharge;
 use App\Http\Controllers\charge\ControllerDeleteCharge;
@@ -66,7 +66,9 @@ use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
+use App\Http\Controllers\enregistrement\ControllerAutomatisationEnvoiEmailEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
+use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerSupprimerEnregistrement;
 use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
 use App\Http\Controllers\Mail\ControllerMail;
@@ -77,6 +79,7 @@ use Illuminate\Support\Facades\Auth;
 Route::post('login', [AccessTokenController::class, 'issueToken'])
     ->middleware(['api-login', 'throttle', 'verified']);
 Route::post('inscription', [UserInscriptionController::class, 'inscription']);
+
 
 Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
@@ -92,16 +95,22 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('user/info', [UserInfoController::class, 'getInfo']);
 
     // enregistrement
-    Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
     Route::get('enregistrement/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('enregistrement/recherche/page/{page}/{information}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsRecherche']);
+    Route::post('enregistrement', [ControllerInsertEnregistrement::class, 'insert']);
+    Route::post('enregistrement/import', [ControllerImportEnregistrement::class, 'import']);
     Route::get('enregistrement/{id}', [ControllerSelectEnregistrement::class, 'getEnregistrement']);
     Route::put('enregistrement', [ControllerUpdateEnregistrement::class, 'update']);
     Route::get('rechercher-enregistrement/{information}', [ControllerRechercheEnregistrement::class, 'rechercher']);
     Route::delete('enregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete']);
+    Route::put('enregistrement/activer-envoi-mail-automatique', [ControllerAutomatisationEnvoiEmailEnregistrement::class, 'activer']);
+    Route::put('enregistrement/desactiver-envoi-mail-automatique', [ControllerAutomatisationEnvoiEmailEnregistrement::class, 'desactiver']);
 
     // courses
 
     Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
+    Route::get('course/recherche/page/{page}/{information}', [ControllerListerCourse::class, 'getAllCoursesRecherche']);
+    Route::get('course/', [ControllerListerCourse::class, 'getAllCourses']);
     Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
 
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
@@ -110,16 +119,17 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     // agenda
     Route::get('agenda/page/{page}', [ControllerListerAgenda::class, 'getAllAgenda']);
+    Route::get('agenda/recherche/page/{page}/{information}', [ControllerListerAgenda::class, 'getAllAgendaRecherche']);
     Route::get('agenda/{id}', [ControllerSelectAgenda::class, 'getAgenda']);
     Route::put('agenda', [ControllerUpdateAgenda::class, 'update']);
     Route::post('agenda', [ControllerInsertAgenda::class, 'insert']);
     Route::delete('agenda', [ControllerDeleteAgenda::class, 'delete']);
 
     // avocat
-    Route::get('/voirLesAvocat', [ControllerListerAvocat::class, 'getAllAvocats']);
+    /* Route::get('/voirLesAvocat', [ControllerListerAvocat::class, 'getAllAvocats']);
     Route::post('/insererAvocat', [ControllerInsertAvocat::class, 'insert'])->name('insertionAvocat');
     Route::delete('/supprimerAvocat/{idAvocat}', [ControllerDeleteAvocat::class, 'delete'])->name('supprimerAvocat');
-    Route::post('/modifierAvocat/{idAvocat}', [ControllerUpdateAvocat::class, 'update'])->name('modifierAvocat');
+    Route::post('/modifierAvocat/{idAvocat}', [ControllerUpdateAvocat::class, 'update'])->name('modifierAvocat'); */
 
     //charge
     Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
@@ -134,7 +144,6 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierEtat/{idEtat}', [ControllerUpdateEtat::class, 'update'])->name('modifierEtat');
 
     //calendrier
-    Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
     Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
     Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsByName']);
@@ -151,9 +160,15 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
 
     //client
-    Route::get('/client/dossier', [ControllerListerDossierClient::class, 'getAll']);
-    Route::get('/client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
+    Route::get('client/dossier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
+    Route::get('client/dossier/{page}', [ControllerListerDossierClient::class, 'getAll']);
+    Route::get('client/dossier/recherche/{page}/{information}', [ControllerListerDossierClient::class, 'rechercher']);
+    Route::get('client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
 
+    //chiffre Affaire
+    Route::get('/chiffreAffaire', [ControlleurVoirChiffreAffaire::class, 'getChiffreAffaire']);
+    Route::get('/chiffreAffaire/{annee}', [ControlleurVoirChiffreAffaireParAnne::class, 'getChiffreAffaireParAnne']);
+    Route::get('/chargeFixe', [ControlleurVoirTotalChargeFixe::class, 'getChargeFixe']);
 
 
     Route::middleware(['isAdmin'])->group(function () {
@@ -169,7 +184,6 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
         Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
         Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
     });
-
 });
 
 
@@ -193,13 +207,16 @@ Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiem
 Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
+
 // courses
     //Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+
 
 //type frequence de paiement
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
 //type charge
 Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
+
 
  //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
@@ -207,4 +224,5 @@ Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge'
  
 
  
+
 

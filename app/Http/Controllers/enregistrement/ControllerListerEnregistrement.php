@@ -13,7 +13,23 @@ class ControllerListerEnregistrement extends Controller
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
-        $enregistrements = Enregistrement::where('user_id', Auth::user()->id)->offset($offset)->limit($limit)->get();
+        $enregistrements = Enregistrement::offset($offset)
+            ->limit($limit)
+            ->orderBy('created_at', "DESC")
+            ->get();
+        return $enregistrements;
+    }
+
+    public function getAllEnregistrementsRecherche($page = 0, $information)
+    {
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
+        $enregistrements = Enregistrement::where('id', 'LIKE', '%' . $information . '%')
+            ->orWhere('procedure', 'LIKE', '%' . $information . '%')
+            ->orWhere('pour', 'LIKE', '%' . $information . '%')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
         return $enregistrements;
     }*/
     public function getAllEnregistrementsByName($page=0,$nomClient)

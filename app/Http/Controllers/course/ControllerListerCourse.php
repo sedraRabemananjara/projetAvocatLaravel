@@ -14,6 +14,7 @@ class ControllerListerCourse extends Controller
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
         $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
+
             ->where('enregistrements.user_id', '=', Auth::user()->id)
             ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
             ->offset($offset)
@@ -22,8 +23,20 @@ class ControllerListerCourse extends Controller
         return $courses;
     }
 
-    /*public function getAllCourses()
+
+    public function getAllCoursesRecherche($page = 0, $information)
     {
-        return Course::all();
-    }*/
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
+        $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
+            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
+            ->where('enregistrements.id', 'LIKE', '%' . $information . '%')
+            ->orWhere('enregistrements.procedure', 'LIKE', '%' . $information . '%')
+            ->orWhere('enregistrements.pour', 'LIKE', '%' . $information . '%')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+        return $courses;
+    }
+
 }

@@ -10,12 +10,15 @@ use App\Models\ViewSelectEnregistrementCourseEtAgendaParAvocat;
 
 class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
 {
-    public function getEnregistrementsAndCoursesAndAgendaByAvocat($id){
+
+    public function getEnregistrementsAndCoursesAndAgendaByAvocat($id)
+    {
+
 
         $enregistrement = ViewSelectEnregistrementCourseEtAgendaParAvocat::select("*")
-                        ->where('user_id', $id)
-                        ->get()
-                        ->toArray();
+            ->where('user_id', $id)
+            ->get()
+            ->toArray();
         var_dump($enregistrement);
         return $enregistrement;
 
@@ -35,5 +38,7 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
     public function getCourseByIdEnregistrement($enregistrement_id)
     {
         return Course::where('enregistrement_id', $enregistrement_id)->get();
+
     }
+ 
 }

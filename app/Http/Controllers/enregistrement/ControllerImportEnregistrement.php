@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\enregistrement;
 
-use App\Events\AgendaCreatedEvent;
 use App\Http\Controllers\Controller;
-use App\models\Enregistrement;
-use App\Models\Agenda;
+use App\Models\Enregistrement;
 use Illuminate\Support\Facades\Auth;
 
-class ControllerInsertEnregistrement extends Controller
+class ControllerImportEnregistrement extends Controller
 {
-    public function insert()
+    public function import()
     {
-        // validation champs enregistrements
         request()->validate([
+            "id" => "required",
             "pour" => "required",
             "contre" => "required",
             "nature" => "required",
@@ -22,19 +20,6 @@ class ControllerInsertEnregistrement extends Controller
             "sectionJuridiction" => "required",
             "lieu" => "required",
         ]);
-
-        // validation champs agenda
-        if (
-            request("typeRenvoi") != null ||
-            request("motif") != null ||
-            request("salle") != null
-        ) {
-            request()->validate([
-                "typeRenvoi" => "required",
-                "motif" => "required",
-                "salle" => "required",
-            ]);
-        }
 
 
         // controle du regex du procedure
@@ -47,7 +32,8 @@ class ControllerInsertEnregistrement extends Controller
         } */
 
 
-        $enregistrement =  Enregistrement::create([
+        return Enregistrement::create([
+            "id" => request("id"),
             "user_id" => Auth::user()->id,
             "lieu" => request("lieu"),
             "pour" => request("pour"),
@@ -62,28 +48,6 @@ class ControllerInsertEnregistrement extends Controller
             "email_interlocuteur" => request("emailInterloc"),
             "telephone_interlocuteur" => request("telephoneInterloc"),
             "date_delais_paiement" => request("dateDelaisPaiement"),
-            "montant_honoraire" => request("montantHonoraire"),
         ]);
-
-        $agenda = null;
-
-        if (
-            request("typeRenvoi") != null &&
-            request("motif") != null &&
-            request("salle") != null
-        ) {
-            $agenda = Agenda::create([
-                "enregistrement_id" => $enregistrement->id,
-                "type_renvoi_id" => request('typeRenvoi'),
-                "motif" => request("motif"),
-                "date_agenda" => request("dateAgenda"),
-                "salle" => request("salle"),
-                "espace_conclusion" => request("espaceConclusion"),
-            ]);
-
-            event(new AgendaCreatedEvent($agenda, $enregistrement));
-        }
-
-        return [$enregistrement, $agenda];
     }
 }
