@@ -71,7 +71,7 @@ use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerSupprimerEnregistrement;
 use App\Http\Controllers\typeCharge\ControllerListerTypeCharge;
-
+use App\Http\Controllers\Mail\ControllerMail;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -107,10 +107,12 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::put('enregistrement/desactiver-envoi-mail-automatique', [ControllerAutomatisationEnvoiEmailEnregistrement::class, 'desactiver']);
 
     // courses
+
     Route::get('course/page/{page}', [ControllerListerCourse::class, 'getAllCourses']);
     Route::get('course/recherche/page/{page}/{information}', [ControllerListerCourse::class, 'getAllCoursesRecherche']);
     Route::get('course/', [ControllerListerCourse::class, 'getAllCourses']);
     Route::get('course/{id}', [ControllerSelectCourse::class, 'getCourse']);
+
     Route::put('course', [ControllerUpdateCourse::class, 'update']);
     Route::post('course', [ControllerInsertCourse::class, 'insert']);
     Route::delete('course', [ControllerDeleteCourse::class, 'delete']);
@@ -143,6 +145,13 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
     //calendrier
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
+    Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
+    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsByName']);
+    Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
+
+    //service mail
+    Route::get('sendMail', [ControllerMail::class, 'sendMail']);
+
 
     //frequencePaiement
     Route::get('/voirLesFrequencePaiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
@@ -198,10 +207,22 @@ Route::get('type-frequence-paiement-charge', [ControllerSelectTypeFrequencePaiem
 Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
+
+// courses
+    //Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+
+
 //type frequence de paiement
 Route::get('frequence_paiement', [ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements']);
 //type charge
 Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge']);
 
-Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
-Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+
+ //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
+ //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+
+ 
+
+ 
+
+

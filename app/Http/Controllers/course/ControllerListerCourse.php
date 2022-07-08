@@ -14,12 +14,15 @@ class ControllerListerCourse extends Controller
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
         $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
+
+            ->where('enregistrements.user_id', '=', Auth::user()->id)
             ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
             ->offset($offset)
             ->limit($limit)
             ->get();
         return $courses;
     }
+
 
     public function getAllCoursesRecherche($page = 0, $information)
     {
@@ -35,4 +38,5 @@ class ControllerListerCourse extends Controller
             ->get();
         return $courses;
     }
+
 }

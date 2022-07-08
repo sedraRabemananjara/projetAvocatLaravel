@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ControllerListerEnregistrement extends Controller
 {
-    public function getAllEnregistrements($page = 0)
+    /*public function getAllEnregistrements($page=0)
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
@@ -30,6 +30,20 @@ class ControllerListerEnregistrement extends Controller
             ->offset($offset)
             ->limit($limit)
             ->get();
+        return $enregistrements;
+    }*/
+    public function getAllEnregistrementsByName($page=0,$nomClient)
+    {
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
+        $enregistrements = Enregistrement::where('pour',$nomClient)->offset($offset)->limit($limit)->get();
+        return $enregistrements;
+    }
+    public function getAllEnregistrements($page=0)
+    {
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
+        $enregistrements = Enregistrement::offset($offset)->limit($limit)->get();
         return $enregistrements;
     }
 }
