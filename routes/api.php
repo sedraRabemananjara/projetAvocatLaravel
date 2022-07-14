@@ -160,7 +160,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierFrequencePaiement/{idFrequence}', [ControllerUpdateFrequencePaiement::class, 'update'])->name('modifierFrequencePaiement');
 
     //client
-    Route::get('client/dossier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
+    // Route::get('client/dossier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat']);
     Route::get('client/dossier/{page}', [ControllerListerDossierClient::class, 'getAll']);
     Route::get('client/dossier/recherche/{page}/{information}', [ControllerListerDossierClient::class, 'rechercher']);
     Route::get('client/dossier/detail/{id}', [ControllerDetailDossierClient::class, 'get']);
@@ -209,7 +209,7 @@ Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
 // courses
-    //Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+//Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
 
 
 //type frequence de paiement
@@ -220,9 +220,3 @@ Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge'
 
  //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
-
- 
-
- 
-
-

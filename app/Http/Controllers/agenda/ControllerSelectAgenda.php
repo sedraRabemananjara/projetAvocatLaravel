@@ -10,6 +10,12 @@ class ControllerSelectAgenda extends Controller
 {
     public function getAgenda($id)
     {
-        return Agenda::where('id', $id)->get();
+        return Agenda::where('agendas.id', $id)
+            ->join('enregistrements', 'enregistrements.id', '=', 'agendas.enregistrement_id')
+            ->select([
+                'agendas.*',
+                'enregistrements.procedure'
+            ])
+            ->get();
     }
 }

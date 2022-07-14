@@ -9,7 +9,12 @@ class ControllerSelectCourse extends Controller
 {
     public function getCourse($id)
     {
-        return Course::where('id', $id)->get();
+        return Course::where('courses.id', $id)
+            ->join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
+            ->select([
+                'courses.*',
+                'enregistrements.procedure'
+            ])
+            ->get();
     }
-
 }
