@@ -2,45 +2,38 @@
 
 namespace App\Http\Controllers\agenda;
 
+use App\Events\AgendaCreatedEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\enregistrement\ControllerEnvoiMailEnregistrement;
+use App\Listeners\AgendaCreatedListener;
 use Illuminate\Http\Request;
 use App\models\Agenda;
+use App\Models\Enregistrement;
 
 class ControllerInsertAgenda extends Controller
 {
-  
-    
-    public function insert(Request $request)
+
+
+    public function insert()
     {
         request()->validate([
-            'idEnregistrement' => 'required',
-            'renvoi' => 'required',
-            'motif' => 'required',
-            'espaceConclusion' => 'required',
-            'idCourse' => 'required',
-            'dateTimeAgenda' => 'required',
+            "idEnregistrement" => "required",
+            "typeRenvoi" => "required",
+            "motif" => "required",
+            "dateAgenda" => "required",
+            "salle" => "required",
         ]);
-        
-        $agenda = new Agenda();
-        $agenda->idEnregistrement=$request->input('idEnregistrement');
-        $agenda->renvoi=$request->input('renvoi');
-        $agenda->motif=$request->input('motif');
-        $agenda->espaceConclusion=$request->input('espaceConclusion');
-        $agenda->idCourse=$request->input('idCourse');
-        $agenda->dateTimeAgenda=$request->input('dateTimeAgenda');
 
-        $agenda->save();
-        return view('formulaireInsertionAgenda');
+        // insertion de l'agenda
+        $agenda =  Agenda::create([
+            "enregistrement_id" => request('idEnregistrement'),
+            "type_renvoi_id" => request('typeRenvoi'),
+            "motif" => request("motif"),
+            "date_agenda" => request("dateAgenda"),
+            "salle" => request("salle"),
+            "espace_conclusion" => request("espaceConclusion"),
+        ]);
 
-        /*return redirect()
-            ->route('formulaireInsertionAgenda')
-            ->with('succes', 'Enregistrement agenda effectué');*/
-
-        //return view("controlpanel.products");
-        //$employe=new Employe;
-        //$employe-> nom = $req->input('nom');;
-        //$employe-> is_complete =0;
-        //$employe->save();
-        //return view('pageListerAgenda',['listeAgendas'=> Agenda::all()]);
+        return $agenda;
     }
 }

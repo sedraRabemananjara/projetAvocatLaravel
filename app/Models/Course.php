@@ -8,9 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
+    public function enregistrement()
+    {
+        return $this->belongsTo(Enregistrement::class);
+    }
+
 
     protected $fillable = [
-        'id', 'building_name', 'building_information', 'building_image', 
+        'id',
+        'enregistrement_id',
+        'agenda_id',
+        'travaux_a_faire',
+        'resultat',
+        'responsable',
+        'date_necessite',
+        'fini',
     ];
 }

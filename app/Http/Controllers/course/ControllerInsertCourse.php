@@ -5,39 +5,39 @@ namespace App\Http\Controllers\course;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Course;
-
+use Illuminate\Support\Facades\DB;
 
 class ControllerInsertCourse extends Controller
 {
     public function insert(Request $request)
     {
         request()->validate([
-            'idEnregistrement' => 'required',
-            'TAF' => 'required',
-            'dateTimeCourse' => 'required',
-            'resultat' => 'required',
-            'addresseAvocat' => 'required',
+            "idEnregistrement" => "required",
+            "TAF" => "required",
+            "dateNecessite" => "required",
+            "resultat" => "required",
+            "responsable" => "required",
         ]);
-        $course = new Course();
-        $course->idEnregistrement=$request->input('idEnregistrement');
-        $course->TAF=$request->input('TAF');
-        $course->dateTimeCourse=$request->input('dateTimeCourse');
-        $course->resultat=$request->input('resultat');
-        $course->responsable=$request->input('responsable');
 
-        $course->save();
-        /*return redirect()
-        ->route('formulaireInsertionCourse')
-        ->with('succes', 'Enregistrement effectué');
-        */
-        //return view('formulaireInsertionCourse')
-        //->with('succes', 'Enregistrement effectué');
+        return Course::create([
+            "enregistrement_id" => request("idEnregistrement"),
+            "travaux_a_faire" => request("TAF"),
+            "date_necessite" => request("dateNecessite"),
+            "resultat" => request("resultat"),
+            "responsable" => request("responsable"),
+            "fini" => request("fini"),
+        ]);
 
-        //return view("controlpanel.products");
-        //$employe=new Employe;
-        //$employe-> nom = $req->input('nom');;
-        //$employe-> is_complete =0;
-        //$employe->save();
-        //return view('pageListerCourse',['listecourses'=> course::all()]);
+        /*$course = new Course();
+        $course->enregistrement_id = $request->input('idEnregistrement');
+        $course->agenda_id = $request->input('idAgenda');
+        $course-> = $request->input('TAF');
+        $course->date_necessite = $request->input('dateNecessite');
+        $course->resultat = $request->input('resultat');
+        $course->responsable = $request->input('responsable');
+        $course->created_at = DB::raw('CURRENT_TIMESTAMP');
+        $course->fini = false;
+
+        return $course->save();*/
     }
 }

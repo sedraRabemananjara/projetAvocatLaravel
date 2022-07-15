@@ -49,13 +49,7 @@
             <td>{{$liste->resultat}}</td>    
             <td>{{$liste->responsable}}</td>  
             
-            <td >  
-                <form action="{{ route('supprimerCourses', $liste->idCourse)}}" method="post" enctype="multipart/form-data"  >  
-                @csrf
-                {{method_field('delete')}}
-                    <button class="btn btn-danger" type="submit">Delete</button>  
-                </form>  
-            </td>  
+            
 
    
   

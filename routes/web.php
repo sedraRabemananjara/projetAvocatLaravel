@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\models\Enregistrement;
 use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\EnregistrementController;
 use App\Http\Controllers\CourseController;
@@ -13,26 +12,8 @@ use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
-use App\Http\Controllers\agenda\ControllerInsertAgenda;
-use App\Http\Controllers\agenda\ControllerDeleteAgenda;
-use App\Http\Controllers\agenda\ControllerUpdateAgenda;
-use App\Http\Controllers\agenda\ControllerListerAgenda;
-use App\Http\Controllers\avocat\ControllerInsertAvocat;
-use App\Http\Controllers\avocat\ControllerDeleteAvocat;
-use App\Http\Controllers\avocat\ControllerUpdateAvocat;
-use App\Http\Controllers\avocat\ControllerListerAvocat;
-use App\Http\Controllers\charge\ControllerInsertCharge;
-use App\Http\Controllers\charge\ControllerDeleteCharge;
-use App\Http\Controllers\charge\ControllerUpdateCharge;
-use App\Http\Controllers\charge\ControllerListerCharge;
-use App\Http\Controllers\etat\ControllerInsertEtat;
-use App\Http\Controllers\etat\ControllerDeleteEtat;
-use App\Http\Controllers\etat\ControllerUpdateEtat;
-use App\Http\Controllers\etat\ControllerListerEtat;
-use App\Http\Controllers\frequencePaiement\ControllerInsertFrequencePaiement;
-use App\Http\Controllers\frequencePaiement\ControllerDeleteFrequencePaiement;
-use App\Http\Controllers\frequencePaiement\ControllerUpdateFrequencePaiement;
-use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
+use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
+use App\Http\Controllers\Mail\ControllerMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,96 +26,63 @@ use App\Http\Controllers\frequencePaiement\ControllerListerFrequencePaiement;
 |
 */
 
+
 Route::get('/', function () {
-    return view('insertionEnregistrements');
+    return view('welcome');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/email', function () {
+    return view('email');
 });
 
 Route::get('/course', function () {
     return view('formulaireInsertionCourse');
 });
 
-Route::get('/liste', function () {
-    return view('pageListerEnregistrement',['listeEnregistrements'=> Enregistrement::all()]);
-});
 
-Route::get('/agenda', function () {
-    return view('formulaireInsertionAgenda');
-});
+//mailing
 
-
-
+Route::get('/email', [ControllerMail::class, 'sendMail'])->name('envoiemail');
 
 
 
 //enregistrements
-Route::get('/voirLesEnregistrement',[ControllerListerEnregistrement::class, 'getAllEnregistrements' ]);
+Route::get('/voirLesEnregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
 
-Route::get('/insererEnregistrement',[ControllerInsertEnregistrement::class, 'insert' ])->name('insertionEnregistrements');
+Route::post('/insererEnregistrement', [ControllerInsertEnregistrement::class, 'insert'])->name('insertionEnregistrements');
 
-Route::delete('/supprimerEnregistrement/{id}',[ControllerDeleteEnregistrement::class, 'delete' ])->name('supprimerEnregistrements');
+Route::post('/supprimerEnregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete'])->name('supprimerEnregistrements');
 
-Route::post('/modifierEnregistrement/{id}',[ControllerUpdateEnregistrement::class, 'update' ])->name('modifierEnregistrement');
+Route::get('/findById/{id}', [ControllerUpdateEnregistrement::class, 'findById'])->name('findById');
+
+Route::post('/modifierEnregistrement/{id}', [ControllerUpdateEnregistrement::class, 'update'])->name('modifierEnregistrement');
 
 
 
 // courses
-Route::get('/voirLesCourses',[ControllerListerCourse::class, 'getAllCourses' ]);
+Route::get('/voirLesCourses', [ControllerListerCourse::class, 'getAllCourses']);
 
-Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('insertionCourses');
+Route::post('/insererCourse', [ControllerInsertCourse::class, 'insert'])->name('insertionCourses');
 
-Route::delete('/supprimerCourse/{idCourse}',[ControllerDeleteCourse::class, 'delete' ])->name('supprimerCourses');
+Route::post('/course/{id}', [ControllerDeleteCourse::class, 'delete'])->name('delete');
 
-Route::post('/modifierCourse/{idCourse}',[ControllerUpdateCourse::class, 'update' ])->name('modifierCourses');
+Route::get('/course/{id}', [ControllerUpdateCourse::class, 'edit'])->name('edit');
 
-
-// agenda
-
-Route::get('/voirLesAgenda',[ControllerListerAgenda::class, 'getAllAgenda' ]);
-
-Route::post('/insererAgenda',[ControllerInsertAgenda::class, 'insert' ])->name('insertionAgendas');
-
-Route::delete('/supprimerAgenda/{idAgenda}',[ControllerDeleteAgenda::class, 'delete' ])->name('supprimerAgendas');
-
-Route::post('/modifierAgenda/{idAgenda}',[ControllerUpdateAgenda::class, 'update' ])->name('modifierAgendas');
+Route::post('/course/update/{id}', [ControllerUpdateCourse::class, 'update'])->name('update');
 
 
-// avocat
+//calendrier
+Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat'])->name('edit');
+
+Route::get('/calendrierParEnregistrements/{id}/{idE}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements']);
 
 
-Route::get('/voirLesAvocat',[ControllerListerAvocat::class, 'getAllAvocats' ]);
 
-Route::post('/insererAvocat',[ControllerInsertAvocat::class, 'insert' ])->name('insertionAvocat');
+Auth::routes();
 
-Route::delete('/supprimerAvocat/{idAvocat}',[ControllerDeleteAvocat::class, 'delete' ])->name('supprimerAvocat');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/modifierAvocat/{idAvocat}',[ControllerUpdateAvocat::class, 'update' ])->name('modifierAvocat');
-
-
-//charge
-Route::get('/voirLesCharge',[ControllerListerCharge::class, 'getAllCharges' ]);
-
-Route::post('/insererCharge',[ControllerInsertCharge::class, 'insert' ])->name('insertionCharge');
-
-Route::delete('/supprimerCharge/{idCharge}',[ControllerDeleteCharge::class, 'delete' ])->name('supprimerCharge');
-
-Route::post('/modifierCharge/{idCharge}',[ControllerUpdateCharge::class, 'update' ])->name('modifierCharge');
-
-
-//etat
-Route::get('/voirLesEtat',[ControllerListerEtat::class, 'getAllEtats' ]);
-
-Route::post('/insererEtat',[ControllerInsertEtat::class, 'insert' ])->name('insertionEtat');
-
-Route::delete('/supprimerEtat/{idEtat}',[ControllerDeleteEtat::class, 'delete' ])->name('supprimerEtat');
-
-Route::post('/modifierEtat/{idEtat}',[ControllerUpdateEtat::class, 'update' ])->name('modifierEtat');
-
-
-//frequencePaiement
-Route::get('/voirLesFrequencePaiement',[ControllerListerFrequencePaiement::class, 'getAllFrequencePaiements' ]);
-
-Route::post('/insererFrequencePaiement',[ControllerInsertFrequencePaiement::class, 'insert' ])->name('insertionFrequencePaiement');
-
-Route::delete('/supprimerFrequencePaiement/{idFrequence}',[ControllerDeleteFrequencePaiement::class, 'delete' ])->name('supprimerFrequencePaiement');
-
-Route::post('/modifierFrequencePaiement/{idFrequence}',[ControllerUpdateFrequencePaiement::class, 'update' ])->name('modifierFrequencePaiement');

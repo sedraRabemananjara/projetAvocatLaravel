@@ -10,9 +10,6 @@ class ControllerInsertEtat extends Controller
 {
     public function insert(Request $request)
     {
-        request()->validate([
-            'idEnregistrement' => 'required',
-        ]);
         $Etat = new Etat();
         $Etat->idEnregistrement=$request->input('idEnregistrement');
         
