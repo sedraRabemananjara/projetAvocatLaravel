@@ -13,6 +13,7 @@ use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
 use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
+use App\Http\Controllers\Mail\ControllerMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,9 @@ Route::get('/course', function () {
 });
 
 
+//mailing
 
-
+Route::get('/email', [ControllerMail::class, 'sendMail'])->name('envoiemail');
 
 
 
