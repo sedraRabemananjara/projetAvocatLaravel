@@ -150,7 +150,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
 
     //service mail
-    Route::get('sendMail', [ControllerMail::class, 'sendMail']);
+    //Route::get('sendMail', [ControllerMail::class, 'sendMail']);
 
 
     //frequencePaiement
@@ -186,7 +186,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     });
 });
 
-
+Route::get('sendMail', [ControllerMail::class, 'sendMail']);
 
 // Juridiction
 Route::get('juridiction', [ControllerSelectJuridiction::class, 'selectAll']);
