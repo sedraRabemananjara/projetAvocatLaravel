@@ -34,6 +34,9 @@ class ControllerInsertAgenda extends Controller
             "espace_conclusion" => request("espaceConclusion"),
         ]);
 
+
+        event(new AgendaCreatedEvent($agenda, null));
+
         return $agenda;
     }
 }

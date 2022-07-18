@@ -10,6 +10,11 @@ class Agenda extends Model
 {
     use HasFactory;
 
+    public function fichierAgenda()
+    {
+        return $this->hasOne(FichierAgenda::class);
+    }
+
     public function enregistrement()
     {
         $this->belongsTo(Enregistrement::class);
