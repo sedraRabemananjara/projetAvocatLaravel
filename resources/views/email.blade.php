@@ -20,20 +20,21 @@
             }
         </style>
     </head>
-      <x-mailing.headline tag="h1" text="Headline Example #4"> Cabinet Razafimahefa </x-mailing.headline>
-      </br>
-      <x-mailing.headline tag="h1" text="Headline Example #5">  Village des jeux </x-mailing.headline> 
-      </br>
-      <x-mailing.headline tag="h1" text="Headline Example #6"> Emmeuble Regus </x-mailing.headline> 
-      </br>
-      <x-mailing.headline tag="h1" text="Headline Example #6"> Numero: +261  </x-mailing.headline> 
-      </br>
-      <x-mailing.headline tag="h1" text="Headline Example #6"> Addresse mail: cab-razafimahefa@email.com </x-mailing.headline> 
+    <div id="header">
+        <h5> Cabinet Razafimahefa </h5>
+
+      <h5>  Village des jeux </h5> 
+    
+      <h5> Emmeuble Regus </h5> 
+     
+      <h5> Numero: +261  </h5> 
+     
+      <h5> Addresse mail: cab-razafimahefa@email.com </h5> 
 	           
     <body class="antialiased">
     @foreach($enregistrement as $liste)  
       
-      <h1 style="text-align: center" class="heading-section">{{$liste->client}}</h1>
+      <h1 style="text-align: center" class="heading-section">{{$liste->client }}</h1>
       <h2 style="" class="heading-section">Procedure: {{$liste->procedure}}</h2>  
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
           <section class="ftco-section">

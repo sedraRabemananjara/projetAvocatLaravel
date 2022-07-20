@@ -35,7 +35,7 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/email', function () {
+Route::get('/contenuemail', function () {
     return view('email');
 });
 
@@ -46,7 +46,9 @@ Route::get('/course', function () {
 
 //mailing
 
-Route::get('/email', [ControllerMail::class, 'sendMail'])->name('envoiemail');
+Route::get('/email/{id}/{idE}', [ControllerMail::class, 'sendMail'])->name('envoiemail');
+//Route::get('/email/{id}', [ControllerMail::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat'])->name('envoiemail');
+
 
 
 
