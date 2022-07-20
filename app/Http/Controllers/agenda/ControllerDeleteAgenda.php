@@ -8,13 +8,9 @@ use App\models\Agenda;
 
 class ControllerDeleteAgenda extends Controller
 {
-    public function delete()
+    public function delete($idAgenda)
     {
-        request()->validate([
-            'id' => 'required',
-        ]);
-
-        return Agenda::where('id', request('id'))
+        return Agenda::where('id', $idAgenda)
             ->delete();
     }
 }

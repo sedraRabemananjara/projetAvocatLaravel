@@ -28,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('view_voir_chiffre_affaires');
+        Schema::dropIfExists('view_voir_chiffreAffaire');
     }
     private function createView(): string
     {

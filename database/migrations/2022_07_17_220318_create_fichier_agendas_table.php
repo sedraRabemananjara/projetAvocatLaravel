@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('fichier_agendas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agenda_id')->constrained()->onUpdate("CASCADE");
+            $table->foreignId('agenda_id')->unique()->constrained()->onUpdate("CASCADE")->onDelete("CASCADE");
             $table->longText('fichier_base_64');
             $table->timestamps();
         });

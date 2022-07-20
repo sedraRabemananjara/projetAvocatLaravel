@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Enregistrement extends Model
 {
@@ -61,4 +62,24 @@ class Enregistrement extends Model
     ];
 
     protected $hidden = ['user_id'];
+
+    public static function getDernierAgendaWithConclusion($idEnregistrement)
+    {
+        // $query = "select * from agendas where exists (select agenda_id from fichier_agendas where agendas.id=fichier_agendas.agenda_id) and enregistrement_id=%d order by created_at DESC offset 0 limit 1";
+        // $query = sprintf($query, $idEnregistrement);
+        // $dernierAgendaWithConclusion = DB::select(DB::raw($query));
+        $dernierAgendaWithConclusion = Agenda::where('enregistrement_id', $idEnregistrement)
+            ->whereExists(function ($query) {
+                $query->select('agenda_id')
+                    ->from('fichier_agendas')
+                    ->whereRaw('agendas.id = fichier_agendas.agenda_id');
+            })
+            ->offset(0)
+            ->limit(1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        if (count($dernierAgendaWithConclusion) > 0) $dernierAgendaWithConclusion = $dernierAgendaWithConclusion[0];
+        else $dernierAgendaWithConclusion = null;
+        return $dernierAgendaWithConclusion;
+    }
 }

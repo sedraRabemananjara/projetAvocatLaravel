@@ -16,7 +16,7 @@ class ControllerAutomatisationEnvoiEmailEnregistrement extends Controller
 
         return Enregistrement::where('id', request('id'))
             ->update([
-                'envoi_mail_automatique' => true,
+                'envoi_mail_automatique' => 1,
             ]);
     }
 
@@ -28,7 +28,7 @@ class ControllerAutomatisationEnvoiEmailEnregistrement extends Controller
 
         return Enregistrement::where('id', request('id'))
             ->update([
-                'envoi_mail_automatique' => false,
+                'envoi_mail_automatique' => 0,
             ]);
     }
 }

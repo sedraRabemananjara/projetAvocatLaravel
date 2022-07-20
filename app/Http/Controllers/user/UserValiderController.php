@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class UserValiderController extends Controller
 {
@@ -12,8 +13,8 @@ class UserValiderController extends Controller
         DB::table('users')
             ->where('id', request('id'))
             ->update([
-                'email_verified_at' => DB::raw('CURRENT_TIMESTAMP')
+                'email_verified_at' => Carbon::now()->toDateTimeString()
             ]);
-        return DB::raw('CURRENT_TIMESTAMP');
+        return Carbon::now()->toDateTimeString();
     }
 }

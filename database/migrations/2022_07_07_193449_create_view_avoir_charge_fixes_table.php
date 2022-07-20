@@ -29,12 +29,11 @@ return new class extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('view_avoir_charge_fixes');
+        Schema::dropIfExists('view_avoir_charge_fixe');
     }
     private function createView(): string
     {
-        $sql=" CREATE VIEW view_avoir_charge_fixe AS ( select sum(montant) as charge_fixe from charges)";
+        $sql = " CREATE VIEW view_avoir_charge_fixe AS ( select sum(montant) as charge_fixe from charges)";
         return $sql;
-        
     }
 };

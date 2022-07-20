@@ -28,11 +28,11 @@ return new class extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('view_voir_chiffre_affaire_par_annes');
+        Schema::dropIfExists('view_voir_chiffreAffaire_par_anne');
     }
     private function createView(): string
     {
-        $sql = " CREATE VIEW view_voir_chiffreAffaire_par_anne AS ( select sum(ch.montant) as honoraire,sum(cf.montant) as frais ,sum(ch.montant)+sum(cf.montant) as gain ,date_part('year', cf.date_paiement) as anne from comptabilite_honoraires ch join comptabilite_frais cf on ch.id=cf.id group by date_part('year', cf.date_paiement) )";
+        $sql = " CREATE VIEW view_voir_chiffreAffaire_par_anne AS ( select sum(ch.montant) as honoraire,sum(cf.montant) as frais ,sum(ch.montant)+sum(cf.montant) as gain ,YEAR(cf.date_paiement) as anne from comptabilite_honoraires ch join comptabilite_frais cf on ch.id=cf.id group by YEAR( cf.date_paiement) )";
         return $sql;
     }
 };

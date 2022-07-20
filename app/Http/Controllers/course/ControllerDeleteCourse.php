@@ -7,14 +7,10 @@ use App\models\Course;
 
 class ControllerDeleteCourse extends Controller
 {
-    public function delete()
+    public function delete($idCourses)
     {
-        request()->validate([
-            'id' => 'required',
-        ]);
 
-        return Course::where('id', request('id'))
+        return Course::where('id', $idCourses)
             ->delete();
-        //return redirect('/')->with('deleted','Kamar Theresia deleted successfully');
     }
 }

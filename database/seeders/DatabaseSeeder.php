@@ -27,18 +27,16 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            // SectionJuridictionSeeder::class,
-            // JuridictionSeeder::class,php
+            SectionJuridictionSeeder::class,
+            JuridictionSeeder::class,
             NatureSeeder::class,
             TypeRenvoiSeeder::class,
             TypeChargeSeeder::class,
             UserTableSeeder::class,
-            JuridictionSeeder::class,
-            SectionJuridictionSeeder::class,
             TypeFrequencePaiementChargeSeeder::class,
-            EnregistrementSeeder::class,
-            AgendaSeeder::class,
-            CourseSeeder::class,
+            // EnregistrementSeeder::class,
+            // AgendaSeeder::class,
+            // CourseSeeder::class,
         ]);
     }
 }
