@@ -70,7 +70,7 @@ return [
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'cabinet_avocat'),
             'username' => env('DB_USERNAME', 'postgres'),
-            'password' => env('DB_PASSWORD', 'mdpprom13'),
+            'password' => env('DB_PASSWORD', 'mdpprom'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,

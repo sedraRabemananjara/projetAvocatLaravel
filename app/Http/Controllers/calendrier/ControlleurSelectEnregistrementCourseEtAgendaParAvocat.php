@@ -40,5 +40,12 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
         return Course::where('enregistrement_id', $enregistrement_id)->get();
 
     }
- 
+
+    public function verificationCourse($enregistrement_id)
+    {
+        return Course::where('enregistrement_id', $enregistrement_id)
+                    ->where('fini', false)
+                    ->get();
+    }
+
 }

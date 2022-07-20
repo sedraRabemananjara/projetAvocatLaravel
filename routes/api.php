@@ -146,8 +146,9 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     //calendrier
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
     Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
-    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsByName']);
+    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'verifEnregistrementByName']);
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
+
 
     //service mail
     Route::get('sendMail', [ControllerMail::class, 'sendMail']);
@@ -220,9 +221,9 @@ Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge'
 
  //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+ Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublonEnregistrementCourse']);
 
- 
 
- 
+
 
 
