@@ -4,6 +4,8 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -36,6 +38,19 @@ class UserInscriptionController extends Controller
             throw $error;
         }
 
+        if (count(User::all()) == 0) {
+            return User::create([
+                "email" => request("email"),
+                "nom" => request("nom"),
+                "prenom" => request("prenom"),
+                "password" => Hash::make(request("password")),
+                //"password" =>request("password"),
+                "est_admin" => 1,
+                'remember_token' => Str::random(10),
+                'email_verified_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
+
 
         return User::create([
             "email" => request("email"),
@@ -43,7 +58,7 @@ class UserInscriptionController extends Controller
             "prenom" => request("prenom"),
             "password" => Hash::make(request("password")),
             //"password" =>request("password"),
-            "est_admin" => false,
+            "est_admin" => 0,
             'remember_token' => Str::random(10),
         ]);
     }

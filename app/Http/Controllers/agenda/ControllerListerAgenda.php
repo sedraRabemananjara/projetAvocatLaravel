@@ -21,8 +21,10 @@ class ControllerListerAgenda extends Controller
                 'motif', 'espace_conclusion',
                 'enregistrements.id as dossier', 'salle',
                 'enregistrements.procedure',
-                'date_agenda', 'type_renvois.type', 'type_renvois.degre', 'type_renvois.id as type_renvois_id'
+                'date_agenda', 'type_renvois.type', 'type_renvois.degre', 'type_renvois.id as type_renvois_id',
+                'enregistrements.procedure'
             ])
+            ->orderBy('agendas.created_at', 'desc')
             ->offset($offset)
             ->limit($limit)
             ->get();
@@ -41,8 +43,10 @@ class ControllerListerAgenda extends Controller
                 'motif', 'espace_conclusion',
                 'enregistrements.id as dossier', 'salle',
                 'enregistrements.procedure',
-                'date_agenda', 'type_renvois.type', 'type_renvois.degre', 'type_renvois.id as type_renvois_id'
+                'date_agenda', 'type_renvois.type', 'type_renvois.degre', 'type_renvois.id as type_renvois_id',
+                'enregistrements.procedure'
             ])
+            ->orderBy('agendas.created_at', 'desc')
             ->where('enregistrements.id', 'LIKE', '%' . $information . '%')
             ->orWhere('enregistrements.procedure', 'LIKE', '%' . $information . '%')
             ->orWhere('enregistrements.pour', 'LIKE', '%' . $information . '%')

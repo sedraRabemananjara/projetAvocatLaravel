@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('comptabilite_generale', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_comptabilite_honoraires');
-            $table->foreign('id_comptabilite_honoraires')->references('id')->on('comptabilite_honoraire');
-            $table->integer('id_comptabilite_frais');
+            $table->unsignedBigInteger('id_comptabilite_honoraires');
+            $table->foreign('id_comptabilite_honoraires')->references('id')->on('comptabilite_honoraires');
+            $table->unsignedBigInteger('id_comptabilite_frais');
             $table->foreign('id_comptabilite_frais')->references('id')->on('comptabilite_frais');
             $table->double('especeRecu');
             $table->timestamps();

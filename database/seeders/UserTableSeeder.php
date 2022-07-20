@@ -26,17 +26,17 @@ class UserTableSeeder extends Seeder
         // will be too slow.
         $password = Hash::make('toptal');
 
-     
+
 
         // And now let's generate a few dozen users for our app:
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             User::create([
                 'nom' => $faker->name(),
                 'prenom' => $faker->name(),
-                'adresse'=>"LOT".$faker->numberBetween(25, 45),
+                'adresse' => "LOT" . $faker->numberBetween(25, 45),
                 'contact' => $faker->phoneNumber,
                 'email' => $faker->safeEmail,
-                "est_admin" => $faker->randomElement(["true", "false"]),
+                "est_admin" => $faker->randomElement([true, false]),
                 'password' => $password,
             ]);
         }

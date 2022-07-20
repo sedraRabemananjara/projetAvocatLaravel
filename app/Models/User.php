@@ -32,6 +32,7 @@ class User extends Authenticatable
         'adresse',
         'contact',
         'est_admin',
+        'email_verified_at',
     ];
 
     /**

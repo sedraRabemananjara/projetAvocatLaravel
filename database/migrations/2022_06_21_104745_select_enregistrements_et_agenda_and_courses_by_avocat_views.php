@@ -40,7 +40,7 @@ return new class extends Migration
 
     private function createView(): string
     {
-        $sql = " CREATE VIEW view_enregistrement_course_agenda_byavocat AS (SELECT er.id as id_enregistrement , er.procedure as procedure,er.user_id  as user_id ,er.pour as client,er.email_client as email_client,  ag.* FROM agendas ag JOIN enregistrements er ON er.id=ag.enregistrement_id  ORDER BY ag.date_agenda DESC)";
+        $sql = " CREATE VIEW view_enregistrement_course_agenda_byavocat AS (SELECT er.id as id_enregistrement , er.procedure as `procedure`,er.user_id  as user_id ,er.pour as client,er.email_client as email_client,  ag.* FROM agendas ag JOIN enregistrements er ON er.id=ag.enregistrement_id  ORDER BY ag.date_agenda DESC)";
 
         return $sql;
     }

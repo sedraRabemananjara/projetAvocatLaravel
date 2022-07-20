@@ -28,12 +28,11 @@ return new class extends Migration
      */
     public function down()
     {
-        //Schema::dropIfExists('view_voir_chiffre_affaires');
+        Schema::dropIfExists('view_voir_chiffreAffaire');
     }
     private function createView(): string
     {
-        $sql=" CREATE VIEW view_voir_chiffreAffaire AS (select sum(ch.montant) as honoraire,sum(cf.montant) as frais ,sum(ch.montant)+sum(cf.montant) as gain from comptabilite_honoraire ch join comptabilite_frais cf on ch.id=cf.id)";
+        $sql = " CREATE VIEW view_voir_chiffreAffaire AS (select sum(ch.montant) as honoraire,sum(cf.montant) as frais ,sum(ch.montant)+sum(cf.montant) as gain from comptabilite_honoraires ch join comptabilite_frais cf on ch.id=cf.id)";
         return $sql;
-        
     }
 };

@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -14,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        /*Schema::create('view_avoir_charge_fixes', function (Blueprint $table) {
+        Schema::create('fichier_agendas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('agenda_id')->unique()->constrained()->onUpdate("CASCADE")->onDelete("CASCADE");
+            $table->longText('fichier_base_64');
             $table->timestamps();
-        });*/
-
-        DB::statement($this->createView());
+        });
     }
 
     /**
@@ -29,11 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('view_avoir_charge_fixe');
-    }
-    private function createView(): string
-    {
-        $sql = " CREATE VIEW view_avoir_charge_fixe AS ( select sum(montant) as charge_fixe from charges)";
-        return $sql;
+        Schema::dropIfExists('fichier_agendas');
     }
 };

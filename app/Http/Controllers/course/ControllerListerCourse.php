@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Course;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ControllerListerCourse extends Controller
 {
@@ -14,22 +15,23 @@ class ControllerListerCourse extends Controller
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
         $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
-
-            ->where('enregistrements.user_id', '=', Auth::user()->id)
-            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
+            ->orderBy('courses.created_at', 'desc')
+            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at', 'fini', 'date_ordre', 'enregistrements.procedure'])
             ->offset($offset)
             ->limit($limit)
             ->get();
+        // Log::info($courses);
         return $courses;
     }
 
 
-    public function getAllCoursesRecherche($page = 0, $information)
+    public function getAllCoursesRecherche($page = 0, $information = "")
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
         $courses = Course::join('enregistrements', 'enregistrements.id', '=', 'courses.enregistrement_id')
-            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at'])
+            ->select(['courses.id', 'courses.enregistrement_id', 'date_necessite', 'travaux_a_faire', 'resultat', 'responsable', 'enregistrements.id as dossier', 'courses.created_at', 'fini', 'enregistrements.procedure'])
+            ->orderBy('courses.created_at', 'desc')
             ->where('enregistrements.id', 'LIKE', '%' . $information . '%')
             ->orWhere('enregistrements.procedure', 'LIKE', '%' . $information . '%')
             ->orWhere('enregistrements.pour', 'LIKE', '%' . $information . '%')
@@ -38,5 +40,4 @@ class ControllerListerCourse extends Controller
             ->get();
         return $courses;
     }
-
 }

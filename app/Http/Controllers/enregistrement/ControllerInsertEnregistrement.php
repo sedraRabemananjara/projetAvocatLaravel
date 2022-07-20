@@ -19,7 +19,6 @@ class ControllerInsertEnregistrement extends Controller
             "nature" => "required",
             "juridiction" => "required",
             "procedure" => "required",
-            "sectionJuridiction" => "required",
             "lieu" => "required",
         ]);
 
@@ -63,6 +62,7 @@ class ControllerInsertEnregistrement extends Controller
             "telephone_interlocuteur" => request("telephoneInterloc"),
             "date_delais_paiement" => request("dateDelaisPaiement"),
             "montant_honoraire" => request("montantHonoraire"),
+            "envoi_mail_automatique" => 1,
         ]);
 
         $agenda = null;
