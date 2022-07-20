@@ -14,13 +14,13 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
     public function getEnregistrementsAndCoursesAndAgendaByAvocat($id)
     {
 
-
         $enregistrement = ViewSelectEnregistrementCourseEtAgendaParAvocat::select("*")
             ->where('user_id', $id)
-            ->get()
-            ->toArray();
+            ->get();
+          
         var_dump($enregistrement);
-        return $enregistrement;
+         return view('email',compact('enregistrement'));
+        //return $enregistrement;
 
     }
 
@@ -32,6 +32,7 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
                         ->get();
 
         return view('email',compact('enregistrement'));
+        var_dump($enregistrement);
 
     }
 

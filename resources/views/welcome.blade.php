@@ -51,6 +51,13 @@
                                   <input type="text" name="email">  </br>  
                                   <input type="submit">   
                                 </form>
+
+                                <form method="get" action="{{ route('envoiemail') }}" accept-charset="UTF-8">
+                                      {{ csrf_field() }}
+
+                                  
+                                <input type="submit" value="envoyeremail">   
+                                </form>
 		      	            </div>
                         </div>
 	    	        </div>

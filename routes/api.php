@@ -158,7 +158,9 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
 
     //service mail
-    Route::get('sendMail', [ControllerMail::class, 'sendMail']);
+    //Route::get('sendMail', [ControllerMail::class, 'sendMail']);
+    //id=user-id    et idE=enregistrements id
+    Route::get('/email/{id}/{idE}', [ControllerMail::class, 'sendMail'])->name('envoiemail');
 
 
     //frequencePaiement
