@@ -55,6 +55,7 @@ class ControllerListerEnregistrement extends Controller
                             ->get();
         return $courses;
     }
+
     public function getEnregistrementCourseFiniByName($page=0,$nomClient)
     {
         $offset = env('PAGINATION') * $page;
@@ -71,6 +72,7 @@ class ControllerListerEnregistrement extends Controller
 
     public function verifEnregistrementByName($page=0,$nomClient)
     {
+
         $getEnregistrementCourseNonFiniByName=$this->getEnregistrementCourseNonFiniByName($page,$nomClient);
         $getEnregistrementCourseFiniByName=$this->getEnregistrementCourseFiniByName($page,$nomClient);
         $getEnregistrementByName=$this->getAllEnregistrementsByName($page,$nomClient);
