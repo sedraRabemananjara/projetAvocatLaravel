@@ -146,9 +146,10 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     //calendrier
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
     Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
-    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'verifEnregistrementByName']);
+    // Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'verifEnregistrementByName']);
+    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{information}', [ControllerListerEnregistrement::class, 'getCalendrierByName']);
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
-    // Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublongetEnregistrementCourse']);
+    // Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublonEnregistrementCourse']);
     Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'getCalendrier']);
 
     //service mail

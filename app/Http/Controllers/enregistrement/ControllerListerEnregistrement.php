@@ -10,6 +10,7 @@ use App\models\Enregistrement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use phpseclib3\System\SSH\Agent;
 
 class ControllerListerEnregistrement extends Controller
 {
@@ -24,7 +25,7 @@ class ControllerListerEnregistrement extends Controller
         return $enregistrements;
     }
 
-    /*public function getAllEnregistrementsRecherche($page = 0, $information)
+    public function getAllEnregistrementsRecherche($page = 0, $information)
     {
         $offset = env('PAGINATION') * $page;
         $limit = $offset + env('PAGINATION');
@@ -33,9 +34,10 @@ class ControllerListerEnregistrement extends Controller
             ->orWhere('pour', 'LIKE', '%' . $information . '%')
             ->offset($offset)
             ->limit($limit)
+            ->orderBy('created_at', "DESC")
             ->get();
         return $enregistrements;
-    }*/
+    }
     public function getAllEnregistrementsByName($page = 0, $nomClient)
     {
         $offset = env('PAGINATION') * $page;
@@ -178,23 +180,59 @@ class ControllerListerEnregistrement extends Controller
 
     public function getCalendrier($page = 0)
     {
-        /* $enregistrementNonFinis = Course::where('fini', '0')
-            ->select('enregistrement_id', 'pour', 'procedure', 'fini')
-            ->join('enregistrements', 'courses.enregistrement_id', '=', 'enregistrements.id')
-            ->orderBy('enregistrements.created_at', "DESC")
-            ->groupBy('enregistrement_id')
-            ->get(); */
-        $calendrier = Agenda::orderBy('agendas.date_agenda', "desc")
-            ->join('enregistrements', 'agendas.enregistrement_id', '=', 'enregistrements.id')
-            ->distinct('enregistrement_id')
-            ->select(['enregistrement_id', 'procedure', 'date_agenda'])
-            ->get();
-        /* foreach ($enregistrementNonFinis as $enregistrementNonFini) {
-            if ($enregistrementNonFini->fini == '1') $enregistrementNonFini->fini = true;
-            else if ($enregistrementNonFini->fini == '0') $enregistrementNonFini->fini = false;
+        $offset = env('PAGINATION') * $page;
+        $limit = $offset + env('PAGINATION');
 
-            // recuperation de l'agenda
-        } */
+        $calendrier = Agenda::whereRaw('date_agenda  = (SELECT MAX(date_agenda) FROM agendas a1 WHERE a1.enregistrement_id = agendas.enregistrement_id)')
+            ->join('enregistrements', 'agendas.enregistrement_id', '=', 'enregistrements.id')
+            ->select(['enregistrement_id', 'date_agenda', 'pour', 'procedure'])
+            ->orderBy('date_agenda', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+
+        foreach ($calendrier as $agenda) {
+            // recuperation de l'etat de l'agenda
+            $courseNonFini = Course::where('enregistrement_id', $agenda->enregistrement_id)
+                ->where('fini', 0)
+                ->get();
+            if (count($courseNonFini) > 0) {
+                $agenda->fini = false;
+            } else {
+
+                $agenda->fini = true;
+            }
+        }
+        return $calendrier;
+    }
+
+    public function getCalendrierByName($page = 0, $information)
+    {
+        // $offset = env('PAGINATION') * $page;
+        // $limit = $offset + env('PAGINATION');
+        $offset = 10 * $page;
+        $limit = $offset + 10;
+
+        $calendrier = Agenda::whereRaw("date_agenda  = (SELECT MAX(date_agenda) FROM agendas a1 WHERE a1.enregistrement_id = agendas.enregistrement_id) 
+            AND ( enregistrements.id LIKE '%" . $information . "%' OR `procedure` LIKE '%" . $information . "%' OR pour LIKE '%" . $information . "%' )")
+            ->join('enregistrements', 'agendas.enregistrement_id', '=', 'enregistrements.id')
+            ->select(['enregistrement_id', 'date_agenda', 'pour', 'procedure'])
+            ->orderBy('date_agenda', 'desc')
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
+
+        foreach ($calendrier as $agenda) {
+            // recuperation de l'etat de l'agenda
+            $courseNonFini = Course::where('enregistrement_id', $agenda->enregistrement_id)
+                ->where('fini', 0)
+                ->get();
+            if (count($courseNonFini) > 0) {
+                $agenda->fini = false;
+            } else {
+                $agenda->fini = true;
+            }
+        }
         return $calendrier;
     }
 }
