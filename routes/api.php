@@ -148,7 +148,8 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
     Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'verifEnregistrementByName']);
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
-    Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublonEnregistrementCourse']);
+    // Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublongetEnregistrementCourse']);
+    Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'getCalendrier']);
 
     //service mail
     Route::get('sendMail', [ControllerMail::class, 'sendMail']);
@@ -184,7 +185,6 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
         //charge
         Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
         Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
-
     });
 });
 
@@ -211,7 +211,7 @@ Route::get('type-renvoi', [ControllerSelectTypeRenvoi::class, 'selectAll']);
 
 
 // courses
-    //Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
+//Route::get('course', [ControllerListerCourse::class, 'getAllCourses']);
 
 
 //type frequence de paiement
@@ -222,9 +222,3 @@ Route::get('type_charge', [ControllerListerTypeCharge::class, 'getAllTypeCharge'
 
  //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
  //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
-
-
-
-
-
-
