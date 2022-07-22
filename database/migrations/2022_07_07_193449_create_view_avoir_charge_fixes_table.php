@@ -29,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('view_avoir_charge_fixe');
+        DB::statement("DROP VIEW view_avoir_charge_fixe");
     }
     private function createView(): string
     {

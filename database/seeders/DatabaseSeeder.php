@@ -34,9 +34,11 @@ class DatabaseSeeder extends Seeder
             TypeChargeSeeder::class,
             UserTableSeeder::class,
             TypeFrequencePaiementChargeSeeder::class,
-            // EnregistrementSeeder::class,
-            // AgendaSeeder::class,
-            // CourseSeeder::class,
+            EnregistrementSeeder::class,
+            AgendaSeeder::class,
+            CourseSeeder::class,
+            ComptabiliteFraisSeeder::class,
+            ComptabiliteHonoraireSeeder::class,
         ]);
     }
 }
