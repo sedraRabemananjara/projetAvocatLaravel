@@ -177,7 +177,7 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::middleware(['isAdmin'])->group(function () {
         //comptabiliteFrais
         Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
-        Route::get('selectComptaFrais', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
+        Route::get('selectComptaFrais/{page}', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');
 
         //comptabiiteHonoraire
         Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
