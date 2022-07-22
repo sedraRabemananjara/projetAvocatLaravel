@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ComptabiliteFrais;
 use App\Models\Enregistrement;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,7 @@ class ComptabiliteFraisSeeder extends Seeder
 
         foreach ($enregistrements as $enregistrement) {
             for ($i = 1; $i < 3; $i++) {
-                DB::table("comptabilite_frais")->insert([
+                ComptabiliteFrais::create([
                     'enregistrement_id' => $enregistrement->id,
                     'motif' => "motif",
                     'montant' => 10000,

@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Course;
 use Illuminate\Support\Facades\DB;
 use App\Models\Enregistrement;
+use Illuminate\Support\Carbon;
 
 class CourseSeeder extends Seeder
 {
@@ -24,10 +25,10 @@ class CourseSeeder extends Seeder
 
         foreach ($enregistrements as $enregistrement) {
             for ($i = 1; $i < 5; $i++) {
-                DB::table("courses")->insert([
+                Course::create([
                     'enregistrement_id' => $enregistrement->id,
                     'travaux_a_faire' => 'mila maka cetificat de residence',
-                    'date_necessite' => "20/06/2022",
+                    'date_necessite' => Carbon::createFromTimeStamp($faker->dateTimeBetween('-1 month', '+2 month')->getTimestamp()),
                     'resultat' => 'resoudre le probleme entre client et entite',
                     'responsable' => $faker->name(),
                     'date_ordre' => "2022-08-30",
