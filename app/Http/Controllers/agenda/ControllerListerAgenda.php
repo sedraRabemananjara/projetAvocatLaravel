@@ -12,7 +12,7 @@ class ControllerListerAgenda extends Controller
     public function getAllAgenda($page = 0)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $agendas = Agenda::join('enregistrements', 'enregistrements.id', '=', 'agendas.enregistrement_id')
             ->join('type_renvois', 'agendas.type_renvoi_id', 'type_renvois.id')
             ->select([
@@ -32,7 +32,7 @@ class ControllerListerAgenda extends Controller
     public function getAllAgendaRecherche($page = 0, $information)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $agendas = Agenda::join('enregistrements', 'enregistrements.id', '=', 'agendas.enregistrement_id')
             ->join('type_renvois', 'agendas.type_renvoi_id', 'type_renvois.id')
             ->select([
