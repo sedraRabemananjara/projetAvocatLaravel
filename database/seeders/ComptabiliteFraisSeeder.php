@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\ComptabiliteFrais;
 use App\Models\Enregistrement;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class ComptabiliteFraisSeeder extends Seeder
 {
@@ -21,6 +20,7 @@ class ComptabiliteFraisSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         foreach ($enregistrements as $enregistrement) {
+            $createdAt = Carbon::createFromTimeStamp($faker->dateTimeBetween('-10 day', '-1 day')->getTimestamp());
             for ($i = 1; $i < 3; $i++) {
                 ComptabiliteFrais::create([
                     'enregistrement_id' => $enregistrement->id,
@@ -28,6 +28,7 @@ class ComptabiliteFraisSeeder extends Seeder
                     'montant' => 10000,
                     'paye_par' => $faker->name(),
                     'recu_par' => $faker->name(),
+                    'created_at' => $createdAt,
                 ]);
             }
         }
