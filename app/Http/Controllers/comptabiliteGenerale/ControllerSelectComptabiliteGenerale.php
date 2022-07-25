@@ -22,7 +22,7 @@ class ControllerSelectComptabiliteGenerale extends Controller
         $comptaGenerale = $comptabiliteFrais->union($comptaHonoraires)->offset($offset)
             ->limit($limit)
             ->orderBy('created_at', 'desc')
-            ->toSql();
+            ->get();
 
         // Log::info(count($comptaGenerale));
 
