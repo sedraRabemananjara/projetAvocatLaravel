@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Events\AgendaCreatedEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Agenda extends Model
 {
@@ -37,4 +37,28 @@ class Agenda extends Model
     protected $casts = [
         'date_agenda' => 'datetime',
     ];
+
+    public static function getLienFichier($idAgenda)
+    {
+
+        $fichierAgenda = FichierAgenda::where('agenda_id', $idAgenda)
+            ->get();
+
+        if (count($fichierAgenda) == 1) {
+            $fichierAgenda = $fichierAgenda[0];
+
+            $fichierBase64 = $fichierAgenda->fichier_base_64;
+
+            $extension = explode('/', mime_content_type($fichierBase64))[1];
+            if ($extension == "msword") $extension = "doc";
+
+            $data = explode('base64,', $fichierBase64)[1];
+
+
+            // Storage::disk("public")->put('fichier.pdf', base64_decode($data));
+            Storage::disk("public")->put('agenda/' . $idAgenda . '/espaceConclusion.' . $extension, base64_decode($data));
+            return asset('storage/agenda/' . $idAgenda . '/espaceConclusion.' . $extension);
+        }
+        return null;
+    }
 }
