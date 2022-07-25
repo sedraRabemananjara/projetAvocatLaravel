@@ -5,28 +5,32 @@ namespace App\Http\Controllers\course;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Course;
-
+use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateCourse extends Controller
 {
-    public function edit($id){
-        $course= course::find($id);  
-        return view('modifier', compact('course'));  
-    }
-    
+    public function update()
+    {
+        /*request()->validate([
+            'idEnregistrement' => 'required',
+            'TAF' => 'required',
+            'dateTimeCourse' => 'required',
+            'resultat' => 'required',
+            'addresseAvocat' => 'required',
+        ]);*/
 
-    public function update(Request $request, $id)  
-    {  
-        //    
-        $course = Course::find();  
-         
-        $course->idEnregistrement=$request->get('idEnregistrement');
-        $course->TAF=$request->get('TAF');
-        $course->dateTimeCourse=$request->get('dateTimeCourse');
-        $course->resultat=$request->get('resultat');
-        $course->responsable=$request->get('responsable');
-        
-        $course->save();  
-        return view('pageLister',['listecourses'=> course::all()]);
-    }  
+        return DB::table('courses')
+            ->where('id', request('id'))
+            ->update([
+                'enregistrement_id' => request('enregistrement'),
+                'travaux_a_faire' => request('TAF'),
+                'date_necessite' => request('dateNecessite'),
+                'resultat' => request('resultat'),
+                'responsable' => request('responsable'),
+                'fini' => request('fini'),
+            ]);
+
+        //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');
+
+    }
 }

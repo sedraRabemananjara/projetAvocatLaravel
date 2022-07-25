@@ -12,6 +12,9 @@ use App\Http\Controllers\course\ControllerInsertCourse;
 use App\Http\Controllers\course\ControllerDeleteCourse;
 use App\Http\Controllers\course\ControllerUpdateCourse;
 use App\Http\Controllers\course\ControllerListerCourse;
+use App\Http\Controllers\calendrier\ControlleurSelectEnregistrementCourseEtAgendaParAvocat;
+use App\Http\Controllers\Mail\ControllerMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +26,17 @@ use App\Http\Controllers\course\ControllerListerCourse;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/contenuemail', function () {
+    return view('email');
 });
 
 Route::get('/course', function () {
@@ -32,31 +44,47 @@ Route::get('/course', function () {
 });
 
 
+//mailing
 
+Route::get('/email/{id}/{idE}', [ControllerMail::class, 'sendMail'])->name('envoiemail');
+//Route::get('/email/{id}', [ControllerMail::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat'])->name('envoiemail');
 
 
 
 
 //enregistrements
-Route::get('/voirLesEnregistrement',[ControllerListerEnregistrement::class, 'getAllEnregistrements' ]);
+Route::get('/voirLesEnregistrement', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
 
-Route::post('/insererEnregistrement',[ControllerInsertEnregistrement::class, 'insert' ])->name('insertionEnregistrements');
+Route::post('/insererEnregistrement', [ControllerInsertEnregistrement::class, 'insert'])->name('insertionEnregistrements');
 
-Route::post('/supprimerEnregistrement/{id}',[ControllerDeleteEnregistrement::class, 'delete' ])->name('supprimerEnregistrements');
+Route::post('/supprimerEnregistrement/{id}', [ControllerDeleteEnregistrement::class, 'delete'])->name('supprimerEnregistrements');
 
-Route::get('/findById/{id}',[ControllerUpdateEnregistrement::class, 'findById' ])->name('findById');
+Route::get('/findById/{id}', [ControllerUpdateEnregistrement::class, 'findById'])->name('findById');
 
-Route::post('/modifierEnregistrement/{id}',[ControllerUpdateEnregistrement::class, 'update' ])->name('modifierEnregistrement');
+Route::post('/modifierEnregistrement/{id}', [ControllerUpdateEnregistrement::class, 'update'])->name('modifierEnregistrement');
 
 
 
 // courses
-Route::get('/voirLesCourses',[ControllerListerCourse::class, 'getAllCourses' ]);
+Route::get('/voirLesCourses', [ControllerListerCourse::class, 'getAllCourses']);
 
-Route::post('/insererCourse',[ControllerInsertCourse::class, 'insert' ])->name('insertionCourses');
+Route::post('/insererCourse', [ControllerInsertCourse::class, 'insert'])->name('insertionCourses');
 
-Route::post('/course/{id}',[ControllerDeleteCourse::class, 'delete' ])->name('delete');
+Route::post('/course/{id}', [ControllerDeleteCourse::class, 'delete'])->name('delete');
 
-Route::get('/course/{id}',[ControllerUpdateCourse::class, 'edit' ])->name('edit');
+Route::get('/course/{id}', [ControllerUpdateCourse::class, 'edit'])->name('edit');
 
-Route::post('/course/update/{id}',[ControllerUpdateCourse::class, 'update' ])->name('update');
+Route::post('/course/update/{id}', [ControllerUpdateCourse::class, 'update'])->name('update');
+
+
+//calendrier
+Route::get('/calendrier/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocat'])->name('edit');
+
+Route::get('/calendrierParEnregistrements/{id}/{idE}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements']);
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
