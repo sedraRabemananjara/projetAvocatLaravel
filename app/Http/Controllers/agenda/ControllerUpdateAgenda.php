@@ -8,6 +8,8 @@ use App\models\Agenda;
 use App\Models\FichierAgenda;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Events\AgendaCreatedEvent;
+use App\Models\Enregistrement;
 
 class ControllerUpdateAgenda extends Controller
 {
@@ -20,6 +22,7 @@ class ControllerUpdateAgenda extends Controller
             'motif' => 'required',
             // 'espaceConclusion' => 'required',
             'dateAgenda' => 'required',
+            'typeRenvoi' => 'required',
         ]);
 
         DB::transaction(function () {
@@ -49,6 +52,12 @@ class ControllerUpdateAgenda extends Controller
                     ]);
                 }
             }
+
+            $agenda = Agenda::find(request('id'));
+            $enregistrement = Enregistrement::find($agenda->enregistrement_id);
+
+            event(new AgendaCreatedEvent($agenda, $enregistrement));
+
             return 1;
         });
 
