@@ -66,6 +66,7 @@ use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
+use App\Http\Controllers\comptabiliteGenerale\ControllerSelectComptabiliteGenerale;
 use App\Http\Controllers\enregistrement\ControllerAutomatisationEnvoiEmailEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
@@ -175,13 +176,16 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
 
     Route::middleware(['isAdmin'])->group(function () {
+        //comptabiliteGenerale
+        Route::get('selectComptaGenerale/{page}', [ControllerSelectComptabiliteGenerale::class, 'select']);
+
         //comptabiliteFrais
         Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
         Route::get('selectComptaFrais/{page}', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');
 
         //comptabiiteHonoraire
         Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
-        Route::get('selectComptaHonoraire', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
+        Route::get('selectComptaHonoraire/{page}', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
 
         //charge
         Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);

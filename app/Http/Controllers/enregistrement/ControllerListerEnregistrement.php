@@ -17,7 +17,7 @@ class ControllerListerEnregistrement extends Controller
     public function getAllEnregistrements($page = 0)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $enregistrements = Enregistrement::offset($offset)
             ->limit($limit)
             ->orderBy('created_at', "DESC")
@@ -28,7 +28,7 @@ class ControllerListerEnregistrement extends Controller
     public function getAllEnregistrementsRecherche($page = 0, $information)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $enregistrements = Enregistrement::where('id', 'LIKE', '%' . $information . '%')
             ->orWhere('procedure', 'LIKE', '%' . $information . '%')
             ->orWhere('pour', 'LIKE', '%' . $information . '%')
@@ -41,7 +41,7 @@ class ControllerListerEnregistrement extends Controller
     public function getAllEnregistrementsByName($page = 0, $nomClient)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $enregistrements = Enregistrement::where('pour', $nomClient)->offset($offset)->limit($limit)->get();
         return $enregistrements;
     }
@@ -49,7 +49,7 @@ class ControllerListerEnregistrement extends Controller
     /* public function getEnregistrementCourseNonFiniByName($page = 0, $nomClient)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $courses = Course::offset($offset)
             ->select('enregistrement_id', 'pour', 'procedure')
             ->join('enregistrements', 'courses.enregistrement_id', '=', 'enregistrements.id')
@@ -63,7 +63,7 @@ class ControllerListerEnregistrement extends Controller
     public function getEnregistrementCourseFiniByName($page = 0, $nomClient)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $courses = Course::offset($offset)
             ->select('enregistrement_id', 'pour', 'procedure')
             ->join('enregistrements', 'courses.enregistrement_id', '=', 'enregistrements.id')
@@ -113,7 +113,7 @@ class ControllerListerEnregistrement extends Controller
     public function getEnregistrementCourseNonFini($page = 0)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $courses = Course::offset($offset)
             ->select('enregistrement_id')
             ->where('fini', '=', '0')
@@ -181,7 +181,7 @@ class ControllerListerEnregistrement extends Controller
     public function getCalendrier($page = 0)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
 
         $calendrier = Agenda::whereRaw('date_agenda  = (SELECT MAX(date_agenda) FROM agendas a1 WHERE a1.enregistrement_id = agendas.enregistrement_id)')
             ->join('enregistrements', 'agendas.enregistrement_id', '=', 'enregistrements.id')
@@ -209,7 +209,7 @@ class ControllerListerEnregistrement extends Controller
     public function getCalendrierByName($page = 0, $information)
     {
         // $offset = env('PAGINATION') * $page;
-        // $limit = $offset + env('PAGINATION');
+        // $limit = env('PAGINATION');
         $offset = 10 * $page;
         $limit = $offset + 10;
 
