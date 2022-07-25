@@ -13,7 +13,7 @@ class ControllerListerDossierClient extends Controller
     public function getAll($page = 0)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $dossiers = Enregistrement::orderBy("created_at", "DESC")
             ->select(['id', 'procedure', 'pour'])
             ->offset($offset)
@@ -25,7 +25,7 @@ class ControllerListerDossierClient extends Controller
     public function rechercher($page, $information)
     {
         $offset = env('PAGINATION') * $page;
-        $limit = $offset + env('PAGINATION');
+        $limit = env('PAGINATION');
         $dossiers = Enregistrement::where('id', 'LIKE', '%' . $information . '%')
             ->orWhere('procedure', 'LIKE', '%' . $information . '%')
             ->orWhere('pour', 'LIKE', '%' . $information . '%')

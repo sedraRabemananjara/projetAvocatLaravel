@@ -66,6 +66,7 @@ use App\Http\Controllers\comptabiliteFrais\ControllerInsertComptabiliteFrais;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerInsertComptabiliteHonoraire;
 use App\Http\Controllers\comptabiliteHonoraire\ControllerListerComptabiliteHonoraires;
 use App\Http\Controllers\comptabiliteFrais\ControllerListerComptabiliteFrais;
+use App\Http\Controllers\comptabiliteGenerale\ControllerSelectComptabiliteGenerale;
 use App\Http\Controllers\enregistrement\ControllerAutomatisationEnvoiEmailEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerDeleteEnregistrement;
 use App\Http\Controllers\enregistrement\ControllerImportEnregistrement;
@@ -140,10 +141,10 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     Route::post('/modifierAvocat/{idAvocat}', [ControllerUpdateAvocat::class, 'update'])->name('modifierAvocat'); */
 
     //charge
-    Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
-    Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
-    Route::delete('/supprimerCharge/{idCharge}', [ControllerDeleteCharge::class, 'delete'])->name('supprimerCharge');
-    Route::post('/modifierCharge/{idCharge}', [ControllerUpdateCharge::class, 'update'])->name('modifierCharge');
+    //Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharges']);
+    //Route::post('/insererCharge', [ControllerInsertCharge::class, 'insert'])->name('insertionCharge');
+    //Route::delete('/supprimerCharge/{idCharge}', [ControllerDeleteCharge::class, 'delete'])->name('supprimerCharge');
+    //Route::post('/modifierCharge/{idCharge}', [ControllerUpdateCharge::class, 'update'])->name('modifierCharge');
 
     //etat
     Route::get('/voirLesEtat', [ControllerListerEtat::class, 'getAllEtats']);
@@ -154,8 +155,11 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
     //calendrier
     Route::get('calendrier', [ControllerSelectSemaineCalendrier::class, 'select']);
     Route::get('enregistrement_calendrier/page/{page}', [ControllerListerEnregistrement::class, 'getAllEnregistrements']);
-    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'getAllEnregistrementsByName']);
+    // Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{nomClient}', [ControllerListerEnregistrement::class, 'verifEnregistrementByName']);
+    Route::get('getEnregistrementByNameClient/page/{page}/nomClient/{information}', [ControllerListerEnregistrement::class, 'getCalendrierByName']);
     Route::get('calendrierByIdEnregistrement/{id}', [ControlleurSelectEnregistrementCourseEtAgendaParAvocat::class, 'getCourseByIdEnregistrement']);
+    // Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'removeDoublonEnregistrementCourse']);
+    Route::get('verificationCourseEnregistrement/{page}', [ControllerListerEnregistrement::class, 'getCalendrier']);
 
     //service mail
     //Route::get('sendMail', [ControllerMail::class, 'sendMail']);
@@ -182,13 +186,16 @@ Route::middleware(['web', 'auth:api', 'verified'])->group(function () {
 
 
     Route::middleware(['isAdmin'])->group(function () {
+        //comptabiliteGenerale
+        Route::get('selectComptaGenerale/{page}', [ControllerSelectComptabiliteGenerale::class, 'select']);
+
         //comptabiliteFrais
         Route::post('insererComptaFrais', [ControllerInsertComptabiliteFrais::class, 'insert'])->name('insertionComptabiliteFrais');
-        Route::get('selectComptaFrais', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');;
+        Route::get('selectComptaFrais/{page}', [ControllerListerComptabiliteFrais::class, 'getAllComptabiliteFrais'])->name('selectComptabiliteFrais');
 
         //comptabiiteHonoraire
         Route::post('insererComptaHonoraires', [ControllerInsertComptabiliteHonoraire::class, 'insert'])->name('insertionComptabiliteHonoraire');
-        Route::get('selectComptaHonoraire', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
+        Route::get('selectComptaHonoraire/{page}', [ControllerListerComptabiliteHonoraires::class, 'getAllComptabiliteHonoraire'])->name('selectComptabiliteHonoraire');
 
         //charge
         Route::get('/voirLesCharge', [ControllerListerCharge::class, 'getAllCharge']);
