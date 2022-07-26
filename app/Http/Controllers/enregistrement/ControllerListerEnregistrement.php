@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agenda;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use App\models\Enregistrement;
+use App\Models\Enregistrement;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

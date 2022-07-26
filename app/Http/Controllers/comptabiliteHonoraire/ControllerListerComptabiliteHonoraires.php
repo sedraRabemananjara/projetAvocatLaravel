@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\comptabiliteHonoraire;
 
 use App\Http\Controllers\Controller;
-use App\models\ComptabiliteHonoraire;
+use App\Models\ComptabiliteHonoraire;
 
 class ControllerListerComptabiliteHonoraires extends Controller
 {

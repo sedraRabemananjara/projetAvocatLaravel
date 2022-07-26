@@ -8,16 +8,12 @@ use App\Models\ViewVoirChiffreAffaire;
 
 class ControlleurVoirChiffreAffaire extends Controller
 {
-    public function getChiffreAffaire(){
-      
+    public function getChiffreAffaire()
+    {
+
         $chiffre = ViewVoirChiffreAffaire::select("*")
-                    ->get();
-                        
+            ->get();
+
         return $chiffre;
-    
     }
 }
-
-
-
-

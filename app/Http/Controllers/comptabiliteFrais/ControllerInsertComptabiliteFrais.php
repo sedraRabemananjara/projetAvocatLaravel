@@ -4,7 +4,7 @@ namespace App\Http\Controllers\comptabiliteFrais;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\ComptabiliteFrais;
+use App\Models\ComptabiliteFrais;
 use Illuminate\Support\Facades\DB;
 
 class ControllerInsertComptabiliteFrais extends Controller
@@ -19,12 +19,12 @@ class ControllerInsertComptabiliteFrais extends Controller
             "recu_par" => "required",
         ]);
         $ComptabiliteFrais = new ComptabiliteFrais();
-        $ComptabiliteFrais->enregistrement_id=$request->input('enregistrement_id');
-        $ComptabiliteFrais->motif=$request->input('motif');
-        $ComptabiliteFrais->montant=$request->input('montant');
-        $ComptabiliteFrais->paye_par=$request->input('paye_par');
-        $ComptabiliteFrais->recu_par=$request->input('recu_par');
-        $ComptabiliteFrais->remarque=$request->input('remarque');
+        $ComptabiliteFrais->enregistrement_id = $request->input('enregistrement_id');
+        $ComptabiliteFrais->motif = $request->input('motif');
+        $ComptabiliteFrais->montant = $request->input('montant');
+        $ComptabiliteFrais->paye_par = $request->input('paye_par');
+        $ComptabiliteFrais->recu_par = $request->input('recu_par');
+        $ComptabiliteFrais->remarque = $request->input('remarque');
 
 
         return $ComptabiliteFrais->save();

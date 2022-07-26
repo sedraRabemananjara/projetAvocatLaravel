@@ -4,7 +4,7 @@ namespace App\Http\Controllers\avocat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Avocat;
+use App\Models\Avocat;
 use Illuminate\Support\Facades\DB;
 
 class ControllerUpdateAvocat extends Controller
@@ -21,15 +21,15 @@ class ControllerUpdateAvocat extends Controller
         ]);
 
         $avocat = DB::table('avocats')
-                        ->where('idAvocat', $id)
-                        ->update([
-                            'mdp' => request('mdp'),
-                            'nom' => request('nom'),
-                            'prenom' => request('prenom'),
-                            'mailAvocat' => request('mailAvocat'),
-                            'addresseAvocat' => request('addresseAvocat'),
-                            'contactAvocat' => request('contactAvocat'),
-                        ]);
+            ->where('idAvocat', $id)
+            ->update([
+                'mdp' => request('mdp'),
+                'nom' => request('nom'),
+                'prenom' => request('prenom'),
+                'mailAvocat' => request('mailAvocat'),
+                'addresseAvocat' => request('addresseAvocat'),
+                'contactAvocat' => request('contactAvocat'),
+            ]);
 
         //return redirect()->route('modifier-echeance', ['id' => $id])->with('succes', 'Enregistrement mis à jour');
 

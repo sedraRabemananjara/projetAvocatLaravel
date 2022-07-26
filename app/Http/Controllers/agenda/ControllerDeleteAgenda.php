@@ -4,7 +4,7 @@ namespace App\Http\Controllers\agenda;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Agenda;
+use App\Models\Agenda;
 
 class ControllerDeleteAgenda extends Controller
 {

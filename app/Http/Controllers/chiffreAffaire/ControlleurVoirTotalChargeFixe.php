@@ -8,13 +8,12 @@ use App\Models\ViewAvoirChargeFixe;
 
 class ControlleurVoirTotalChargeFixe extends Controller
 {
-    public function getChargeFixe(){
-      
-        $charge = ViewAvoirChargeFixe::select("*")
-                    ->get();
-                        
-        return $charge;
-    
-    }
+    public function getChargeFixe()
+    {
 
+        $charge = ViewAvoirChargeFixe::select("*")
+            ->get();
+
+        return $charge;
+    }
 }
