@@ -4,7 +4,7 @@ namespace App\Http\Controllers\agenda;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Agenda;
+use App\Models\Agenda;
 use App\Models\FichierAgenda;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

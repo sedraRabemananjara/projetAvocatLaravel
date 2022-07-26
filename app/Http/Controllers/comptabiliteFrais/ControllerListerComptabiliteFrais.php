@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\comptabiliteFrais;
 
 use App\Http\Controllers\Controller;
-use App\models\ComptabiliteFrais;
+use App\Models\ComptabiliteFrais;
 
 class ControllerListerComptabiliteFrais extends Controller
 {

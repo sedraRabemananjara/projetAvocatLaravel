@@ -4,7 +4,7 @@ namespace App\Http\Controllers\comptabiliteHonoraire;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\ComptabiliteHonoraire;
+use App\Models\ComptabiliteHonoraire;
 
 
 class ControllerInsertComptabiliteHonoraire extends Controller
@@ -20,17 +20,17 @@ class ControllerInsertComptabiliteHonoraire extends Controller
             "recu_par" => "required",
         ]);
 
-       $ComptabiliteHonoraire = new ComptabiliteHonoraire();
-        $ComptabiliteHonoraire->enregistrement_id=$request->input('enregistrement_id');
-        $ComptabiliteHonoraire->motif=$request->input('motif');
-        $ComptabiliteHonoraire->montant=$request->input('montant');
-        $ComptabiliteHonoraire->paye_par=$request->input('paye_par');
-        $ComptabiliteHonoraire->recu_par=$request->input('recu_par');
-        $ComptabiliteHonoraire->remarque=$request->input('remarque');
+        $ComptabiliteHonoraire = new ComptabiliteHonoraire();
+        $ComptabiliteHonoraire->enregistrement_id = $request->input('enregistrement_id');
+        $ComptabiliteHonoraire->motif = $request->input('motif');
+        $ComptabiliteHonoraire->montant = $request->input('montant');
+        $ComptabiliteHonoraire->paye_par = $request->input('paye_par');
+        $ComptabiliteHonoraire->recu_par = $request->input('recu_par');
+        $ComptabiliteHonoraire->remarque = $request->input('remarque');
 
         return  $ComptabiliteHonoraire->save();
 
-       /* return ComptabiliteHonoraire::create([
+        /* return ComptabiliteHonoraire::create([
             "enregistrement_id"=>request('enregistrement_id'),
             "motif"=>request('motif'),
             "montant"=>request('montant'),
@@ -39,7 +39,5 @@ class ControllerInsertComptabiliteHonoraire extends Controller
             "remarque"=>request('remarque'),
 
         ]);*/
-
-
     }
 }

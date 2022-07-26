@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\enregistrement;
 
 use App\Http\Controllers\Controller;
-use App\models\Enregistrement;
+use App\Models\Enregistrement;
 
 class ControllerDeleteEnregistrement extends Controller
 {

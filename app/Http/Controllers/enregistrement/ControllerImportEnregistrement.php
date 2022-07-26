@@ -17,7 +17,6 @@ class ControllerImportEnregistrement extends Controller
             "nature" => "required",
             "juridiction" => "required",
             "procedure" => "required",
-            "sectionJuridiction" => "required",
             "lieu" => "required",
         ]);
 
