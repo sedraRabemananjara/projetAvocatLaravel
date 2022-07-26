@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\enregistrement\ControllerEnvoiMailEnregistrement;
 use App\Listeners\AgendaCreatedListener;
 use Illuminate\Http\Request;
-use App\models\Agenda;
+use App\Models\Agenda;
 use App\Models\Enregistrement;
 
 class ControllerInsertAgenda extends Controller

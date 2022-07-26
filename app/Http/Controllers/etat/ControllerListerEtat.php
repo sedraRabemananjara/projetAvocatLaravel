@@ -4,12 +4,13 @@ namespace App\Http\Controllers\etat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Etat;
+use App\Models\Etat;
 
 class ControllerListerEtat extends Controller
 {
-    public function getAllEtats(Request $req){
+    public function getAllEtats(Request $req)
+    {
         Etat::all();
-        return view('pageListerEtat',['listeEtats'=> Etat::all()]);
+        return view('pageListerEtat', ['listeEtats' => Etat::all()]);
     }
 }

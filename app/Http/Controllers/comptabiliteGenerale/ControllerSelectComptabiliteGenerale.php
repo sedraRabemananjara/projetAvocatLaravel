@@ -4,7 +4,7 @@ namespace App\Http\Controllers\comptabiliteGenerale;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\ComptabiliteFrais;
+use App\Models\ComptabiliteFrais;
 use App\Models\ComptabiliteHonoraire;
 use Illuminate\Support\Facades\Log;
 

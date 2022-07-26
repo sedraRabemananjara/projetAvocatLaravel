@@ -4,15 +4,15 @@ namespace App\Http\Controllers\etat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Etat;
+use App\Models\Etat;
 
 class ControllerInsertEtat extends Controller
 {
     public function insert(Request $request)
     {
         $Etat = new Etat();
-        $Etat->idEnregistrement=$request->input('idEnregistrement');
-        
+        $Etat->idEnregistrement = $request->input('idEnregistrement');
+
         $Etat->save();
         //return view("controlpanel.products");
         //$employe=new Employe;

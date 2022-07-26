@@ -9,13 +9,13 @@ use App\Models\ViewVoirChiffreAffaireParAnne;
 class ControlleurVoirChiffreAffaireParAnne extends Controller
 {
     //
-    public function getChiffreAffaireParAnne($annee){
-      
+    public function getChiffreAffaireParAnne($annee)
+    {
+
         $chiffre = ViewVoirChiffreAffaireParAnne::select("*")
-                    ->where('anne', $annee)
-                    ->get();
-                        
+            ->where('anne', $annee)
+            ->get();
+
         return $chiffre;
-    
     }
 }

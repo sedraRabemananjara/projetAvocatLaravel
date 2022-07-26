@@ -4,7 +4,7 @@ namespace App\Http\Controllers\enregistrement;
 
 use App\Events\AgendaCreatedEvent;
 use App\Http\Controllers\Controller;
-use App\models\Enregistrement;
+use App\Models\Enregistrement;
 use App\Models\Agenda;
 use Illuminate\Support\Facades\Auth;
 

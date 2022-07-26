@@ -17,36 +17,34 @@ class ControlleurSelectEnregistrementCourseEtAgendaParAvocat extends Controller
         $enregistrement = ViewSelectEnregistrementCourseEtAgendaParAvocat::select("*")
             ->where('user_id', $id)
             ->get();
-          
+
         var_dump($enregistrement);
-         return view('email',compact('enregistrement'));
+        return view('email', compact('enregistrement'));
         //return $enregistrement;
 
     }
 
-    public function getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements($id,$idE){
+    public function getEnregistrementsAndCoursesAndAgendaByAvocatGrouperParEnregistrements($id, $idE)
+    {
 
         $enregistrement = ViewSelectEnregistrementCourseEtAgendaParAvocat::select("*")
-                        ->where('user_id', $id)
-                        ->where('id_enregistrement', $idE)
-                        ->get();
+            ->where('user_id', $id)
+            ->where('id_enregistrement', $idE)
+            ->get();
 
-        return view('email',compact('enregistrement'));
+        return view('email', compact('enregistrement'));
         var_dump($enregistrement);
-
     }
 
     public function getCourseByIdEnregistrement($enregistrement_id)
     {
         return Course::where('enregistrement_id', $enregistrement_id)->get();
-
     }
 
     public function verificationCourse($enregistrement_id)
     {
         return Course::where('enregistrement_id', $enregistrement_id)
-                    ->where('fini', false)
-                    ->get();
+            ->where('fini', false)
+            ->get();
     }
-
 }

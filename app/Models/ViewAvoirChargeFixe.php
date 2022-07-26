@@ -9,5 +9,4 @@ class ViewAvoirChargeFixe extends Model
 {
     use HasFactory;
     public $table = "view_avoir_charge_fixe";
-    
 }
