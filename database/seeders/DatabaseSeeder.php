@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
             NatureSeeder::class,
             TypeRenvoiSeeder::class,
             TypeChargeSeeder::class,
-            UserTableSeeder::class,
+            // UserTableSeeder::class,
             TypeFrequencePaiementChargeSeeder::class,
-            EnregistrementSeeder::class,
-            AgendaSeeder::class,
-            CourseSeeder::class,
-            ComptabiliteFraisSeeder::class,
-            ComptabiliteHonoraireSeeder::class,
+            // EnregistrementSeeder::class,
+            // AgendaSeeder::class,
+            // CourseSeeder::class,
+            // ComptabiliteFraisSeeder::class,
+            // ComptabiliteHonoraireSeeder::class,
         ]);
     }
 }

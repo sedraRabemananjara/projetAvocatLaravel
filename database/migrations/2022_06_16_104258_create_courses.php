@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('date_necessite');
             $table->string('resultat')->nullable();
             $table->string('responsable');
-            $table->string('date_ordre')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->datetime('date_ordre')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('fini')->nullable()->default(0);
             $table->timestamps();
         });
