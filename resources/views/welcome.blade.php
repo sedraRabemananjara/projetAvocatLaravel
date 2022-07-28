@@ -22,47 +22,52 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            <section class="ftco-section">
-		        <div class="container">
-			        <div class="row justify-content-center">
-				        <div class="col-md-6 text-center mb-5">
-					        <h2 class="heading-section">Connectez-vous</h2>
-				        </div>
-			        </div>
-		            <div class="row justify-content-center">
-				        <div class="col-md-6 col-lg-4">
-					        <div class="login-wrap p-0">
-		      	                <form method="post" action="{{ route('insertionEnregistrements') }}" accept-charset="UTF-8">
-                                      {{ csrf_field() }}
+            @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        </br>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+              
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+            
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+                <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
+                    <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-16 w-auto text-gray-700 sm:h-20">
+                        <g clip-path="url(#clip0)" fill="#EF3B2D">
+                          <img src="" alt="">
+                       
+                        </g>
+                    </svg>
+                </div>
 
-                                  <label for="pour"> pour: </label>   </br>     
-                                  <input type="text" name="pour">  </br> 
-                                  <label for="contre">contre: </label>   </br>     
-                                  <input type="text" name="contre">  </br> 
-                                  <label for="juridiction"> juridiction: </label>   </br>     
-                                  <input type="text" name="juridiction">  </br> 
-                                  <label for="numerodossier">numerodossier: </label>   </br>     
-                                  <input type="text" name="numerodossier">  </br> 
-                                  <label for="addresse"> votre addresse: </label>   </br>     
-                                  <input type="text" name="addresse">  </br>
-                                  <label for="contact"> votre contact: </label>   </br>     
-                                  <input type="text" name="contact">  </br> 
-                                  <label for="email"> votre email: </label>   </br>     
-                                  <input type="text" name="email">  </br>  
-                                  <input type="submit">   
-                                </form>
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        
 
-                                <form method="get" action="{{ route('envoiemail') }}" accept-charset="UTF-8">
-                                      {{ csrf_field() }}
+                       
 
-                                  
-                                <input type="submit" value="envoyeremail">   
-                                </form>
-		      	            </div>
+
+                       
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
+                    <div class="text-center text-sm text-gray-500 sm:text-left">
+                        <div class="flex items-center">
+                            
                         </div>
-	    	        </div>
-		        </div>
-	        </section>
+                    </div>
+
+                    
+                </div>
+            </div>
         </div>
     </body>
 </html>
